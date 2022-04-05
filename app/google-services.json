@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "931405164530",
+    "project_id": "phikaso-37470",
+    "storage_bucket": "phikaso-37470.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931405164530:android:c84cf47430890d2621856b",
+        "android_client_info": {
+          "package_name": "com.android.phikaso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "931405164530-2mi11ofkpnpoukrihmpu59t37cvgm3nl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.phikaso",
+            "certificate_hash": "0f8eb2dd7d0b45aef27f443520801670a5216f0d"
+          }
+        },
+        {
+          "client_id": "931405164530-1g6qhlp9cbubd8j6s5806a23rcthes8l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCetFPf0GjmEU_Okjfsdla1fj77Kcjf3d0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "931405164530-1g6qhlp9cbubd8j6s5806a23rcthes8l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
