@@ -16,18 +16,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.content.CursorLoader;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.content.ContentValues.TAG;
 
@@ -42,9 +45,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText editTextName;
     private EditText editTextPhone;
-    private EditText editTextEmail;
     private EditText editTextContent;
     private ImageView imageViewFile;
+
+    private DatabaseReference mDBReference;
+    private HashMap<String, Object> childUpdates;
+    private Map<String, Object> countValue;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,9 +64,11 @@ public class RegisterActivity extends AppCompatActivity {
         //아이디 설정
         editTextName = findViewById(R.id.editTextName);
         editTextPhone = findViewById(R.id.editTextPhone);
-        editTextEmail = findViewById(R.id.editTextEmail);
         editTextContent = findViewById(R.id.editTextContent);
         imageViewFile = findViewById(R.id.imageViewFile);
+
+        //전체 피해 사례 초기화
+        count();
 
         imageViewFile.setOnClickListener(onClickListener);
         findViewById(R.id.buttonRegister).setOnClickListener(onClickListener);
@@ -77,6 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
                     break;
                 case R.id.buttonRegister:
                     register();
+                    updateCount();//전체 피해 사례 증가
                     Intent intent_main = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent_main);
                     break;
@@ -156,5 +165,35 @@ public class RegisterActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void count() {
+        mDBReference = mDatabase.getReference().child("phishingCases");
+        mDBReference.child("count")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        try{
+
+                        }catch (Exception e){
+                            RegisterModel registerModel = new RegisterModel();
+                            childUpdates = new HashMap<>();
+                            countValue = registerModel.toMap();
+                            childUpdates.put("count", countValue);
+                            mDBReference.updateChildren(childUpdates);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    private void updateCount() {
+        Map<String, Object> childUpdates1 = new HashMap<>();
+        childUpdates1.put("count/", ServerValue.increment(1));
+        mDBReference.updateChildren(childUpdates1);
     }
 }

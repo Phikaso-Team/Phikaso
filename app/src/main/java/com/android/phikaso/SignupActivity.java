@@ -15,15 +15,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+
 
 public class SignupActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
-    private FirebaseStorage mStorage;
     private Button signUp;
 
     @Override
@@ -33,7 +30,6 @@ public class SignupActivity extends AppCompatActivity {
         //초기화
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
-        mStorage = FirebaseStorage.getInstance();
 
         //아이디 설정
         signUp = findViewById(R.id.buttonSignUp);
