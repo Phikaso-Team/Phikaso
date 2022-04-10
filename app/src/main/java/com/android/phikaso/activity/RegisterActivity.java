@@ -1,4 +1,4 @@
-package com.android.phikaso;
+package com.android.phikaso.activity;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,6 +15,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.content.CursorLoader;
 
+import com.android.phikaso.R;
+import com.android.phikaso.model.RegisterModel;
+import com.android.phikaso.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

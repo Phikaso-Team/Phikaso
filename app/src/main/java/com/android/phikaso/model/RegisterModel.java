@@ -1,4 +1,4 @@
-package com.android.phikaso;
+package com.android.phikaso.model;
 
 import java.util.HashMap;
 import java.util.Map;
