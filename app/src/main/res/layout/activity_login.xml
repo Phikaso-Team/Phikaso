@@ -4,10 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <TextView
-        android:layout_width="163dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="26dp"
@@ -15,7 +14,7 @@
         android:gravity="top"
         android:text="PHIKASO"
         android:textColor="@color/phikaso"
-        android:textSize="36dp"
+        android:textSize="36sp"
         android:textStyle="bold" />
 
     <EditText
@@ -55,8 +54,7 @@
         android:text="로그인"
         android:textAllCaps="false"
         android:textColor="#fff"
-        android:textSize="20dp" />
-
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/goToSignUp"
@@ -66,9 +64,4 @@
         android:layout_marginTop="20dp"
         android:text="아직 회원이 아니신가요? 지금 가입하세요." />
 
-
 </LinearLayout>
-
-
-
-

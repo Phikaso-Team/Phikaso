@@ -10,8 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp">
 
-        //개인정보 수집 이용 및 제공 동의(?)
-        //이름, 전화번호, 신고 내용, 첨부 파일
         <TextView
             android:id="@+id/textViewName"
             android:layout_width="wrap_content"

@@ -7,21 +7,34 @@
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
-    <!-- 타이틀 -->
-    <TextView
-        android:id="@+id/title_view"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="26dp"
-        android:layout_marginTop="40dp"
-        android:gravity="top"
-        android:text="PHIKASO"
-        android:textColor="#4D96FF"
-        android:textSize="36dp"
-        android:textStyle="bold" />
+        android:layout_margin="20dp">
 
+        <!-- 타이틀 -->
+        <TextView
+            android:id="@+id/title_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PHIKASO"
+            android:textColor="@color/phikaso"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <!-- 설정 -->
+        <ImageButton
+            android:id="@+id/buttonSetting"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:background="@drawable/setting"
+            android:backgroundTint="@color/phikaso"/>
+
+    </RelativeLayout>
 
     <!-- 2행 1열 -->
     <GridLayout
@@ -41,6 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="실시간 데이터"
+                android:layout_marginStart="6dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -113,6 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_marginStart="6dp"
                 android:text="피해 사례 등록"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -183,14 +198,11 @@
                             android:text="피해 사례 등록"
                             android:textAllCaps="false"
                             android:textColor="#fff"
-                            android:textSize="15dp"></Button>
+                            android:textSize="15sp" />
 
                     </LinearLayout>
                 </LinearLayout>
-
-
             </androidx.cardview.widget.CardView>
         </LinearLayout>
     </GridLayout>
 </LinearLayout>
-

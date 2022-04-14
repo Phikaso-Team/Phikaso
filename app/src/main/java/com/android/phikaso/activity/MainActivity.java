@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private AlertDialog dialog = null;
     private FirebaseDatabase mDatabase;
     private TextView textViewCount;
-    private Button buttonRegister;
     private int count;
 
     @Override
@@ -43,17 +41,26 @@ public class MainActivity extends AppCompatActivity {
 
         //아이디 설정
         textViewCount = findViewById(R.id.textViewCount);
-        buttonRegister = findViewById(R.id.buttonRegister);
 
-        //피해 사례 등록화면으로 이동
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
+        findViewById(R.id.buttonRegister).setOnClickListener(onClickListener);
+        findViewById(R.id.buttonSetting).setOnClickListener(onClickListener);
     }
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.buttonRegister://피해 사례 등록
+                    Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
+                    startActivity(intentRegister);
+                    break;
+                case R.id.buttonSetting://설정
+                    Intent intentSetting = new Intent(getApplicationContext(), SettingActivity.class);
+                    startActivity(intentSetting);
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onStart() {

@@ -8,9 +8,15 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="회원가입"
-        android:textSize="30sp"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="200dp"
+        android:gravity="top"
+        android:text="PHIKASO"
+        android:textColor="@color/phikaso"
+        android:textSize="36sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextEmail"
@@ -54,10 +60,12 @@
 
     <Button
         android:id="@+id/buttonSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="회원가입"/>
+        android:background="@drawable/rounded_corner"
+        android:text="회원가입"
+        android:textSize="20sp" />
 
 </LinearLayout>
