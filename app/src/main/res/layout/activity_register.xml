@@ -16,25 +16,40 @@
             android:id="@+id/textViewName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="이름" />
+            android:text="이름"
+            android:textColor="@color/phikaso"
+            android:textStyle="bold"/>
         <EditText
             android:id="@+id/editTextName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_below="@+id/textViewName"
+            android:background="@drawable/custom_input"
+            android:drawableStart="@drawable/ic_edit"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:drawablePadding="12dp"
             android:inputType="textPersonName"/>
 
         <TextView
             android:id="@+id/textViewPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_below="@+id/editTextName"
-            android:text="전화번호" />
+            android:text="전화번호"
+            android:textColor="@color/phikaso"
+            android:textStyle="bold"/>
         <EditText
             android:id="@+id/editTextPhone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_below="@+id/textViewPhone"
+            android:background="@drawable/custom_input"
+            android:drawableStart="@drawable/ic_edit"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:drawablePadding="12dp"
             android:inputType="phone"/>
 
         <TextView
@@ -42,12 +57,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/editTextPhone"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/phikaso"
             android:text="신고 내용"/>
+
         <EditText
             android:id="@+id/editTextContent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_below="@+id/textViewContent"
+            android:background="@drawable/custom_input"
+            android:drawableStart="@drawable/ic_edit"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:drawablePadding="12dp"
             android:inputType="textMultiLine"
             android:scrollHorizontally="false"/>
 
@@ -55,13 +79,17 @@
             android:id="@+id/textViewFile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/phikaso"
+            android:textStyle="bold"
             android:layout_below="@+id/editTextContent"
             android:text="첨부 파일"/>
         <ImageView
             android:id="@+id/imageViewFile"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_below="@id/textViewFile"
+            android:backgroundTint="@color/cardview_dark_background"
             app:srcCompat="@android:drawable/ic_menu_gallery"/>
 
         <Button

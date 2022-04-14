@@ -1,40 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="로그인"
-        android:textSize="30sp"/>
+        android:layout_width="163dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="206dp"
+        android:gravity="top"
+        android:text="PHIKASO"
+        android:textColor="@color/phikaso"
+        android:textSize="36dp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_margin="20dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/custom_email_icon"
+        android:drawablePadding="12dp"
+        android:hint="이메일"
         android:inputType="textEmailAddress"
-        android:hint="이메일" />
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp" />
+
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/custom_lock_icon"
+        android:drawablePadding="12dp"
+        android:hint="비밀번호"
         android:inputType="textPassword"
-        android:hint="비밀번호"/>
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp" />
 
     <Button
         android:id="@+id/buttonLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="로그인"/>
+        android:background="@drawable/rounded_corner"
+        android:text="로그인"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="20dp" />
+
 
     <TextView
         android:id="@+id/goToSignUp"
@@ -42,6 +64,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="아직 회원이 아니신가요? 지금 가입하세요."/>
+        android:text="아직 회원이 아니신가요? 지금 가입하세요." />
+
 
 </LinearLayout>
+
+
+
+

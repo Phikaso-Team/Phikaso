@@ -99,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode != RESULT_OK) {
+        if (resultCode != RESULT_OK) {
             if (tempFile != null) {
                 if (tempFile.exists()) {
                     if (tempFile.delete()) {
@@ -111,7 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        if(requestCode == PICK_FROM_ALBUM) {
+        if (requestCode == PICK_FROM_ALBUM) {
             imageUri = data.getData();
             pathUri = getPath(data.getData());
             Log.d(TAG, "PICK_FROM_ALBUM photoUri : " + imageUri);
@@ -130,7 +130,7 @@ public class RegisterActivity extends AppCompatActivity {
         return cursor.getString(index);
     }
 
-    private void register(){
+    private void register() {
         String name = editTextName.getText().toString();
         String phone = editTextPhone.getText().toString();
         String content = editTextContent.getText().toString();
@@ -138,34 +138,34 @@ public class RegisterActivity extends AppCompatActivity {
         final String uid = mAuth.getCurrentUser().getUid();
         final Uri file = Uri.fromFile(new File(pathUri));
 
-        StorageReference storageReference = mStorage.getReference().child("imageFile").child("uid/"+file.getLastPathSegment());
+        StorageReference storageReference = mStorage.getReference().child("imageFile").child("uid/" + file.getLastPathSegment());
         storageReference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                 final Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
-                while(!imageUrl.isComplete());
+                while (!imageUrl.isComplete()) ;
 
                 mDatabase.getReference().child("users").child(uid)
                         .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        UserModel userModel = snapshot.getValue(UserModel.class);
-                        RegisterModel registerModel = new RegisterModel();
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                UserModel userModel = snapshot.getValue(UserModel.class);
+                                RegisterModel registerModel = new RegisterModel();
 
-                        registerModel.name = name;
-                        registerModel.phone = phone;
-                        registerModel.email = userModel.email;
-                        registerModel.content = content;
-                        registerModel.file = imageUrl.getResult().toString();
+                                registerModel.name = name;
+                                registerModel.phone = phone;
+                                registerModel.email = userModel.email;
+                                registerModel.content = content;
+                                registerModel.file = imageUrl.getResult().toString();
 
-                        mDatabase.getReference().child("phishingCases").child("content").push().setValue(registerModel);
-                    }
+                                mDatabase.getReference().child("phishingCases").child("content").push().setValue(registerModel);
+                            }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+                            }
+                        });
             }
         });
     }
@@ -176,9 +176,9 @@ public class RegisterActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        try{
+                        try {
 
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             RegisterModel registerModel = new RegisterModel();
                             childUpdates = new HashMap<>();
                             countValue = registerModel.toMap();
