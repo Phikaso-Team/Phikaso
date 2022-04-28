@@ -35,9 +35,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.content.ContentValues.TAG;
-
 public class RegisterActivity extends AppCompatActivity {
+    private static final String TAG = "RegisterActivity";
     public static final int PICK_FROM_ALBUM = 1;
     private Uri imageUri;
     private String pathUri;

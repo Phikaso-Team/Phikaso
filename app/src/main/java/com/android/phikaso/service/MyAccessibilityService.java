@@ -132,8 +132,8 @@ public class MyAccessibilityService extends AccessibilityService {
                     text = getAllText(node, 0);
                 }
 
-//                message.append(text).append(" "); // 대화 내용만
-                message.append(name).append(": ").append(text).append("\n"); // 이름 + 대화 내용
+                message.append(text).append(" "); // 대화 내용만
+//                message.append(name).append(": ").append(text).append("\n"); // 이름 + 대화 내용
             }
         }
 

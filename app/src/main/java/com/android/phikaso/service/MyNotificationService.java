@@ -49,10 +49,10 @@ public class MyNotificationService extends NotificationListenerService {
         if (room == null) room = "(개인 채팅)"; // room은 그룹/오픈채팅만 있음
 
         // 토스트 띄우기
-        Toast.makeText(this, "< 알림 내용 >\n"
-                + "이름: " + name + "\n"
-                + "메시지: " + text + "\n"
-                + "채팅방: " + room, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "< 알림 내용 >\n"
+//                + "이름: " + name + "\n"
+//                + "메시지: " + text + "\n"
+//                + "채팅방: " + room, Toast.LENGTH_SHORT).show();
 
         // 메인 엑티비티로 전달
         @SuppressLint("SimpleDateFormat")
