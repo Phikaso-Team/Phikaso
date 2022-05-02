@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             } else {
                                 if (task.getException() != null) {
-                                    startToast(task.getException().toString());
+                                    startToast("이메일 또는 비밀번호가 일치하지 않습니다.");
                                 }
                             }
                         }

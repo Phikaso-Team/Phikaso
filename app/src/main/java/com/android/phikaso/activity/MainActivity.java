@@ -29,6 +29,7 @@ import com.android.phikaso.server.RetrofitClient;
 import com.android.phikaso.server.PhishingData;
 import com.android.phikaso.service.MyAccessibilityService;
 import com.android.phikaso.service.MyNotificationService;
+import com.android.phikaso.service.MyOverlayService;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -165,6 +166,37 @@ public class MainActivity extends AppCompatActivity {
             dialog.show();
             return;
         }
+
+        if(!checkOverlayPermission()){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("다른 앱 위에 표시 권한 필요");
+                builder.setMessage("다른 앱 위에 표시 권한이 필요합니다.");
+                builder.setPositiveButton("설정", (dialog, which) -> {
+                    startActivity(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION));
+                });
+                dialog = builder.create();
+                dialog.show();
+                return;
+            }
+        }
+
+        //실시간 보호
+        switchProtection.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+                    //팝업 알림 띄우기
+                    if(!isMyServiceRunning(MyOverlayService.class)){
+                        Intent intent = new Intent(getApplicationContext(), MyOverlayService.class);
+                        startService(intent);//서비스 시작
+                    }
+                }else{
+                    Intent intent = new Intent(getApplicationContext(), MyOverlayService.class);
+                    stopService(intent);//서비스 종료
+                }
+            }
+        });
     }
 
     // 서비스가 실행 중인지 확인하는 함수
@@ -197,6 +229,12 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    // 다른 앱 위에 표시 권한이 있는지 확인하는 함수
+    public boolean checkOverlayPermission() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                && Settings.canDrawOverlays(this);
+    }
+
     //딥러닝 서버
     public void deepLearningServer(String text){
         RetrofitAPI retrofitAPI = RetrofitClient.getClient().create(RetrofitAPI.class);
@@ -226,20 +264,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<PhishingData> call, Throwable t) {
                 Log.d(TAG, t.getMessage());
-            }
-        });
-    }
-
-    //실시간 보호
-    public void realTimeProtection(){
-        switchProtection.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked){
-                    //팝업 알림 띄우기
-                }else{
-
-                }
             }
         });
     }

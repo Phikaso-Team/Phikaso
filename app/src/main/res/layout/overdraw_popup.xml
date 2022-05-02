@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imageViewWarning"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:background="@drawable/warning"/>
+
+        <TextView
+            android:id="@+id/textViewWarning"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="#FF6B6B"
+            android:textStyle="bold"
+            android:text="주의!" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:text="피싱 확률" />
+
+        <TextView
+            android:id="@+id/textViewProbability"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:text="0 %" />
+
+        <Button
+            android:id="@+id/buttonOk"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:text="확인"
+            android:textColor="#fff"
+            android:background="@color/phikaso"/>
+
+    </LinearLayout>
+
+</LinearLayout>

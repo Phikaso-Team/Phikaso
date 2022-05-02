@@ -3,6 +3,8 @@
     package="com.android.phikaso">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:allowBackup="true"
@@ -46,6 +48,16 @@
             <meta-data
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessibility_service_config" />
+        </service>
+
+        <service
+            android:name=".service.MyOverlayService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.SYSTEM_ALERT_WINDOW">
+            <intent-filter>
+                <action android:name="android.service.SYSTEM_ALERT_WINDOW" />
+            </intent-filter>
         </service>
 
     </application>
