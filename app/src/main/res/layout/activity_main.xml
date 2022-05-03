@@ -103,6 +103,15 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/main_count_today"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -112,6 +121,14 @@
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
+                        <TextView
+                            android:id="@+id/main_count_all"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="0"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
                 </LinearLayout>

@@ -30,6 +30,7 @@ import com.android.phikaso.server.PhishingData;
 import com.android.phikaso.service.MyAccessibilityService;
 import com.android.phikaso.service.MyNotificationService;
 import com.android.phikaso.service.MyOverlayService;
+import com.android.phikaso.util.PreferenceManager;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -50,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
     private Switch switchProtection;
     private int count;
 
+    private TextView preventCountToday;
+    private TextView preventCountAll;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.buttonSetting).setOnClickListener(onClickListener);//설정
         textViewCount = findViewById(R.id.textViewCount);//전체 피해 사례
         switchProtection = findViewById(R.id.switchProtection);//실시간 보호
+
+        preventCountToday = (TextView) findViewById(R.id.main_count_today);
+        preventCountAll   = (TextView) findViewById(R.id.main_count_all);
 
         //카카오톡 대화 읽어오기
 //        LocalBroadcastManager.getInstance(this).registerReceiver(//백그라운드
@@ -123,9 +130,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onResume() {
         super.onResume();
+
+        preventCountToday.setText(Integer.toString(PreferenceManager.getPreventCountToday(this)));
+        preventCountAll.setText(Integer.toString(PreferenceManager.getPreventCountAll(this)));
 
         if (this.dialog != null) {
             this.dialog.dismiss();

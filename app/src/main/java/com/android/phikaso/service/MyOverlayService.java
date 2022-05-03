@@ -24,6 +24,7 @@ import com.android.phikaso.R;
 import com.android.phikaso.server.PhishingData;
 import com.android.phikaso.server.RetrofitAPI;
 import com.android.phikaso.server.RetrofitClient;
+import com.android.phikaso.util.PreferenceManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -76,7 +77,7 @@ public class MyOverlayService extends Service {
                     flags = WindowManager.LayoutParams.TYPE_PHONE;
                 }
                 WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(
-                        WindowManager.LayoutParams.MATCH_PARENT,
+                        WindowManager.LayoutParams.WRAP_CONTENT,
                         WindowManager.LayoutParams.WRAP_CONTENT,
                         flags,
                         WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
@@ -96,6 +97,8 @@ public class MyOverlayService extends Service {
 
         Button btnClose = (Button) popupView.findViewById(R.id.buttonOk);
         btnClose.setOnClickListener(view -> hidePopup());
+
+        PreferenceManager.increasePreventCount(this);
     }
 
     private void hidePopup() {

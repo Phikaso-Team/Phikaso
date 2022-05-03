@@ -20,6 +20,8 @@ public class MyAccessibilityService extends AccessibilityService {
 
     public static final String TARGET_APP_PACKAGE = "com.kakao.talk"; // 화면을 읽어올 앱
 
+    private String old = "";
+
     // 이벤트가 발생할때마다 실행되는 부분
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
@@ -139,10 +141,13 @@ public class MyAccessibilityService extends AccessibilityService {
 
         final String m = message.toString();
         if (m.length() > 0) {
-            Log.e(TAG, m);
-            final Intent intent = new Intent(ACTION_NOTIFICATION_BROADCAST);
-            intent.putExtra(EXTRA_TEXT, m); // 메인 엑티비티로 전달
-            LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+            if (!old.equals(m)) {
+                Log.e(TAG, m);
+                final Intent intent = new Intent(ACTION_NOTIFICATION_BROADCAST);
+                intent.putExtra(EXTRA_TEXT, m); // 메인 엑티비티로 전달
+                LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+                old = m;
+            }
         }
     }
 
