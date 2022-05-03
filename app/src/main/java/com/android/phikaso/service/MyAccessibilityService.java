@@ -86,7 +86,7 @@ public class MyAccessibilityService extends AccessibilityService {
                         (isChildImageView(node.getChild(2), 0) || isChildRecyclerView(node.getChild(2), 0)) && // 1장 vs 여러장
                         isChildImageView(node, 3)) {
                     name = node.getChild(1).getText();
-                    text = "(사진)";
+                    text = "";//""(사진)";
                 }
                 // 이모티콘 노드 (상대방 이름 있음)
                 else if ((childCount == 3 || childCount == 4) && // 일반=3, 반응=4
@@ -95,7 +95,7 @@ public class MyAccessibilityService extends AccessibilityService {
                         ((isChildRelativeLayout(node, 2) && isChildImageView(node.getChild(2), 0)) || // 움직이는 이모티콘
                                 isChildImageView(node, 2))) { // 일반 이모티콘
                     name = node.getChild(1).getText();
-                    text = "(이모티콘)";
+                    text = "";//""(이모티콘)";
                 }
                 // 텍스트 노드 (상대방 이름 없음)
                 else if (childCount >= 1 && // 일반=1, 반응=2, URL=3
@@ -109,7 +109,7 @@ public class MyAccessibilityService extends AccessibilityService {
                         isChildImageView(node, 0) &&
                         isChildFrameLayout(node, 1)) {
                     name = (isSelfMessage(node.getChild(0)) ? "나" : name);
-                    text = "(사진)";
+                    text = "";//""(사진)";
                 }
                 // 이미지 노드 2 (상대방 이름 없음)
                 else if (childCount == 2 &&
@@ -117,14 +117,14 @@ public class MyAccessibilityService extends AccessibilityService {
                         isChildImageView(node.getChild(0), 0) &&
                         isChildImageView(node, 1)) {
                     name = (isSelfMessage(node.getChild(0)) ? "나" : name);
-                    text = "(사진)";
+                    text = "";//""(사진)";
                 }
                 // 이모티콘 노드 (상대방 이름 없음)
                 else if ((childCount == 1 || childCount == 2) && // 일반=1, 반응=2
                         ((isChildRelativeLayout(node, 0) && isChildImageView(node.getChild(0), 0)) || // 움직이는 이모티콘
                                 isChildImageView(node, 0))) { // 일반 이모티콘
                     name = (isSelfMessage(node.getChild(0)) ? "나" : name);
-                    text = "(이모티콘)";
+                    text = "";//""(이모티콘)";
                 }
                 // 기타 노드
                 else {

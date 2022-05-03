@@ -63,30 +63,26 @@ public class MainActivity extends AppCompatActivity {
         switchProtection = findViewById(R.id.switchProtection);//실시간 보호
 
         //카카오톡 대화 읽어오기
-        LocalBroadcastManager.getInstance(this).registerReceiver(//백그라운드
-                new BroadcastReceiver() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onReceive(Context context, Intent intent) {
-//                        String time = intent.getStringExtra(MyNotificationService.EXTRA_TIME);
-//                        String name = intent.getStringExtra(MyNotificationService.EXTRA_NAME);
-//                        String room = intent.getStringExtra(MyNotificationService.EXTRA_ROOM);
-//                        if (room == null) room = "개인 채팅";
-                        String text = intent.getStringExtra(MyNotificationService.EXTRA_TEXT);
-                        deepLearningServer(text);
-                    }
-                }, new IntentFilter(MyNotificationService.ACTION_NOTIFICATION_BROADCAST)
-        );
-        LocalBroadcastManager.getInstance(this).registerReceiver(//포그라운드
-                new BroadcastReceiver() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onReceive(Context context, Intent intent) {
-                        String text = intent.getStringExtra(MyAccessibilityService.EXTRA_TEXT);
-                        deepLearningServer(text);
-                    }
-                }, new IntentFilter(MyAccessibilityService.ACTION_NOTIFICATION_BROADCAST)
-        );
+//        LocalBroadcastManager.getInstance(this).registerReceiver(//백그라운드
+//                new BroadcastReceiver() {
+//                    @SuppressLint("SetTextI18n")
+//                    @Override
+//                    public void onReceive(Context context, Intent intent) {
+//                        String text = intent.getStringExtra(MyNotificationService.EXTRA_TEXT);
+//                        deepLearningServer(text);
+//                    }
+//                }, new IntentFilter(MyNotificationService.ACTION_NOTIFICATION_BROADCAST)
+//        );
+//        LocalBroadcastManager.getInstance(this).registerReceiver(//포그라운드
+//                new BroadcastReceiver() {
+//                    @SuppressLint("SetTextI18n")
+//                    @Override
+//                    public void onReceive(Context context, Intent intent) {
+//                        String text = intent.getStringExtra(MyAccessibilityService.EXTRA_TEXT);
+//                        deepLearningServer(text);
+//                    }
+//                }, new IntentFilter(MyAccessibilityService.ACTION_NOTIFICATION_BROADCAST)
+//        );
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -257,6 +253,17 @@ public class MainActivity extends AppCompatActivity {
                 }
                 content += "Probability: " + data.getProbability() + "\n";
                 content += "Text: " + data.getText() + "\n";
+
+//                if (data.getPhishing()) {
+//                    Intent popup = new Intent(MainActivity.this, PopupActivity.class);
+//                    popup.putExtra("probability", data.getProbability());
+//                    popup.putExtra("is_phishing", data.getPhishing());
+//                    popup.putExtra("text", data.getText());
+//                    popup.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    popup.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    startActivity(popup);
+//                }
+
 
                 Log.d(TAG, content);
             }
