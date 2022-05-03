@@ -64,4 +64,24 @@
         android:layout_marginTop="20dp"
         android:text="아직 회원이 아니신가요? 지금 가입하세요." />
 
+    <ImageView
+        android:id="@+id/kakaoLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/kakao_login_medium_wide" />
+
+    <Button
+        android:id="@+id/kakaoUnlink"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_corner"
+        android:text="로그아웃"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:visibility="gone"/>
+
 </LinearLayout>
