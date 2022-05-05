@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.phikaso.R;
 import com.android.phikaso.model.UserModel;
+import com.android.phikaso.util.PreferenceManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -47,6 +48,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void signUp(){
+        String name = ((EditText)findViewById(R.id.editTextName)).getText().toString();
         String email = ((EditText)findViewById(R.id.editTextEmail)).getText().toString();
         String password = ((EditText)findViewById(R.id.editTextPassword)).getText().toString();
         String passwordCheck = ((EditText)findViewById(R.id.editTextPasswordCheck)).getText().toString();
@@ -60,9 +62,12 @@ public class SignupActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     final String uid = task.getResult().getUser().getUid();
                                     UserModel userModel = new UserModel();
+                                    userModel.name = name;
                                     userModel.email = email;
                                     userModel.uid = uid;
                                     mDatabase.getReference().child("users").child(uid).setValue(userModel);
+
+                                    PreferenceManager.setString(SignupActivity.this, "personal-name", name);
 
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);

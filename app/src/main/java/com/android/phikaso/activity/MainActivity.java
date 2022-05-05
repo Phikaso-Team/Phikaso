@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         textViewCount = findViewById(R.id.textViewCount);//전체 피해 사례
         switchProtection = findViewById(R.id.switchProtection);//실시간 보호
 
+        findViewById(R.id.phishingPrevent).setOnClickListener(onClickListener);//피싱 예방
         preventCountToday = (TextView) findViewById(R.id.main_count_today);
         preventCountAll   = (TextView) findViewById(R.id.main_count_all);
 
@@ -104,6 +105,9 @@ public class MainActivity extends AppCompatActivity {
                     Intent intentSetting = new Intent(getApplicationContext(), SettingActivity.class);
                     startActivity(intentSetting);
                     break;
+                case R.id.phishingPrevent://피싱 예방
+                    Intent intentPrevent = new Intent(getApplicationContext(), PreventActivity.class);
+                    startActivity(intentPrevent);
             }
         }
     };

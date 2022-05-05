@@ -11,7 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="26dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="140dp"
         android:gravity="top"
         android:text="PHIKASO"
         android:textColor="@color/phikaso"
@@ -19,10 +19,22 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="20dp"
+        android:inputType="textPersonName"
+        android:background="@drawable/custom_input"
+        android:drawablePadding="12dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:hint="이름" />
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:inputType="textEmailAddress"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/custom_email_icon"
@@ -34,6 +46,7 @@
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/custom_input"
