@@ -92,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 public void onDataChange(DataSnapshot snapshot) {
                                                     String name = snapshot.child("name").getValue(String.class);
                                                     PreferenceManager.setString(LoginActivity.this, "personal-name", name);
+                                                    PreferenceManager.setString(LoginActivity.this, "personal-id", uid);
                                                 }
 
                                                 @Override
@@ -179,6 +180,7 @@ public class LoginActivity extends AppCompatActivity {
                     mDatabase.getReference().child("users").child(String.valueOf(user.getId())).setValue(userModel);
 
                     PreferenceManager.setString(LoginActivity.this, "personal-name", user.getKakaoAccount().getProfile().getNickname());
+                    PreferenceManager.setString(LoginActivity.this, "personal-id", String.valueOf(user.getId()));
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);

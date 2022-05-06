@@ -33,9 +33,12 @@ import com.android.phikaso.service.MyOverlayService;
 import com.android.phikaso.util.PreferenceManager;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private AlertDialog dialog = null;
     private FirebaseDatabase mDatabase;
+    private DatabaseReference mDBReference;
     private TextView textViewCount;
     private Switch switchProtection;
     private int count;
@@ -139,8 +143,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        preventCountToday.setText(Integer.toString(PreferenceManager.getPreventCountToday(this)));
-        preventCountAll.setText(Integer.toString(PreferenceManager.getPreventCountAll(this)));
+        preventCountToday();
+        preventCountAll();
 
         if (this.dialog != null) {
             this.dialog.dismiss();
@@ -288,5 +292,54 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, t.getMessage());
             }
         });
+    }
+
+    //오늘의 피싱 예방
+    private void preventCountToday(){
+        Calendar calendar = Calendar.getInstance();
+        String today = calendar.get(Calendar.YEAR) + "-"
+                + calendar.get(Calendar.MONTH) + "-"
+                + calendar.get(Calendar.DATE);
+
+        mDBReference = FirebaseDatabase.getInstance().getReference();
+        mDBReference.child("total").child(today)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        Integer count = snapshot.child("count").getValue(Integer.class);
+                        if(count != null){
+                            preventCountToday.setText(String.valueOf(count));
+                        }else{
+                            preventCountToday.setText("0");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+
+                    }
+                });
+    }
+
+    //전체 피싱 예방
+    private void preventCountAll(){
+        mDBReference = FirebaseDatabase.getInstance().getReference();
+        mDBReference.child("total")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        Integer count = snapshot.child("count").getValue(Integer.class);
+                        if(count != null){
+                            preventCountAll.setText(String.valueOf(count));
+                        }else{
+                            preventCountAll.setText("0");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+
+                    }
+                });
     }
 }

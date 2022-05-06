@@ -25,6 +25,14 @@ import com.android.phikaso.server.PhishingData;
 import com.android.phikaso.server.RetrofitAPI;
 import com.android.phikaso.server.RetrofitClient;
 import com.android.phikaso.util.PreferenceManager;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +41,11 @@ import retrofit2.Response;
 public class MyOverlayService extends Service {
     private static final String TAG = "MyOverlayService";
     private View popupView;
+    private DatabaseReference mDBReference;
+    private Calendar calendar = Calendar.getInstance();
+    private String today = calendar.get(Calendar.YEAR) + "-"
+                    + calendar.get(Calendar.MONTH) + "-"
+                    + calendar.get(Calendar.DATE);
 
     @Override
     public IBinder onBind(Intent intent){
@@ -98,7 +111,9 @@ public class MyOverlayService extends Service {
         Button btnClose = (Button) popupView.findViewById(R.id.buttonOk);
         btnClose.setOnClickListener(view -> hidePopup());
 
-        PreferenceManager.increasePreventCount(this);
+        updatePersonalCount(PreferenceManager.getString(this, "personal-id"));
+        updateTodayCount(today);
+        updateTotalCount();
     }
 
     private void hidePopup() {
@@ -152,5 +167,29 @@ public class MyOverlayService extends Service {
                 Log.d(TAG, t.getMessage());
             }
         });
+    }
+
+    //개인별 피싱 예방 횟수
+    private void updatePersonalCount(String uid) {
+        mDBReference = FirebaseDatabase.getInstance().getReference().child("users");
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put(""+uid+"/count/", ServerValue.increment(1));
+        mDBReference.updateChildren(childUpdates);
+    }
+
+    //오늘의 피싱 예방 횟수
+    private void updateTodayCount(String today){
+        mDBReference = FirebaseDatabase.getInstance().getReference().child("total");
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put(""+today+"/count/", ServerValue.increment(1));
+        mDBReference.updateChildren(childUpdates);
+    }
+
+    //전체 피싱 예방 횟수
+    private void updateTotalCount() {
+        mDBReference = FirebaseDatabase.getInstance().getReference().child("total");
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put(""+"/count/", ServerValue.increment(1));
+        mDBReference.updateChildren(childUpdates);
     }
 }
