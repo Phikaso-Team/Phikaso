@@ -30,7 +30,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,7 +43,7 @@ public class MyOverlayService extends Service {
     private DatabaseReference mDBReference;
     private Calendar calendar = Calendar.getInstance();
     private String today = calendar.get(Calendar.YEAR) + "-"
-                    + calendar.get(Calendar.MONTH) + "-"
+                    + (calendar.get(Calendar.MONTH)+1) + "-"
                     + calendar.get(Calendar.DATE);
 
     @Override

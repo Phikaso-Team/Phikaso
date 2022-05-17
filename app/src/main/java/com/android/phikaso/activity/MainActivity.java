@@ -3,15 +3,12 @@ package com.android.phikaso.activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -27,7 +24,6 @@ import com.android.phikaso.R;
 import com.android.phikaso.server.RetrofitAPI;
 import com.android.phikaso.server.RetrofitClient;
 import com.android.phikaso.server.PhishingData;
-import com.android.phikaso.service.MyAccessibilityService;
 import com.android.phikaso.service.MyNotificationService;
 import com.android.phikaso.service.MyOverlayService;
 import com.android.phikaso.util.PreferenceManager;
@@ -38,7 +34,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -65,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         //초기화
         mDatabase= FirebaseDatabase.getInstance();
 
+        findViewById(R.id.buttonSearch).setOnClickListener(onClickListener);//피싱 번호 조회
         findViewById(R.id.buttonRegister).setOnClickListener(onClickListener);//피해 사례 등록
         findViewById(R.id.buttonSetting).setOnClickListener(onClickListener);//설정
         textViewCount = findViewById(R.id.textViewCount);//전체 피해 사례
@@ -73,6 +69,12 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.phishingPrevent).setOnClickListener(onClickListener);//피싱 예방
         preventCountToday = (TextView) findViewById(R.id.main_count_today);
         preventCountAll   = (TextView) findViewById(R.id.main_count_all);
+
+        if(PreferenceManager.getString(MainActivity.this, "checked").equals("true")){
+            switchProtection.setChecked(true);
+        }else{
+            switchProtection.setChecked(false);
+        }
 
         //카카오톡 대화 읽어오기
 //        LocalBroadcastManager.getInstance(this).registerReceiver(//백그라운드
@@ -101,6 +103,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
+                case R.id.buttonSearch://피싱 번호 조회
+                    Intent intentSearch = new Intent(getApplicationContext(), NumberSearchActivity.class);
+                    startActivity(intentSearch);
+                    break;
                 case R.id.buttonRegister://피해 사례 등록
                     Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
                     startActivity(intentRegister);
@@ -112,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.phishingPrevent://피싱 예방
                     Intent intentPrevent = new Intent(getApplicationContext(), PreventActivity.class);
                     startActivity(intentPrevent);
+                    break;
             }
         }
     };
@@ -203,12 +210,12 @@ public class MainActivity extends AppCompatActivity {
                 if(isChecked){
                     //팝업 알림 띄우기
                     if(!isMyServiceRunning(MyOverlayService.class)){
-                        Intent intent = new Intent(getApplicationContext(), MyOverlayService.class);
-                        startService(intent);//서비스 시작
+                        PreferenceManager.setString(MainActivity.this, "checked", "true");
+                        startService(new Intent(getApplicationContext(), MyOverlayService.class));
                     }
                 }else{
-                    Intent intent = new Intent(getApplicationContext(), MyOverlayService.class);
-                    stopService(intent);//서비스 종료
+                    PreferenceManager.setString(MainActivity.this, "checked", "false");
+                    stopService(new Intent(getApplicationContext(), MyOverlayService.class));
                 }
             }
         });
@@ -298,7 +305,7 @@ public class MainActivity extends AppCompatActivity {
     private void preventCountToday(){
         Calendar calendar = Calendar.getInstance();
         String today = calendar.get(Calendar.YEAR) + "-"
-                + calendar.get(Calendar.MONTH) + "-"
+                + (calendar.get(Calendar.MONTH)+1) + "-"
                 + calendar.get(Calendar.DATE);
 
         mDBReference = FirebaseDatabase.getInstance().getReference();
