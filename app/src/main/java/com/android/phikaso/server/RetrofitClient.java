@@ -7,15 +7,14 @@ public class RetrofitClient {
     private final static String BASE_URL = "http://15.164.229.237:5000";
     private static Retrofit retrofit = null;
 
-    private RetrofitClient() {
-    }
+    private RetrofitClient() { }
 
     public static Retrofit getClient() {
-        if(retrofit == null) {
+        if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
         }
         return retrofit;
     }

@@ -187,32 +187,8 @@ public class MyAccessibilityService extends AccessibilityService {
         return rect.left >= 200;
     }
 
-
-
-
-    public void onServiceConnected() {
-//        AccessibilityServiceInfo info = new AccessibilityServiceInfo();
-//        info.eventTypes = AccessibilityEvent.TYPES_ALL_MASK;
-//        info.feedbackType = AccessibilityServiceInfo.DEFAULT | AccessibilityServiceInfo.FEEDBACK_VISUAL;
-//        info.notificationTimeout = 500;
-//        setServiceInfo(info);
-    }
-
     @Override
-    public void onInterrupt() {
-        Log.e(TAG, "onInterrupt()");
-    }
-
-    private void printAllViews(AccessibilityNodeInfo nodeInfo, int depth) {
-        if (nodeInfo == null) return;
-        if (depth > 10) return; // Max-Depth
-        String t = "";
-        for (int i = 0; i < depth; i++) t += ".";
-        Log.d(TAG, t + "(" + nodeInfo.getText() + " <-- " + nodeInfo.getViewIdResourceName() + " / " + nodeInfo.getClassName().toString() + ")");
-        for (int i = 0; i < nodeInfo.getChildCount(); i++) {
-            printAllViews(nodeInfo.getChild(i), depth+1);
-        }
-    }
+    public void onInterrupt() { Log.e(TAG, "onInterrupt()"); }
 
     private String getAllText(AccessibilityNodeInfo node, int depth) {
         if (node == null) return "";

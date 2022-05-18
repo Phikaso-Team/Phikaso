@@ -129,8 +129,6 @@ public class MyOverlayService extends Service {
         super.onDestroy();
     }
 
-
-
     //딥러닝 서버
     public void deepLearningServer(String text) {
         RetrofitAPI retrofitAPI = RetrofitClient.getClient().create(RetrofitAPI.class);

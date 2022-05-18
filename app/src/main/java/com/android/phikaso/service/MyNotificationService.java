@@ -33,7 +33,6 @@ public class MyNotificationService extends NotificationListenerService {
         return r;
     }
 
-    // 알림이 표시되면 내용을 읽어온다
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
         // 패키지 체크
@@ -46,13 +45,7 @@ public class MyNotificationService extends NotificationListenerService {
         CharSequence text   = extras.getCharSequence(Notification.EXTRA_TEXT);
         CharSequence room   = extras.getCharSequence(Notification.EXTRA_SUB_TEXT);
         if (name == null || text == null) return;
-        if (room == null) room = "(개인 채팅)"; // room은 그룹/오픈채팅만 있음
-
-        // 토스트 띄우기
-//        Toast.makeText(this, "< 알림 내용 >\n"
-//                + "이름: " + name + "\n"
-//                + "메시지: " + text + "\n"
-//                + "채팅방: " + room, Toast.LENGTH_SHORT).show();
+        if (room == null) room = "";
 
         // 메인 엑티비티로 전달
         @SuppressLint("SimpleDateFormat")
@@ -63,10 +56,5 @@ public class MyNotificationService extends NotificationListenerService {
         intent.putExtra(EXTRA_TEXT, text.toString());
         intent.putExtra(EXTRA_ROOM, room.toString());
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-    }
-
-    @Override
-    public void onNotificationRemoved(StatusBarNotification sbn) {
-        // Toast.makeText(this, "알림 제거됨", Toast.LENGTH_SHORT).show();
     }
 }

@@ -35,15 +35,15 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "RegisterActivity";
     public static final int PICK_FROM_ALBUM = 1;
     private Uri imageUri;
     private String pathUri;
     private File tempFile;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth     mAuth;
     private FirebaseDatabase mDatabase;
-    private FirebaseStorage mStorage;
+    private FirebaseStorage  mStorage;
 
     private EditText editTextName;
     private EditText editTextPhone;
@@ -58,10 +58,11 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         //초기화
-        mAuth = FirebaseAuth.getInstance();
+        mAuth     = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
-        mStorage = FirebaseStorage.getInstance();
+        mStorage  = FirebaseStorage.getInstance();
 
         //아이디 설정
         editTextName = findViewById(R.id.editTextName);
@@ -72,28 +73,26 @@ public class RegisterActivity extends AppCompatActivity {
         //전체 피해 사례 초기화
         count();
 
-        imageViewFile.setOnClickListener(onClickListener);
-        findViewById(R.id.buttonRegister).setOnClickListener(onClickListener);
+        imageViewFile.setOnClickListener(this);
+        findViewById(R.id.buttonRegister).setOnClickListener(this);
     }
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.imageViewFile:
-                    Intent intent_album = new Intent(Intent.ACTION_PICK);
-                    intent_album.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                    startActivityForResult(intent_album, PICK_FROM_ALBUM);
-                    break;
-                case R.id.buttonRegister:
-                    register();
-                    updateCount();//전체 피해 사례 증가
-                    Intent intent_main = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent_main);
-                    break;
-            }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imageViewFile:
+                Intent intent_album = new Intent(Intent.ACTION_PICK);
+                intent_album.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                startActivityForResult(intent_album, PICK_FROM_ALBUM);
+                break;
+            case R.id.buttonRegister:
+                register();
+                updateCount();//전체 피해 사례 증가
+                Intent intent_main = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent_main);
+                break;
         }
-    };
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -138,59 +137,52 @@ public class RegisterActivity extends AppCompatActivity {
         final Uri file = Uri.fromFile(new File(pathUri));
 
         StorageReference storageReference = mStorage.getReference().child("imageFile").child("uid/" + file.getLastPathSegment());
-        storageReference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                final Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
-                while (!imageUrl.isComplete()) ;
+        storageReference.putFile(imageUri).addOnCompleteListener(task -> {
+            final Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
+            while (!imageUrl.isComplete());
 
-                mDatabase.getReference().child("users").child(uid)
-                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                UserModel userModel = snapshot.getValue(UserModel.class);
-                                RegisterModel registerModel = new RegisterModel();
+            mDatabase.getReference().child("users").child(uid)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        UserModel userModel = snapshot.getValue(UserModel.class);
+                        RegisterModel registerModel = new RegisterModel();
 
-                                registerModel.name = name;
-                                registerModel.phone = phone;
-                                registerModel.email = userModel.email;
-                                registerModel.content = content;
-                                registerModel.file = imageUrl.getResult().toString();
+                        registerModel.name = name;
+                        registerModel.phone = phone;
+                        registerModel.email = userModel.email;
+                        registerModel.content = content;
+                        registerModel.file = imageUrl.getResult().toString();
 
-                                mDatabase.getReference().child("phishingCases").child("content").push().setValue(registerModel);
-                            }
+                        mDatabase.getReference().child("phishingCases").child("content").push().setValue(registerModel);
+                    }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-            }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) { }
+                });
         });
     }
 
     private void count() {
         mDBReference = mDatabase.getReference().child("phishingCases");
         mDBReference.child("count")
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        try {
+            .addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    try {
 
-                        } catch (Exception e) {
-                            RegisterModel registerModel = new RegisterModel();
-                            childUpdates = new HashMap<>();
-                            countValue = registerModel.toMap();
-                            childUpdates.put("count", countValue);
-                            mDBReference.updateChildren(childUpdates);
-                        }
+                    } catch (Exception e) {
+                        RegisterModel registerModel = new RegisterModel();
+                        childUpdates = new HashMap<>();
+                        countValue = registerModel.toMap();
+                        childUpdates.put("count", countValue);
+                        mDBReference.updateChildren(childUpdates);
                     }
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) { }
+            });
     }
 
     private void updateCount() {

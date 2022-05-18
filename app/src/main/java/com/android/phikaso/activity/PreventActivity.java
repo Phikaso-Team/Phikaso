@@ -1,5 +1,6 @@
 package com.android.phikaso.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -14,6 +15,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 
 public class PreventActivity extends AppCompatActivity {
     private TextView personalName;
@@ -40,42 +42,38 @@ public class PreventActivity extends AppCompatActivity {
         String uid = PreferenceManager.getString(this, "personal-id");
         mDBReference = FirebaseDatabase.getInstance().getReference().child("users");
         mDBReference.child(uid)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot snapshot) {
-                        Integer count = snapshot.child("count").getValue(Integer.class);
-                        if(count != null){
-                            personalCount.setText(String.valueOf(count));
-                        }else{
-                            personalCount.setText("0");
-                        }
+            .addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Integer count = snapshot.child("count").getValue(Integer.class);
+                    if(count != null){
+                        personalCount.setText(String.valueOf(count));
+                    }else{
+                        personalCount.setText("0");
                     }
+                }
 
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-
-                    }
-                });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) { }
+            });
     }
 
     private void preventCountAll(){
         mDBReference = FirebaseDatabase.getInstance().getReference();
         mDBReference.child("total")
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot snapshot) {
-                        Integer count = snapshot.child("count").getValue(Integer.class);
-                        if(count != null){
-                            preventCountAll.setText(String.valueOf(count));
-                        }else{
-                            preventCountAll.setText("0");
-                        }
+            .addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Integer count = snapshot.child("count").getValue(Integer.class);
+                    if(count != null){
+                        preventCountAll.setText(String.valueOf(count));
+                    }else{
+                        preventCountAll.setText("0");
                     }
+                }
 
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-
-                    }
-                });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) { }
+            });
     }
 }
