@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.phikaso.R;
 
 public class SplashActivity extends AppCompatActivity {
-    private final int SPLASH_DISPLAY_TIME = 2000;
+    private final int SPLASH_DISPLAY_TIME = 1500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
 
         Handler handler = new Handler();
         handler.postDelayed(() -> {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(intent);
             SplashActivity.this.finish();
         }, SPLASH_DISPLAY_TIME);

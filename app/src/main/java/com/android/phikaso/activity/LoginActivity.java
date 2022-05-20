@@ -30,9 +30,11 @@ import kotlin.jvm.functions.Function2;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "LoginActivity";
-    private FirebaseAuth      mAuth;
-    private FirebaseDatabase  mDatabase;
+
+    private FirebaseAuth     mAuth;
+    private FirebaseDatabase mDatabase;
     private DatabaseReference mDBReference;
+
     private View kakaoLogin, kakaoUnlink;
 
     @Override
@@ -40,7 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mAuth = FirebaseAuth.getInstance();
+        mAuth     = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
 
         final FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -60,14 +62,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.buttonLogin:
-                firebaseLogin();
-                break;
-            case R.id.goToSignUp:
-                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                startActivity(intent);
-                break;
+        int id = v.getId();
+        if (id == R.id.buttonLogin) {
+            firebaseLogin();
+        } else if (id == R.id.goToSignUp) {
+            Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -115,30 +115,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void kakaoLogin() {
-        //카카오가 설치되어 있는지 확인
+        // 카카오가 설치되어 있는지 확인
         Function2<OAuthToken, Throwable, Unit> callback = (oAuthToken, throwable) -> {
-            //토큰이 전달 되면 로그인 성공, 토큰이 전달되지 않았다면 로그인 실패
-            if(oAuthToken != null) {
+            // 토큰이 전달 되면 로그인 성공, 토큰이 전달되지 않았다면 로그인 실패
+            if (oAuthToken != null) {
                 Log.d("[카카오] 로그인", "성공");
                 updateKakaoLogin();
             }
-            if(throwable != null) {
+            if (throwable != null) {
                 Log.d("[카카오] 로그인", "실패");
                 Log.e("signInKakao()", throwable.getLocalizedMessage());
             }
             return null;
         };
 
-        //카카오톡 로그인
+        // 카카오톡 로그인
         kakaoLogin.setOnClickListener(view -> {
-            if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(LoginActivity.this)) {
+            if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(LoginActivity.this)) {
                 UserApiClient.getInstance().loginWithKakaoTalk(LoginActivity.this, callback);
-            }else {
+            } else {
                 UserApiClient.getInstance().loginWithKakaoAccount(LoginActivity.this, callback);
             }
         });
 
-        //카카오톡 연결 끊기(테스트용)
+        // 카카오톡 연결 끊기(테스트용)
         kakaoUnlink.setOnClickListener(view -> UserApiClient.getInstance().unlink(throwable -> {
             Log.d("kakaoUnlink", "연결 끊기 성공. SDK에서 토큰 삭제");
             updateKakaoLogin();
@@ -150,10 +150,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void updateKakaoLogin() {
         UserApiClient.getInstance().me((user, throwable) -> {
             if (user != null) {//로그인
-                Log.d(TAG,"invoke: id " + user.getId());
-                Log.d(TAG,"invoke: email " + user.getKakaoAccount().getEmail());
-                Log.d(TAG,"invoke: nickname " + user.getKakaoAccount().getProfile().getNickname());
-                Log.d(TAG,"invoke: age " + user.getKakaoAccount().getAgeRange());
+                Log.d(TAG, "invoke: id " + user.getId());
+                Log.d(TAG, "invoke: email " + user.getKakaoAccount().getEmail());
+                Log.d(TAG, "invoke: nickname " + user.getKakaoAccount().getProfile().getNickname());
+                Log.d(TAG, "invoke: age " + user.getKakaoAccount().getAgeRange());
 
                 kakaoLogin.setVisibility(View.GONE);
                 kakaoUnlink.setVisibility(View.VISIBLE);
@@ -167,8 +167,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 PreferenceManager.setString(LoginActivity.this, "personal-name", user.getKakaoAccount().getProfile().getNickname());
                 PreferenceManager.setString(LoginActivity.this, "personal-id", String.valueOf(user.getId()));
 
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                showMainScreen(); // 메인 액티비티로 전환
             } else {//연결 끊기
                 kakaoLogin.setVisibility(View.VISIBLE);
                 kakaoUnlink.setVisibility(View.GONE);

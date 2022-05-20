@@ -18,7 +18,6 @@ import androidx.loader.content.CursorLoader;
 import com.android.phikaso.R;
 import com.android.phikaso.model.RegisterModel;
 import com.android.phikaso.model.UserModel;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +28,6 @@ import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.util.HashMap;
@@ -74,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         count();
 
         imageViewFile.setOnClickListener(this);
-        findViewById(R.id.buttonRegister).setOnClickListener(this);
+        findViewById(R.id.main_btn_add_case).setOnClickListener(this);
     }
 
     @Override
@@ -85,7 +83,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 intent_album.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 startActivityForResult(intent_album, PICK_FROM_ALBUM);
                 break;
-            case R.id.buttonRegister:
+            case R.id.main_btn_add_case:
                 register();
                 updateCount();//전체 피해 사례 증가
                 Intent intent_main = new Intent(getApplicationContext(), MainActivity.class);

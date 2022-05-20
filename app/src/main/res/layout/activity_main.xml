@@ -14,7 +14,7 @@
 
         <!-- 타이틀 -->
         <TextView
-            android:id="@+id/title_view"
+            android:id="@+id/main_text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="PHIKASO"
@@ -24,7 +24,7 @@
 
         <!-- 설정 -->
         <ImageButton
-            android:id="@+id/buttonSetting"
+            android:id="@+id/main_btn_setting"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
@@ -40,7 +40,7 @@
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/title_view"
+        android:layout_below="@+id/main_text_title"
         android:layout_margin="20dp"
         android:columnCount="1"
         android:rowCount="2">
@@ -60,7 +60,7 @@
                 android:textStyle="bold" />
 
             <ImageButton
-                android:id="@+id/buttonSearch"
+                android:id="@+id/main_btn_search"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
@@ -184,7 +184,7 @@
                 android:layout_weight="1" />
 
             <Switch
-                android:id="@+id/switchProtection"
+                android:id="@+id/main_sw_protection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -251,7 +251,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/textViewCount"
+                            android:id="@+id/main_text_cnt_case"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentTop="true"
@@ -262,7 +262,7 @@
                             android:textStyle="bold" />
 
                         <Button
-                            android:id="@+id/buttonRegister"
+                            android:id="@+id/main_btn_add_case"
                             android:layout_width="140dp"
                             android:layout_height="40dp"
                             android:layout_alignParentTop="true"

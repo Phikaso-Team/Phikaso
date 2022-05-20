@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "MainActivity";
 
     private AlertDialog dialog = null;
-    private FirebaseDatabase  mDatabase;
+    private FirebaseDatabase mDatabase;
     private DatabaseReference mDBReference;
     private TextView textViewCount;
     private Switch switchProtection;
@@ -53,42 +52,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mDatabase = FirebaseDatabase.getInstance();
 
-        findViewById(R.id.buttonSearch).setOnClickListener(this);   // 피싱 번호 조회
-        findViewById(R.id.buttonRegister).setOnClickListener(this); // 피해 사례 등록
-        findViewById(R.id.buttonSetting).setOnClickListener(this);  // 설정
-        textViewCount = findViewById(R.id.textViewCount); // 전체 피해 사례
-        switchProtection = findViewById(R.id.switchProtection); // 실시간 보호
+        findViewById(R.id.main_btn_search).setOnClickListener(this);   // 피싱 번호 조회
+        findViewById(R.id.main_btn_add_case).setOnClickListener(this); // 피해 사례 등록
+        findViewById(R.id.main_btn_setting).setOnClickListener(this);  // 설정
+        textViewCount = findViewById(R.id.main_text_cnt_case); // 전체 피해 사례
+        switchProtection = findViewById(R.id.main_sw_protection); // 실시간 보호
 
         findViewById(R.id.phishingPrevent).setOnClickListener(this); // 피싱 예방
         preventCountToday = (TextView) findViewById(R.id.main_count_today);
-        preventCountAll   = (TextView) findViewById(R.id.main_count_all);
+        preventCountAll = (TextView) findViewById(R.id.main_count_all);
 
         if (PreferenceManager.getString(MainActivity.this, "checked").equals("true")) {
             switchProtection.setChecked(true);
-        }else{
+        } else {
             switchProtection.setChecked(false);
         }
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.buttonSearch: //피싱 번호 조회
-                Intent intentSearch = new Intent(getApplicationContext(), NumberSearchActivity.class);
-                startActivity(intentSearch);
-                break;
-            case R.id.buttonRegister: //피해 사례 등록
-                Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(intentRegister);
-                break;
-            case R.id.buttonSetting: //설정
-                Intent intentSetting = new Intent(getApplicationContext(), SettingActivity.class);
-                startActivity(intentSetting);
-                break;
-            case R.id.phishingPrevent: //피싱 예방
-                Intent intentPrevent = new Intent(getApplicationContext(), PreventActivity.class);
-                startActivity(intentPrevent);
-                break;
+        int id = v.getId();
+        if (id == R.id.main_btn_search) { // 피싱 번호 조회
+            Intent intentSearch = new Intent(MainActivity.this, SearchActivity.class);
+            startActivity(intentSearch);
+        } else if (id == R.id.main_btn_add_case) { // 피해 사례 등록
+            Intent intentRegister = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intentRegister);
+        } else if (id == R.id.main_btn_setting) { // 설정
+            Intent intentSetting = new Intent(MainActivity.this, SettingActivity.class);
+            startActivity(intentSetting);
+        } else if (id == R.id.phishingPrevent) { // 피싱 예방
+            Intent intentPrevent = new Intent(MainActivity.this, PreventActivity.class);
+            startActivity(intentPrevent);
         }
     }
 
@@ -96,20 +91,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
         mDatabase.getReference().child("phishingCases").child("count")
-                .addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    count = (int)snapshot.getValue(Integer.class);
-                }else{
-                    count = 0;
+            .addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        count = (int) snapshot.getValue(Integer.class);
+                    } else {
+                        count = 0;
+                    }
+                    textViewCount.setText(String.valueOf(count));
                 }
-                textViewCount.setText(String.valueOf(count));
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) { }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) { }
+            });
     }
 
     @SuppressLint("SetTextI18n")
@@ -125,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if (!checkNotificationPermission()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("알림 접근 권한 필요");
                 builder.setMessage("알림 접근 권한이 필요합니다.");
@@ -156,8 +151,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        if(!checkOverlayPermission()){
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+        if (!checkOverlayPermission()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("다른 앱 위에 표시 권한 필요");
                 builder.setMessage("다른 앱 위에 표시 권한이 필요합니다.");
@@ -172,8 +167,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //실시간 보호
         switchProtection.setOnCheckedChangeListener((compoundButton, isChecked) -> {
-            if(isChecked) { // 팝업 알림 띄우기
-                if(!isMyServiceRunning(MyOverlayService.class)){
+            if (isChecked) { // 팝업 알림 띄우기
+                if (!isMyServiceRunning(MyOverlayService.class)) {
                     PreferenceManager.setString(MainActivity.this, "checked", "true");
                     startService(new Intent(getApplicationContext(), MyOverlayService.class));
                 }
@@ -196,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // 알림 접근 권한이 있는지 확인하는 함수
-    public boolean checkNotificationPermission(){
+    public boolean checkNotificationPermission() {
         final Set<String> sets = NotificationManagerCompat.getEnabledListenerPackages(this);
         return sets.contains(getApplicationContext().getPackageName());
     }
@@ -221,10 +216,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //오늘의 피싱 예방
-    private void preventCountToday(){
+    private void preventCountToday() {
         Calendar calendar = Calendar.getInstance();
         String today = calendar.get(Calendar.YEAR) + "-"
-                + (calendar.get(Calendar.MONTH)+1) + "-"
+                + (calendar.get(Calendar.MONTH) + 1) + "-"
                 + calendar.get(Calendar.DATE);
 
         mDBReference = FirebaseDatabase.getInstance().getReference();
@@ -235,13 +230,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Integer count = snapshot.child("count").getValue(Integer.class);
                     if (count != null) {
                         preventCountToday.setText(String.valueOf(count));
-                    }else{
+                    } else {
                         preventCountToday.setText("0");
                     }
                 }
 
                 @Override
-                public void onCancelled(DatabaseError error) { }
+                public void onCancelled(DatabaseError error) {
+                }
             });
     }
 
@@ -255,13 +251,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Integer count = snapshot.child("count").getValue(Integer.class);
                     if (count != null) {
                         preventCountAll.setText(String.valueOf(count));
-                    }else{
+                    } else {
                         preventCountAll.setText("0");
                     }
                 }
 
                 @Override
-                public void onCancelled(DatabaseError error) { }
+                public void onCancelled(DatabaseError error) {
+                }
             });
     }
 }
