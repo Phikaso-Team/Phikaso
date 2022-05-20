@@ -52,10 +52,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mDatabase = FirebaseDatabase.getInstance();
 
-        findViewById(R.id.main_btn_search).setOnClickListener(this);   // 피싱 번호 조회
-        findViewById(R.id.main_btn_add_case).setOnClickListener(this); // 피해 사례 등록
-        findViewById(R.id.main_btn_setting).setOnClickListener(this);  // 설정
-        textViewCount = findViewById(R.id.main_text_cnt_case); // 전체 피해 사례
+        findViewById(R.id.main_btn_search).setOnClickListener(this);
+        findViewById(R.id.main_btn_search2).setOnClickListener(this);
+        findViewById(R.id.main_btn_add_case).setOnClickListener(this);
+        findViewById(R.id.main_btn_setting).setOnClickListener(this);
+
+        textViewCount    = findViewById(R.id.main_text_cnt_case); // 전체 피해 사례
         switchProtection = findViewById(R.id.main_sw_protection); // 실시간 보호
 
         findViewById(R.id.phishingPrevent).setOnClickListener(this); // 피싱 예방
@@ -73,6 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.main_btn_search) { // 피싱 번호 조회
+            Intent intentSearch = new Intent(MainActivity.this, NumberSearchActivity.class);
+            startActivity(intentSearch);
+        } else if (id == R.id.main_btn_search2) { // 피싱 번호 조회
             Intent intentSearch = new Intent(MainActivity.this, SearchActivity.class);
             startActivity(intentSearch);
         } else if (id == R.id.main_btn_add_case) { // 피해 사례 등록

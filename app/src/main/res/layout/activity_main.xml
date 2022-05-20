@@ -69,6 +69,16 @@
                 android:background="@drawable/search"
                 android:backgroundTint="@color/phikaso" />
 
+            <ImageButton
+                android:id="@+id/main_btn_search2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:background="@drawable/search"
+                android:backgroundTint="@color/phikaso" />
+
         </LinearLayout>
 
         <LinearLayout
