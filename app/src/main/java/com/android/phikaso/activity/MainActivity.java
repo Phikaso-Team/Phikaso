@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.android.phikaso.R;
 import com.android.phikaso.service.MyNotificationService;
 import com.android.phikaso.service.MyOverlayService;
+import com.android.phikaso.util.PermissionUtil;
 import com.android.phikaso.util.PreferenceManager;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -124,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             this.dialog.dismiss();
         }
 
-        if (!checkNotificationPermission()) {
+        if (!PermissionUtil.checkNotificationPermission(this)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("알림 접근 권한 필요");
@@ -144,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this.getApplicationContext(), "알림 읽기 서비스 - 시작됨", Toast.LENGTH_SHORT).show();
         }
 
-        if (!checkAccessibilityPermission()) {
+        if (!PermissionUtil.checkAccessibilityPermission(this)) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("접근성 권한 필요");
             builder.setMessage("접근성 권한이 필요합니다.\n\n설치된 앱 -> 허용");
@@ -156,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        if (!checkOverlayPermission()) {
+        if (!PermissionUtil.checkOverlayPermission(this)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("다른 앱 위에 표시 권한 필요");
@@ -193,31 +194,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         return false;
-    }
-
-    // 알림 접근 권한이 있는지 확인하는 함수
-    public boolean checkNotificationPermission() {
-        final Set<String> sets = NotificationManagerCompat.getEnabledListenerPackages(this);
-        return sets.contains(getApplicationContext().getPackageName());
-    }
-
-    // 접근성 권한이 있는지 확인하는 함수
-    public boolean checkAccessibilityPermission() {
-        final AccessibilityManager manager = (AccessibilityManager) getSystemService(Context.ACCESSIBILITY_SERVICE);
-        final List<AccessibilityServiceInfo> list = manager.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_GENERIC);
-        for (int i = 0; i < list.size(); i++) {
-            final AccessibilityServiceInfo info = list.get(i);
-            if (info.getResolveInfo().serviceInfo.packageName.equals(getApplication().getPackageName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // 다른 앱 위에 표시 권한이 있는지 확인하는 함수
-    public boolean checkOverlayPermission() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-                && Settings.canDrawOverlays(this);
     }
 
     //오늘의 피싱 예방
