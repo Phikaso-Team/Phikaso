@@ -43,6 +43,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
 
+        final FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) { // 이미 로그인되어 있다면 메인 액티비티로 전환
+            showMainScreen();
+            return;
+        }
+
         findViewById(R.id.buttonLogin).setOnClickListener(this);
         findViewById(R.id.goToSignUp).setOnClickListener(this);
 
@@ -65,6 +71,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    private void showMainScreen() {
+        final Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void firebaseLogin() {
         final String email    = ((EditText) findViewById(R.id.editTextEmail)).getText().toString();
         final String password = ((EditText) findViewById(R.id.editTextPassword)).getText().toString();
@@ -76,33 +88,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this, task -> {
-                if (task.isSuccessful()) {
-                    final FirebaseUser user = mAuth.getCurrentUser();
-                    final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-
-                    if (user != null) {
-                        final String uid = user.getUid();
-                        mDBReference = mDatabase.getReference().child("users");
-                        mDBReference.child(uid)
-                            .addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NotNull DataSnapshot snapshot) {
-                                    String name = snapshot.child("name").getValue(String.class);
-                                    PreferenceManager.setString(LoginActivity.this, "personal-name", name);
-                                    PreferenceManager.setString(LoginActivity.this, "personal-id", uid);
-                                }
-                                @Override
-                                public void onCancelled(@NotNull DatabaseError error) {
-
-                                }
-                            });
-                    }
-                } else {
+                if (!task.isSuccessful()) {
                     if (task.getException() != null) {
                         showToast("이메일 또는 비밀번호가 일치하지 않습니다.");
+                        return;
                     }
                 }
+                final FirebaseUser user = mAuth.getCurrentUser();
+                if (user != null) {
+                    final String uid = user.getUid();
+                    mDBReference = mDatabase.getReference().child("users");
+                    mDBReference.child(uid)
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NotNull DataSnapshot snapshot) {
+                                String name = snapshot.child("name").getValue(String.class);
+                                PreferenceManager.setString(LoginActivity.this, "personal-name", name);
+                                PreferenceManager.setString(LoginActivity.this, "personal-id", uid);
+                            }
+                            @Override
+                            public void onCancelled(@NotNull DatabaseError error) { }
+                        });
+                }
+                showMainScreen(); // 메인 액티비티로 전환
             });
     }
 
