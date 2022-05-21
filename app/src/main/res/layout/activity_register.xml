@@ -15,8 +15,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="이름"
+            android:fontFamily="@font/pretendard_semibold"
+            android:textSize="16sp"
             android:textColor="@color/phikaso"
             android:textStyle="bold"/>
+
         <EditText
             android:id="@+id/editTextName"
             android:layout_width="match_parent"
@@ -36,6 +39,8 @@
             android:layout_marginTop="10dp"
             android:layout_below="@+id/editTextName"
             android:text="전화번호"
+            android:fontFamily="@font/pretendard_semibold"
+            android:textSize="16sp"
             android:textColor="@color/phikaso"
             android:textStyle="bold"/>
         <EditText
@@ -58,7 +63,9 @@
             android:layout_marginTop="10dp"
             android:textStyle="bold"
             android:textColor="@color/phikaso"
-            android:text="신고 내용"/>
+            android:text="신고 내용"
+            android:fontFamily="@font/pretendard_semibold"
+            android:textSize="16sp"/>
 
         <EditText
             android:id="@+id/editTextContent"
@@ -81,7 +88,10 @@
             android:textColor="@color/phikaso"
             android:textStyle="bold"
             android:layout_below="@+id/editTextContent"
-            android:text="첨부 파일"/>
+            android:text="첨부 파일"
+            android:fontFamily="@font/pretendard_semibold"
+            android:textSize="16sp"/>
+
         <ImageView
             android:id="@+id/imageViewFile"
             android:layout_width="match_parent"

@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="얼마나 많이 피싱을\n예방했을까요?"
+        android:fontFamily="@font/pretendard_semibold"
         android:textColor="@color/phikaso"
         android:textSize="35sp"
         android:textStyle="bold"
@@ -35,6 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="이름"
+            android:fontFamily="@font/pretendard_semibold"
             android:textColor="#4E709D"
             android:textSize="28sp"
             android:textStyle="bold" />
@@ -42,6 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" 님은"
+            android:fontFamily="@font/pretendard_semibold"
             android:textColor="#4E709D"
             android:textSize="28sp"
             android:textStyle="bold" />
@@ -62,13 +65,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
+            android:fontFamily="@font/pretendard_black"
             android:textColor="#4E709D"
-            android:textSize="28sp"
+            android:textSize="50sp"
             android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" 번"
+            android:fontFamily="@font/pretendard_semibold"
             android:textColor="#4E709D"
             android:textSize="28sp"
             android:textStyle="bold" />
@@ -108,6 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="지금까지 총 "
+            android:fontFamily="@font/pretendard_semibold"
             android:textColor="#535962"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -116,13 +122,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
+            android:fontFamily="@font/pretendard_black"
             android:textColor="#535962"
-            android:textSize="20sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" 번"
+            android:fontFamily="@font/pretendard_semibold"
             android:textColor="#535962"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -141,6 +149,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="피싱을 예방했어요"
+            android:fontFamily="@font/pretendard_semibold"
             android:textColor="#535962"
             android:textSize="20sp"
             android:textStyle="bold" />

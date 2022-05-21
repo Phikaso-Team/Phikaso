@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.main_btn_search) { // 피싱 번호 조회
-            Intent intentSearch = new Intent(MainActivity.this, NumberSearchActivity.class);
+            Intent intentSearch = new Intent(MainActivity.this, SearchActivity.class);
             startActivity(intentSearch);
         } else if (id == R.id.main_btn_search2) { // 피싱 번호 조회
             Intent intentSearch = new Intent(MainActivity.this, SearchActivity.class);

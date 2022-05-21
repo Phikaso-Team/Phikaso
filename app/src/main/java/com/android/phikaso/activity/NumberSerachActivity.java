@@ -9,7 +9,7 @@ import android.webkit.WebViewClient;
 
 import com.android.phikaso.R;
 
-public class NumberSearchActivity extends Activity {
+public class NumberSerachActivity extends Activity {
     private WebView numberSearch;
 
     @Override

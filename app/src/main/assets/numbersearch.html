@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html xmls="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
-    <head>
-        <script src="https://code.jquery.com/jquery-3.6.0.js" crossorigin="anonymous"></script>
-        <meta name="viewport" content="initial-scale=1.0">
-    </head>
-    <body>
-        <tr align="center">
-            <td>
-                <div id="search_main_box">
-                    <div style="border: solid 8px #F9B530;">
-                        <input class="search_input" id="search_text" type="number" value="" autocomplete="off" autocorrect="off" maxlength="255" data-initval="" placeholder="전화번호를 검색하세요">
-                        <img class="search_button" id="search_btn" title="검색버튼" onclick="chkSearch()" src="http://www.moyaweb.com/images/img_search.png">
-                    </div>
-                </div>
-                <div id="search_error" style="text-align: center; font-size: 12px; color: rgb(244, 127, 117); font-weight: bold;"></div>
-            </td>
-        </tr>
-        <tr align="center">
-            <td>
-                <div id="result_main_view" style="display: none;">
-                </div>
-            </td>
-        </tr>
-        <script type="text/javascript">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="initial-scale=1.0">
+</head>
+<body>
+<tr align="center">
+    <td>
+        <div id="search_main_box">
+            <div style="border: solid 8px #F9B530;">
+                <input class="search_input" id="search_text" type="number" value="" autocomplete="off" autocorrect="off" maxlength="255" data-initval="" placeholder="전화번호를 검색하세요">
+                <img class="search_button" id="search_btn" title="검색버튼" onclick="chkSearch()" src="http://www.moyaweb.com/images/img_search.png">
+            </div>
+        </div>
+        <div id="search_error" style="text-align: center; font-size: 12px; color: rgb(244, 127, 117); font-weight: bold;"></div>
+    </td>
+</tr>
+<tr align="center">
+    <td>
+        <div id="result_main_view" style="display: none;">
+        </div>
+    </td>
+</tr>
+<script type="text/javascript">
             $(document).ready(function(){
                 $(window).resize(chkResize);
                 chkResize();
@@ -146,5 +146,5 @@
                 });
             }
         </script>
-    </body>
+</body>
 </html>

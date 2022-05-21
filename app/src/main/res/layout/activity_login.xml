@@ -13,6 +13,7 @@
         android:layout_marginTop="206dp"
         android:gravity="top"
         android:text="PHIKASO"
+        android:fontFamily="@font/pretendard_black"
         android:textColor="@color/phikaso"
         android:textSize="36sp"
         android:textStyle="bold" />
@@ -26,6 +27,7 @@
         android:drawableStart="@drawable/custom_email_icon"
         android:drawablePadding="12dp"
         android:hint="이메일"
+        android:fontFamily="@font/pretendard_light"
         android:inputType="textEmailAddress"
         android:paddingStart="12dp"
         android:paddingEnd="12dp" />
@@ -40,6 +42,7 @@
         android:drawableStart="@drawable/custom_lock_icon"
         android:drawablePadding="12dp"
         android:hint="비밀번호"
+        android:fontFamily="@font/pretendard_light"
         android:inputType="textPassword"
         android:paddingStart="12dp"
         android:paddingEnd="12dp" />
@@ -52,6 +55,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/rounded_corner"
         android:text="로그인"
+        android:fontFamily="@font/pretendard_semibold"
         android:textAllCaps="false"
         android:textColor="#fff"
         android:textSize="20sp" />
@@ -62,7 +66,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="아직 회원이 아니신가요? 지금 가입하세요." />
+        android:text="아직 회원이 아니신가요? 지금 가입하세요."
+        android:fontFamily="@font/pretendard_light"/>
 
     <ImageView
         android:id="@+id/kakaoLogin"

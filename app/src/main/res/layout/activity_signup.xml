@@ -14,6 +14,7 @@
         android:layout_marginTop="140dp"
         android:gravity="top"
         android:text="PHIKASO"
+        android:fontFamily="@font/pretendard_black"
         android:textColor="@color/phikaso"
         android:textSize="36sp"
         android:textStyle="bold" />
@@ -25,6 +26,8 @@
         android:layout_margin="20dp"
         android:inputType="textPersonName"
         android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_baseline_person_24"
+        android:fontFamily="@font/pretendard_light"
         android:drawablePadding="12dp"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
@@ -38,6 +41,7 @@
         android:inputType="textEmailAddress"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/custom_email_icon"
+        android:fontFamily="@font/pretendard_light"
         android:drawablePadding="12dp"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
@@ -55,7 +59,8 @@
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         android:inputType="textPassword"
-        android:hint="비밀번호"/>
+        android:hint="비밀번호"
+        android:fontFamily="@font/pretendard_light"/>
     <EditText
         android:id="@+id/editTextPasswordCheck"
         android:layout_width="match_parent"
@@ -69,7 +74,8 @@
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         android:inputType="textPassword"
-        android:hint="비밀번호 확인"/>
+        android:hint="비밀번호 확인"
+        android:fontFamily="@font/pretendard_light"/>
 
     <Button
         android:id="@+id/buttonSignUp"
@@ -79,6 +85,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/rounded_corner"
         android:text="회원가입"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:fontFamily="@font/pretendard_light"/>
 
 </LinearLayout>

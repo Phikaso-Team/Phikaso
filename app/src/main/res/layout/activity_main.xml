@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:text="PHIKASO"
             android:textColor="@color/phikaso"
+            android:fontFamily="@font/pretendard_black"
             android:textSize="36sp"
             android:textStyle="bold" />
 
@@ -56,6 +57,7 @@
                 android:text="피싱 번호 조회"
                 android:layout_marginStart="6dp"
                 android:textColor="@color/black"
+                android:fontFamily="@font/pretendard_semibold"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -90,6 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="실시간 데이터"
+                android:fontFamily="@font/pretendard_semibold"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="6dp"
                 android:textColor="@color/black"
@@ -136,6 +139,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="30dp"
                             android:text="오늘의 피싱 예방"
+                            android:fontFamily="@font/pretendard_semibold"
                             android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -146,6 +150,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="0"
+                            android:fontFamily="@font/pretendard_semibold"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -182,6 +187,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="실시간 보호"
+                android:fontFamily="@font/pretendard_semibold"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="6dp"
                 android:textColor="@color/black"
@@ -214,6 +220,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="6dp"
                 android:text="피해 사례 등록"
+                android:fontFamily="@font/pretendard_semibold"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -256,6 +263,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="40dp"
                             android:text="전체 피해 사례"
+                            android:fontFamily="@font/pretendard_semibold"
                             android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -281,6 +289,7 @@
                             android:layout_marginTop="20dp"
                             android:background="@drawable/rounded_corner"
                             android:text="피해 사례 등록"
+                            android:fontFamily="@font/pretendard_semibold"
                             android:textAllCaps="false"
                             android:textColor="#fff"
                             android:textSize="15sp" />

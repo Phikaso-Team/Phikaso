@@ -103,4 +103,5 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             });
         }).start();
     }
+
 }
