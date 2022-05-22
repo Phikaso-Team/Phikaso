@@ -46,10 +46,22 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/search_text_result"
+        android:id="@+id/search_text_result_police"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"/>
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/pretendard_light"
+        android:textSize="20sp"/>
 
+    <TextView
+        android:id="@+id/search_text_result_moya"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:fontFamily="@font/pretendard_light"
+        android:textSize="25sp"/>
 
 </LinearLayout>

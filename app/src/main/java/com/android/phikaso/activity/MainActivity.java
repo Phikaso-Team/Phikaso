@@ -2,9 +2,6 @@ package com.android.phikaso.activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationManagerCompat;
-
-import android.accessibilityservice.AccessibilityServiceInfo;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
@@ -13,7 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
-import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +26,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
-import java.util.List;
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
@@ -54,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDatabase = FirebaseDatabase.getInstance();
 
         findViewById(R.id.main_btn_search).setOnClickListener(this);
-        findViewById(R.id.main_btn_search2).setOnClickListener(this);
         findViewById(R.id.main_btn_add_case).setOnClickListener(this);
         findViewById(R.id.main_btn_setting).setOnClickListener(this);
 
@@ -76,9 +69,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.main_btn_search) { // 피싱 번호 조회
-            Intent intentSearch = new Intent(MainActivity.this, SearchActivity.class);
-            startActivity(intentSearch);
-        } else if (id == R.id.main_btn_search2) { // 피싱 번호 조회
             Intent intentSearch = new Intent(MainActivity.this, SearchActivity.class);
             startActivity(intentSearch);
         } else if (id == R.id.main_btn_add_case) { // 피해 사례 등록

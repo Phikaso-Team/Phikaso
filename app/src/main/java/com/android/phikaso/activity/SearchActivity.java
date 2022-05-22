@@ -3,20 +3,19 @@ package com.android.phikaso.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.phikaso.R;
+import com.android.phikaso.RequestHttpConnection;
 import com.android.phikaso.util.StringUtil;
 
-import org.w3c.dom.Text;
-
 import java.io.IOException;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -27,7 +26,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private static final String TAG = "SearchActivity";
 
     private EditText editPhoneNumber;
-    private TextView textSearchResult;
+    private TextView textSearchResultPolice;
+    private TextView textSearchResultMoya;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.search_btn_query).setOnClickListener(this);
 
         editPhoneNumber  = (EditText) findViewById(R.id.search_edit_phone);
-        textSearchResult = (TextView) findViewById(R.id.search_text_result);
+        textSearchResultPolice = (TextView) findViewById(R.id.search_text_result_police);
+        textSearchResultMoya = (TextView) findViewById(R.id.search_text_result_moya);
     }
 
     @Override
@@ -46,20 +47,21 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         if (id == R.id.search_btn_query) {
             String num = editPhoneNumber.getText().toString();
             searchInThePolice(num);
+            searchInTheMoya(num);
         }
     }
 
     // 경찰청 피싱 번호 검색 결과
     private void searchResultCallback(final String result) {
         if (result == null) {
-            textSearchResult.setText("조회에 실패하였습니다.");
+            textSearchResultPolice.setText("조회에 실패하였습니다.");
         } else {
             if (result.contains("접수된 민원이 없습니다")) {
-                textSearchResult.setTextColor(Color.BLACK);
+                textSearchResultPolice.setTextColor(Color.BLACK);
             } else {
-                textSearchResult.setTextColor(Color.RED);
+                textSearchResultPolice.setTextColor(Color.RED);
             }
-            textSearchResult.setText(result);
+            textSearchResultPolice.setText(result);
         }
     }
 
@@ -104,4 +106,39 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         }).start();
     }
 
+    public class NetworkTask extends AsyncTask<Void, Void, String> {
+        private String url;
+        private ContentValues values;
+
+        public NetworkTask(String url, ContentValues values) {
+            this.url = url;
+            this.values = values;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            String result; // 요청 결과를 저장할 변수.
+            RequestHttpConnection requestHttpURLConnection = new RequestHttpConnection();
+            result = requestHttpURLConnection.request(url, values); // 해당 URL로 부터 결과물을 얻어온다.
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            //doInBackground()로 부터 리턴된 값이 onPostExecute()의 매개변수로 넘어오므로 s를 출력한다.
+            textSearchResultMoya.setText(s);
+        }
+    }
+
+    // 뭐야이번호 피싱 번호 검색
+    private void searchInTheMoya(final String query) {
+        // URL 설정.
+        String url = "http://www.moyaweb.com/search_result.do";
+        ContentValues values = new ContentValues();
+        values.put("SCH_TEL_NO", query);
+        // AsyncTask를 통해 HttpURLConnection 수행.
+        NetworkTask networkTask = new NetworkTask(url, values);
+        networkTask.execute();
+    }
 }
