@@ -25,7 +25,6 @@
         <activity android:name=".activity.SignupActivity" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.PreventActivity" />
-        <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>

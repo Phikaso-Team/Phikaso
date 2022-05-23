@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/ic_lock_focus"
+    <item android:drawable="@drawable/ic_person_focus"
         android:state_focused="true"/>
-
-    <item android:drawable="@drawable/ic_lock"
+    <item android:drawable="@drawable/ic_person"
         android:state_focused="false"/>
-
 </selector>

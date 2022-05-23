@@ -2,6 +2,7 @@ package com.android.phikaso.activity;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -72,6 +73,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         count();
 
         imageViewFile.setOnClickListener(this);
+        imageViewFile.setColorFilter(Color.parseColor("#4D96FF"));
         findViewById(R.id.main_btn_add_case).setOnClickListener(this);
     }
 

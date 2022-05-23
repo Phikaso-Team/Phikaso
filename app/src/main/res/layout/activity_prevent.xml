@@ -152,7 +152,8 @@
             android:fontFamily="@font/pretendard_semibold"
             android:textColor="#535962"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginBottom="15dp"/>
 
     </LinearLayout>
 

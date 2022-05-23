@@ -23,17 +23,6 @@
             android:textSize="36sp"
             android:textStyle="bold" />
 
-        <!-- 설정 -->
-        <ImageButton
-            android:id="@+id/main_btn_setting"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:background="@drawable/setting"
-            android:backgroundTint="@color/phikaso"/>
 
     </RelativeLayout>
 
@@ -63,9 +52,9 @@
 
             <ImageButton
                 android:id="@+id/main_btn_search"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="10dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="20dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:background="@drawable/search"
@@ -140,8 +129,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="0"
-                            android:fontFamily="@font/pretendard_semibold"
-                            android:textSize="20sp"
+                            android:fontFamily="@font/pretendard_black"
+                            android:textSize="22sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -150,6 +139,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="30dp"
                             android:text="전체 피싱 예방"
+                            android:fontFamily="@font/pretendard_semibold"
                             android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -160,7 +150,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="0"
-                            android:textSize="20sp"
+                            android:fontFamily="@font/pretendard_black"
+                            android:textSize="22sp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -170,7 +161,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:orientation="horizontal">
 
             <TextView
@@ -184,10 +175,12 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
+
 
             <Switch
                 android:id="@+id/main_sw_protection"
@@ -195,6 +188,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="4dp"
+                android:track="@drawable/custom_switch_track"
+                android:thumb="@drawable/switch_thumb"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         </LinearLayout>
@@ -265,13 +260,14 @@
                             android:layout_alignParentTop="true"
                             android:layout_marginTop="10dp"
                             android:text="0"
+                            android:fontFamily="@font/pretendard_black"
                             android:textAlignment="center"
-                            android:textSize="20sp"
+                            android:textSize="22sp"
                             android:textStyle="bold" />
 
                         <Button
                             android:id="@+id/main_btn_add_case"
-                            android:layout_width="140dp"
+                            android:layout_width="150dp"
                             android:layout_height="40dp"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentEnd="true"
@@ -282,7 +278,7 @@
                             android:fontFamily="@font/pretendard_semibold"
                             android:textAllCaps="false"
                             android:textColor="#fff"
-                            android:textSize="15sp" />
+                            android:textSize="17sp" />
 
                     </LinearLayout>
                 </LinearLayout>

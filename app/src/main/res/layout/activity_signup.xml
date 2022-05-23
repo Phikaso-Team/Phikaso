@@ -26,12 +26,13 @@
         android:layout_margin="20dp"
         android:inputType="textPersonName"
         android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/ic_baseline_person_24"
+        android:drawableStart="@drawable/custom_person_icon"
         android:fontFamily="@font/pretendard_light"
         android:drawablePadding="12dp"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         android:hint="이름" />
+
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
@@ -46,6 +47,7 @@
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         android:hint="이메일" />
+
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
@@ -61,6 +63,7 @@
         android:inputType="textPassword"
         android:hint="비밀번호"
         android:fontFamily="@font/pretendard_light"/>
+
     <EditText
         android:id="@+id/editTextPasswordCheck"
         android:layout_width="match_parent"
