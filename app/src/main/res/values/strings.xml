@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">PHIKASO</string>
     <string name="accessibility_description">카카오톡 화면을 읽으려면 접근성 권한이 필요합니다.</string>
+
     <string name="register">아직 회원이 아니신가요? 지금 &lt;font color=\'red\'&gt;&lt;b>가입&lt;/b>&lt;/font&gt;하세요.</string>
+    <string name="user_agent">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36</string>
 </resources>
