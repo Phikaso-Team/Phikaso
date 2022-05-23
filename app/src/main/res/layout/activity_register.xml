@@ -34,7 +34,7 @@
             android:src="@drawable/image" />
 
         <TextView
-            android:id="@+id/myImageViewText"
+            android:id="@+id/imageViewText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/imageViewFile"
@@ -68,19 +68,20 @@
                     android:id="@+id/textViewName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="이름"
+                    android:text="제목"
                     android:fontFamily="@font/pretendard_semibold"
                     android:textSize="18sp"
                     android:textColor="@color/phikaso"
                     android:textStyle="bold"/>
 
                 <EditText
-                    android:id="@+id/editTextName"
+                    android:id="@+id/editTextTitle"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_below="@+id/textViewName"
+                    android:fontFamily="@font/pretendard_light"
                     android:background="@drawable/custom_input"
-                    android:drawableStart="@drawable/custom_person_icon"
+                    android:drawableStart="@drawable/custom_edit_icon"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
                     android:drawablePadding="12dp"
@@ -103,6 +104,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_below="@+id/textViewPhone"
+                    android:fontFamily="@font/pretendard_light"
                     android:background="@drawable/custom_input"
                     android:drawableStart="@drawable/custom_call_icon"
                     android:paddingStart="12dp"
@@ -127,6 +129,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_below="@+id/textViewContent"
+                    android:fontFamily="@font/pretendard_light"
                     android:background="@drawable/custom_input"
                     android:drawableStart="@drawable/custom_edit_icon"
                     android:paddingStart="12dp"

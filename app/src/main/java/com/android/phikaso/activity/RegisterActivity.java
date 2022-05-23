@@ -2,7 +2,6 @@ package com.android.phikaso.activity;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -10,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,8 +19,8 @@ import androidx.loader.content.CursorLoader;
 import com.android.phikaso.R;
 import com.android.phikaso.model.RegisterModel;
 import com.android.phikaso.model.UserModel;
+import com.android.phikaso.util.PreferenceManager;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,14 +40,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Uri imageUri;
     private String pathUri;
     private File tempFile;
-    private FirebaseAuth     mAuth;
     private FirebaseDatabase mDatabase;
     private FirebaseStorage  mStorage;
 
-    private EditText editTextName;
+    private EditText editTextTitle;
     private EditText editTextPhone;
     private EditText editTextContent;
     private ImageView imageViewFile;
+    private TextView imageViewText;
 
     private DatabaseReference mDBReference;
     private HashMap<String, Object> childUpdates;
@@ -59,21 +59,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
 
         //초기화
-        mAuth     = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
         mStorage  = FirebaseStorage.getInstance();
 
         //아이디 설정
-        editTextName = findViewById(R.id.editTextName);
+        editTextTitle = findViewById(R.id.editTextTitle);
         editTextPhone = findViewById(R.id.editTextPhone);
         editTextContent = findViewById(R.id.editTextContent);
         imageViewFile = findViewById(R.id.imageViewFile);
+        imageViewText = findViewById(R.id.imageViewText);
 
         //전체 피해 사례 초기화
         count();
 
         imageViewFile.setOnClickListener(this);
-        imageViewFile.setColorFilter(Color.parseColor("#4D96FF"));
         findViewById(R.id.main_btn_add_case).setOnClickListener(this);
     }
 
@@ -114,6 +113,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             pathUri = getPath(data.getData());
             Log.d(TAG, "PICK_FROM_ALBUM photoUri : " + imageUri);
             imageViewFile.setImageURI(imageUri);
+            imageViewText.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -129,11 +129,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void register() {
-        String name = editTextName.getText().toString();
+        String title = editTextTitle.getText().toString();
         String phone = editTextPhone.getText().toString();
         String content = editTextContent.getText().toString();
 
-        final String uid = mAuth.getCurrentUser().getUid();
+        final String uid = PreferenceManager.getString(this, "personal-id");
         final Uri file = Uri.fromFile(new File(pathUri));
 
         StorageReference storageReference = mStorage.getReference().child("imageFile").child("uid/" + file.getLastPathSegment());
@@ -148,7 +148,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         UserModel userModel = snapshot.getValue(UserModel.class);
                         RegisterModel registerModel = new RegisterModel();
 
-                        registerModel.name = name;
+                        registerModel.title = title;
                         registerModel.phone = phone;
                         registerModel.email = userModel.email;
                         registerModel.content = content;

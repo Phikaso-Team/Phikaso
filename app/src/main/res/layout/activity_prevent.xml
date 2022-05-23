@@ -93,6 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="예방했어요"
+            android:fontFamily="@font/pretendard_semibold"
             android:textColor="#4E709D"
             android:textSize="28sp"
             android:textStyle="bold" />
@@ -153,7 +154,7 @@
             android:textColor="#535962"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="5dp"/>
 
     </LinearLayout>
 

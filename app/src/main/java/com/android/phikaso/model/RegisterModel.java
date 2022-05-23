@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterModel {
-    public String name;
+    public String title;
     public String phone;
     public String email;
     public String content;
