@@ -2,9 +2,11 @@ package com.android.phikaso.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +27,6 @@ import com.kakao.sdk.user.UserApiClient;
 import org.jetbrains.annotations.NotNull;
 
 import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -51,10 +52,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        findViewById(R.id.buttonLogin).setOnClickListener(this);
-        findViewById(R.id.goToSignUp).setOnClickListener(this);
+        findViewById(R.id.login_btn_login).setOnClickListener(this);
+        findViewById(R.id.login_text_register).setOnClickListener(this);
+        ((TextView) findViewById(R.id.login_text_register)).setText(Html.fromHtml(getString(R.string.register)));
 
-        kakaoLogin = findViewById(R.id.kakaoLogin);
+        kakaoLogin = findViewById(R.id.login_btn_kakao);
         kakaoUnlink = findViewById(R.id.kakaoUnlink);
 
         kakaoLogin();
@@ -63,9 +65,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.buttonLogin) {
+        if (id == R.id.login_btn_login) {
             firebaseLogin();
-        } else if (id == R.id.goToSignUp) {
+        } else if (id == R.id.login_text_register) {
             Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
             startActivity(intent);
         }
@@ -78,8 +80,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void firebaseLogin() {
-        final String email    = ((EditText) findViewById(R.id.editTextEmail)).getText().toString();
-        final String password = ((EditText) findViewById(R.id.editTextPassword)).getText().toString();
+        final String email    = ((EditText) findViewById(R.id.login_edit_email)).getText().toString();
+        final String password = ((EditText) findViewById(R.id.login_edit_password)).getText().toString();
 
         if (email.length() == 0 || password.length() == 0) {
             showToast("이메일 또는 비밀번호를 입력해주세요.");

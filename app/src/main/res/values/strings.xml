@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">phikaso</string>
+    <string name="app_name">PHIKASO</string>
     <string name="accessibility_description">카카오톡 화면을 읽으려면 접근성 권한이 필요합니다.</string>
+    <string name="register">아직 회원이 아니신가요? 지금 &lt;font color=\'red\'&gt;&lt;b>가입&lt;/b>&lt;/font&gt;하세요.</string>
 </resources>
