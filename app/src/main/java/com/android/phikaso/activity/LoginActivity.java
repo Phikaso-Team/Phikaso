@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // server test code
         ReportService rs = new ReportService();
-        rs.reportKakaoMsg("testMessage");
+        rs.reportPhishing("testMessage");
 
         mAuth     = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();

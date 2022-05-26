@@ -61,56 +61,56 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="13dp">
+                android:layout_margin="13dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textViewName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="제목"
                     android:fontFamily="@font/pretendard_semibold"
-                    android:textSize="18sp"
+                    android:text="제목"
                     android:textColor="@color/phikaso"
-                    android:textStyle="bold"/>
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/editTextTitle"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_below="@+id/textViewName"
-                    android:fontFamily="@font/pretendard_light"
                     android:background="@drawable/custom_input"
                     android:drawableStart="@drawable/custom_edit_icon"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
                     android:drawablePadding="12dp"
-                    android:inputType="textPersonName"/>
+                    android:fontFamily="@font/pretendard_light"
+                    android:inputType="textPersonName"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp" />
 
                 <TextView
                     android:id="@+id/textViewPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
                     android:layout_below="@+id/editTextName"
-                    android:text="전화번호"
+                    android:layout_marginTop="15dp"
                     android:fontFamily="@font/pretendard_semibold"
-                    android:textSize="18sp"
+                    android:text="전화번호"
                     android:textColor="@color/phikaso"
-                    android:textStyle="bold"/>
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/editTextPhone"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_below="@+id/textViewPhone"
-                    android:fontFamily="@font/pretendard_light"
                     android:background="@drawable/custom_input"
                     android:drawableStart="@drawable/custom_call_icon"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
                     android:drawablePadding="12dp"
-                    android:inputType="phone"/>
+                    android:fontFamily="@font/pretendard_light"
+                    android:inputType="phone"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp" />
 
                 <TextView
                     android:id="@+id/textViewContent"
@@ -118,34 +118,34 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/editTextPhone"
                     android:layout_marginTop="15dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/phikaso"
-                    android:text="신고 내용"
                     android:fontFamily="@font/pretendard_semibold"
-                    android:textSize="18sp"/>
+                    android:text="신고 내용"
+                    android:textColor="@color/phikaso"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/editTextContent"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_below="@+id/textViewContent"
-                    android:fontFamily="@font/pretendard_light"
                     android:background="@drawable/custom_input"
                     android:drawableStart="@drawable/custom_edit_icon"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/pretendard_light"
+                    android:inputType="textMultiLine"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
-                    android:drawablePadding="12dp"
-                    android:inputType="textMultiLine"
-                    android:scrollHorizontally="false"/>
+                    android:scrollHorizontally="false" />
 
                 <Button
-                    android:id="@+id/main_btn_add_case"
+                    android:id="@+id/registerPhishingCase"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pretendard_semibold"
                     android:text="등록"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/pretendard_semibold" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
         </ScrollView>

@@ -5,24 +5,24 @@ import com.google.gson.annotations.SerializedName;
 // DTO : 사용자가 피싱 신고 -> store in DB
 public class ReportModel {
 
-    @SerializedName("kakaoMsg")
-    private String kakaoMsg;
+    @SerializedName("phishingReportMsg")
+    private String phishingReportMsg;
 
     @Override
     public String toString() {
-        return kakaoMsg;
+        return phishingReportMsg;
     }
 
-    public String getKakaoMsg() {
-        return kakaoMsg;
+    public String getPhishingReportMsg() {
+        return phishingReportMsg;
     }
 
-    public void setKakaoMsg(String kakaoMsg) {
-        this.kakaoMsg = kakaoMsg;
+    public void setPhishingReportMsg(String phishingReportMsg) {
+        this.phishingReportMsg = phishingReportMsg;
     }
 
-    public ReportModel(String kakaoMsg) {
-        this.kakaoMsg = kakaoMsg;
+    public ReportModel(String phishingReportMsg) {
+        this.phishingReportMsg = phishingReportMsg;
     }
 }
 
