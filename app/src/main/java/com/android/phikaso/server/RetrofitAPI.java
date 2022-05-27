@@ -7,6 +7,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 
@@ -16,5 +17,5 @@ public interface RetrofitAPI {
 
     // 사용자가 피싱 신고 등록 -> insert into DB
     @POST("/reports")
-    Call<ReportModel> postPhishingMsg(@Field("msg") String text);
+    Call<ReportModel> postPhishingMsg(@Body ReportModel reportModel);
 }

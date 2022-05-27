@@ -22,7 +22,7 @@ public class ReportService {
         RetrofitAPI retrofitAPI = RetrofitClient.getClient().create(RetrofitAPI.class);
         ReportModel reportModel = new ReportModel(text);
 
-        Call<ReportModel> call = retrofitAPI.postPhishingMsg(text);
+        Call<ReportModel> call = retrofitAPI.postPhishingMsg(reportModel);
         call.enqueue(new Callback<ReportModel>() {
             @Override
             public void onResponse(Call<ReportModel> call, Response<ReportModel> response) {

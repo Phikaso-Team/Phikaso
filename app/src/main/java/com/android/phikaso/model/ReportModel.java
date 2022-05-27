@@ -8,6 +8,7 @@ public class ReportModel {
     @SerializedName("phishingReportMsg")
     private String phishingReportMsg;
 
+
     @Override
     public String toString() {
         return phishingReportMsg;

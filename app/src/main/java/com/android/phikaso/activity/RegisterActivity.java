@@ -89,7 +89,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.registerPhishingCase:
                 postPhishingCaseToDB();
-//                register();
                 break;
         }
         // 신고 등록 후 작성한 내용 지움.
@@ -173,6 +172,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void postPhishingCaseToDB() {
 
         String phishingText = editTextContent.getText().toString();
+        // todo : sql injection 방지하기 @@
         ReportService reportService = new ReportService();
         reportService.reportPhishing(phishingText);
     }
