@@ -1,6 +1,5 @@
 package com.android.phikaso.service;
 
-import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -43,29 +42,27 @@ public class MyOverlayService extends Service {
     private DatabaseReference mDBReference;
     private Calendar calendar = Calendar.getInstance();
     private String today = calendar.get(Calendar.YEAR) + "-"
-                    + (calendar.get(Calendar.MONTH)+1) + "-"
-                    + calendar.get(Calendar.DATE);
+            + (calendar.get(Calendar.MONTH) + 1) + "-"
+            + calendar.get(Calendar.DATE);
 
     @Override
-    public IBinder onBind(Intent intent){
+    public IBinder onBind(Intent intent) {
         return null;
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-//        LocalBroadcastManager.getInstance(this).registerReceiver(//백그라운드
-//                new BroadcastReceiver() {
-//                    @SuppressLint("SetTextI18n")
-//                    @Override
-//                    public void onReceive(Context context, Intent intent) {
-//                        String text = intent.getStringExtra(MyNotificationService.EXTRA_TEXT);
-//                        deepLearningServer(text);
-//                    }
-//                }, new IntentFilter(MyNotificationService.ACTION_NOTIFICATION_BROADCAST)
-//        );
-        LocalBroadcastManager.getInstance(this).registerReceiver(//포그라운드
+        LocalBroadcastManager.getInstance(this).registerReceiver( // 백그라운드
                 new BroadcastReceiver() {
-                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onReceive(Context context, Intent intent) {
+                        String text = intent.getStringExtra(MyNotificationService.EXTRA_TEXT);
+                        deepLearningServer(text);
+                    }
+                }, new IntentFilter(MyNotificationService.ACTION_NOTIFICATION_BROADCAST)
+        );
+        LocalBroadcastManager.getInstance(this).registerReceiver( // 포그라운드
+                new BroadcastReceiver() {
                     @Override
                     public void onReceive(Context context, Intent intent) {
                         String text = intent.getStringExtra(MyAccessibilityService.EXTRA_TEXT);
@@ -166,27 +163,27 @@ public class MyOverlayService extends Service {
         });
     }
 
-    //개인별 피싱 예방 횟수
+    // 개인별 피싱 예방 횟수
     private void updatePersonalCount(String uid) {
         mDBReference = FirebaseDatabase.getInstance().getReference().child("users");
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put(""+uid+"/count/", ServerValue.increment(1));
+        childUpdates.put("" + uid + "/count/", ServerValue.increment(1));
         mDBReference.updateChildren(childUpdates);
     }
 
-    //오늘의 피싱 예방 횟수
-    private void updateTodayCount(String today){
+    // 오늘의 피싱 예방 횟수
+    private void updateTodayCount(String today) {
         mDBReference = FirebaseDatabase.getInstance().getReference().child("total");
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put(""+today+"/count/", ServerValue.increment(1));
+        childUpdates.put("" + today + "/count/", ServerValue.increment(1));
         mDBReference.updateChildren(childUpdates);
     }
 
-    //전체 피싱 예방 횟수
+    // 전체 피싱 예방 횟수
     private void updateTotalCount() {
         mDBReference = FirebaseDatabase.getInstance().getReference().child("total");
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put(""+"/count/", ServerValue.increment(1));
+        childUpdates.put("" + "/count/", ServerValue.increment(1));
         mDBReference.updateChildren(childUpdates);
     }
 }

@@ -1,7 +1,5 @@
 package com.android.phikaso.activity;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
@@ -13,6 +11,10 @@ import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.phikaso.R;
 import com.android.phikaso.service.MyNotificationService;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "MainActivity";
 
     private AlertDialog dialog = null;
-    private FirebaseDatabase mDatabase;
+    private FirebaseDatabase  mDatabase;
     private DatabaseReference mDBReference;
     private TextView textViewCount;
     private Switch switchProtection;
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViewById(R.id.phishingPrevent).setOnClickListener(this); // 피싱 예방
         preventCountToday = (TextView) findViewById(R.id.main_count_today);
-        preventCountAll = (TextView) findViewById(R.id.main_count_all);
+        preventCountAll   = (TextView) findViewById(R.id.main_count_all);
 
         if (PreferenceManager.getString(MainActivity.this, "checked").equals("true")) {
             switchProtection.setChecked(true);
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDatabase.getReference().child("phishingCases").child("count")
             .addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot snapshot) {
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
                         count = (int) snapshot.getValue(Integer.class);
                     } else {
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) { }
+                public void onCancelled(@NonNull DatabaseError databaseError) { }
             });
     }
 

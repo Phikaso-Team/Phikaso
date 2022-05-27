@@ -1,13 +1,13 @@
 package com.android.phikaso.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.phikaso.R;
 import com.android.phikaso.util.StringUtil;
@@ -17,6 +17,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -145,9 +146,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     private void searchResultMoya(final String result) {
         if (result == null) {
-            textSearchMoya.setText("조회에 실패하였습니다.");
+            textSearchMoya.setText("");
         } else {
-//            textSearchPolice.setTextColor(Color.RED);
             textSearchMoya.setText(result);
         }
     }

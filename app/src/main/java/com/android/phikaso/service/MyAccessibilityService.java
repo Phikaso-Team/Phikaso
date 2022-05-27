@@ -9,8 +9,6 @@ import android.view.accessibility.AccessibilityNodeInfo;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.android.phikaso.activity.MainActivity;
-
 import java.util.Objects;
 
 public class MyAccessibilityService extends AccessibilityService {
