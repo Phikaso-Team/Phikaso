@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +20,7 @@ import androidx.loader.content.CursorLoader;
 import com.android.phikaso.R;
 import com.android.phikaso.model.RegisterModel;
 import com.android.phikaso.model.UserModel;
+import com.android.phikaso.service.ReportService;
 import com.android.phikaso.util.PreferenceManager;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +36,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class ReportActivity extends AppCompatActivity implements View.OnClickListener {
+
     private static final String TAG = "RegisterActivity";
     public static final int PICK_FROM_ALBUM = 1;
     private Uri imageUri;
@@ -56,41 +59,41 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_report);
 
         //초기화
         mDatabase = FirebaseDatabase.getInstance();
         mStorage  = FirebaseStorage.getInstance();
 
         //아이디 설정
-        editTextTitle = findViewById(R.id.editTextTitle);
-        editTextPhone = findViewById(R.id.editTextPhone);
-        editTextContent = findViewById(R.id.editTextContent);
-        imageViewFile = findViewById(R.id.imageViewFile);
-        imageViewText = findViewById(R.id.imageViewText);
+        editTextTitle = findViewById(R.id.report_edit_title);
+        editTextPhone = findViewById(R.id.report_edit_phone);
+        editTextContent = findViewById(R.id.report_edit_content);
+        imageViewFile = findViewById(R.id.report_img_file);
+        imageViewText = findViewById(R.id.report_text_file);
 
         //전체 피해 사례 초기화
         count();
 
         imageViewFile.setOnClickListener(this);
-        findViewById(R.id.main_btn_add_case).setOnClickListener(this);
+        findViewById(R.id.report_btn_submit).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.imageViewFile:
+            case R.id.report_img_file:
                 Intent intent_album = new Intent(Intent.ACTION_PICK);
                 intent_album.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 startActivityForResult(intent_album, PICK_FROM_ALBUM);
                 break;
-            case R.id.main_btn_add_case:
-                register();
-                updateCount();//전체 피해 사례 증가
-                Intent intent_main = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent_main);
+            case R.id.report_btn_submit:
+                postPhishingCaseToDB();
                 break;
         }
+        // 신고 등록 후 작성한 내용 지움.
+        Toast.makeText(ReportActivity.this, "피싱 신고 완료", Toast.LENGTH_LONG).show();
+        editTextContent.setText("");
     }
 
     @Override
@@ -128,6 +131,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         return cursor.getString(index);
     }
 
+    // 피싱 신고 등록을 할 때 사용자 정보가 필요한가?
+    // 일단은 피싱 내용(Text)만 저장하도록 할게요  (postPhishingCaseToDB)
     private void register() {
         String title = editTextTitle.getText().toString();
         String phone = editTextPhone.getText().toString();
@@ -162,6 +167,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 });
         });
     }
+
+    // 피싱 신고 등록 -> DB에 저장 (피싱 내용 텍스트만 저장)
+    private void postPhishingCaseToDB() {
+
+        String phishingText = editTextContent.getText().toString();
+        // todo : sql injection 방지하기 @@
+        ReportService reportService = new ReportService();
+        reportService.reportPhishing(phishingText);
+    }
+
 
     private void count() {
         mDBReference = mDatabase.getReference().child("phishingCases");

@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intentSearch = new Intent(MainActivity.this, SearchActivity.class);
             startActivity(intentSearch);
         } else if (id == R.id.main_btn_add_case) { // 피해 사례 등록
-            Intent intentRegister = new Intent(MainActivity.this, RegisterActivity.class);
+            Intent intentRegister = new Intent(MainActivity.this, ReportActivity.class);
             startActivity(intentRegister);
         } else if (id == R.id.phishingPrevent) { // 피싱 예방
             Intent intentPrevent = new Intent(MainActivity.this, PreventActivity.class);

@@ -3,6 +3,7 @@ package com.android.phikaso.server;
 import com.google.gson.annotations.SerializedName;
 
 public class PhishingData {
+
     //피싱 여부
     @SerializedName("phishing")
     private boolean phishing;

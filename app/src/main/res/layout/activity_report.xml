@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.RegisterActivity">
+    tools:context=".activity.ReportActivity">
 
     <TextView
-        android:id="@+id/search_text_title"
+        android:id="@+id/report_text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -24,7 +24,7 @@
         android:layout_height="fill_parent">
 
         <ImageView
-            android:id="@+id/imageViewFile"
+            android:id="@+id/report_img_file"
             android:layout_width="match_parent"
             android:layout_height="170dp"
             android:layout_alignParentEnd="true"
@@ -34,13 +34,13 @@
             android:src="@drawable/image" />
 
         <TextView
-            android:id="@+id/imageViewText"
+            android:id="@+id/report_text_file"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/imageViewFile"
-            android:layout_alignTop="@id/imageViewFile"
-            android:layout_alignRight="@id/imageViewFile"
-            android:layout_alignBottom="@id/imageViewFile"
+            android:layout_alignLeft="@id/report_img_file"
+            android:layout_alignTop="@id/report_img_file"
+            android:layout_alignRight="@id/report_img_file"
+            android:layout_alignBottom="@id/report_img_file"
             android:layout_marginStart="1dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/pretendard_semibold"
@@ -52,7 +52,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/imageViewFile"
+            android:layout_below="@+id/report_img_file"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="6dp"
@@ -61,91 +61,88 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="13dp">
+                android:layout_margin="13dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textViewName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="제목"
                     android:fontFamily="@font/pretendard_semibold"
-                    android:textSize="18sp"
+                    android:text="제목"
                     android:textColor="@color/phikaso"
-                    android:textStyle="bold"/>
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextTitle"
+                    android:id="@+id/report_edit_title"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_below="@+id/textViewName"
-                    android:fontFamily="@font/pretendard_light"
                     android:background="@drawable/custom_input"
                     android:drawableStart="@drawable/custom_edit_icon"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
                     android:drawablePadding="12dp"
-                    android:inputType="textPersonName"/>
+                    android:fontFamily="@font/pretendard_light"
+                    android:inputType="textPersonName"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp" />
 
                 <TextView
-                    android:id="@+id/textViewPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
                     android:layout_below="@+id/editTextName"
-                    android:text="전화번호"
+                    android:layout_marginTop="15dp"
                     android:fontFamily="@font/pretendard_semibold"
-                    android:textSize="18sp"
+                    android:text="전화번호"
                     android:textColor="@color/phikaso"
-                    android:textStyle="bold"/>
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextPhone"
+                    android:id="@+id/report_edit_phone"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_below="@+id/textViewPhone"
-                    android:fontFamily="@font/pretendard_light"
                     android:background="@drawable/custom_input"
                     android:drawableStart="@drawable/custom_call_icon"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
                     android:drawablePadding="12dp"
-                    android:inputType="phone"/>
+                    android:fontFamily="@font/pretendard_light"
+                    android:inputType="phone"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp" />
 
                 <TextView
-                    android:id="@+id/textViewContent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/editTextPhone"
+                    android:layout_below="@+id/report_edit_phone"
                     android:layout_marginTop="15dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/phikaso"
-                    android:text="신고 내용"
                     android:fontFamily="@font/pretendard_semibold"
-                    android:textSize="18sp"/>
+                    android:text="신고 내용"
+                    android:textColor="@color/phikaso"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextContent"
+                    android:id="@+id/report_edit_content"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_below="@+id/textViewContent"
-                    android:fontFamily="@font/pretendard_light"
                     android:background="@drawable/custom_input"
                     android:drawableStart="@drawable/custom_edit_icon"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/pretendard_light"
+                    android:inputType="textMultiLine"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
-                    android:drawablePadding="12dp"
-                    android:inputType="textMultiLine"
-                    android:scrollHorizontally="false"/>
+                    android:scrollHorizontally="false" />
 
                 <Button
-                    android:id="@+id/main_btn_add_case"
+                    android:id="@+id/report_btn_submit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pretendard_semibold"
                     android:text="등록"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/pretendard_semibold" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
         </ScrollView>
