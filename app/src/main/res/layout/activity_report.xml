@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.RegisterActivity">
+    tools:context=".activity.ReportActivity">
 
     <TextView
-        android:id="@+id/search_text_title"
+        android:id="@+id/report_text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -24,7 +24,7 @@
         android:layout_height="fill_parent">
 
         <ImageView
-            android:id="@+id/imageViewFile"
+            android:id="@+id/report_img_file"
             android:layout_width="match_parent"
             android:layout_height="170dp"
             android:layout_alignParentEnd="true"
@@ -34,13 +34,13 @@
             android:src="@drawable/image" />
 
         <TextView
-            android:id="@+id/imageViewText"
+            android:id="@+id/report_text_file"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/imageViewFile"
-            android:layout_alignTop="@id/imageViewFile"
-            android:layout_alignRight="@id/imageViewFile"
-            android:layout_alignBottom="@id/imageViewFile"
+            android:layout_alignLeft="@id/report_img_file"
+            android:layout_alignTop="@id/report_img_file"
+            android:layout_alignRight="@id/report_img_file"
+            android:layout_alignBottom="@id/report_img_file"
             android:layout_marginStart="1dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/pretendard_semibold"
@@ -52,7 +52,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/imageViewFile"
+            android:layout_below="@+id/report_img_file"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="6dp"
@@ -65,7 +65,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textViewName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pretendard_semibold"
@@ -75,7 +74,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextTitle"
+                    android:id="@+id/report_edit_title"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_below="@+id/textViewName"
@@ -88,7 +87,6 @@
                     android:paddingEnd="12dp" />
 
                 <TextView
-                    android:id="@+id/textViewPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/editTextName"
@@ -100,7 +98,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextPhone"
+                    android:id="@+id/report_edit_phone"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_below="@+id/textViewPhone"
@@ -113,10 +111,9 @@
                     android:paddingEnd="12dp" />
 
                 <TextView
-                    android:id="@+id/textViewContent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/editTextPhone"
+                    android:layout_below="@+id/report_edit_phone"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/pretendard_semibold"
                     android:text="신고 내용"
@@ -125,7 +122,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextContent"
+                    android:id="@+id/report_edit_content"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_below="@+id/textViewContent"
@@ -139,7 +136,7 @@
                     android:scrollHorizontally="false" />
 
                 <Button
-                    android:id="@+id/registerPhishingCase"
+                    android:id="@+id/report_btn_submit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"

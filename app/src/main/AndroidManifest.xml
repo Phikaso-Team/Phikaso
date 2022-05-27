@@ -21,7 +21,7 @@
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.SignupActivity" />
-        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.ReportActivity" />
         <activity android:name=".activity.PreventActivity" />
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.SplashActivity">

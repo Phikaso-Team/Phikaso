@@ -36,7 +36,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class ReportActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "RegisterActivity";
     public static final int PICK_FROM_ALBUM = 1;
@@ -59,40 +59,40 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_report);
 
         //초기화
         mDatabase = FirebaseDatabase.getInstance();
         mStorage  = FirebaseStorage.getInstance();
 
         //아이디 설정
-        editTextTitle = findViewById(R.id.editTextTitle);
-        editTextPhone = findViewById(R.id.editTextPhone);
-        editTextContent = findViewById(R.id.editTextContent);
-        imageViewFile = findViewById(R.id.imageViewFile);
-        imageViewText = findViewById(R.id.imageViewText);
+        editTextTitle = findViewById(R.id.report_edit_title);
+        editTextPhone = findViewById(R.id.report_edit_phone);
+        editTextContent = findViewById(R.id.report_edit_content);
+        imageViewFile = findViewById(R.id.report_img_file);
+        imageViewText = findViewById(R.id.report_text_file);
 
         //전체 피해 사례 초기화
         count();
 
         imageViewFile.setOnClickListener(this);
-        findViewById(R.id.registerPhishingCase).setOnClickListener(this);
+        findViewById(R.id.report_btn_submit).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.imageViewFile:
+            case R.id.report_img_file:
                 Intent intent_album = new Intent(Intent.ACTION_PICK);
                 intent_album.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 startActivityForResult(intent_album, PICK_FROM_ALBUM);
                 break;
-            case R.id.registerPhishingCase:
+            case R.id.report_btn_submit:
                 postPhishingCaseToDB();
                 break;
         }
         // 신고 등록 후 작성한 내용 지움.
-        Toast.makeText(RegisterActivity.this, "피싱 신고 완료", Toast.LENGTH_LONG).show();
+        Toast.makeText(ReportActivity.this, "피싱 신고 완료", Toast.LENGTH_LONG).show();
         editTextContent.setText("");
     }
 
