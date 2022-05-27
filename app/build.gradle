@@ -6,22 +6,42 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
-    defaultConfig {
-        applicationId "com.android.phikaso"
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+    def versionPropsFile = file('version.properties')
+    if (versionPropsFile.canRead()) {
+        def props = new Properties()
+        props.load(new FileInputStream(versionPropsFile))
+        def verCode = props['VERSION_CODE'].toInteger() + 1
+        props['VERSION_CODE'] = verCode.toString()
+        props.store(versionPropsFile.newWriter(), null)
+        def verName = "1.0." + verCode.toString()
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        defaultConfig {
+            applicationId "com.android.phikaso"
+            minSdkVersion 23
+            targetSdkVersion 30
+            versionCode verCode
+            versionName verName
+            testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        }
+    } else {
+        throw new GradleException("Could not read version.properties!")
     }
 
     buildTypes {
-        release {
+        debug {
+            debuggable true
             minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -41,7 +61,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.2.1')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'androidx.cardview:cardview:1.0.0'
-//    implementation 'com.android.support:cardview-v7:28.0.0'
+
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
 
