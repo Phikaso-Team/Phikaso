@@ -13,7 +13,7 @@ android {
         def verCode = props['VERSION_CODE'].toInteger() + 1
         props['VERSION_CODE'] = verCode.toString()
         props.store(versionPropsFile.newWriter(), null)
-        def verName = "1.0." + verCode.toString()
+        def verName = "1.0.0." + verCode.toString()
 
         defaultConfig {
             applicationId "com.android.phikaso"
@@ -25,6 +25,10 @@ android {
         }
     } else {
         throw new GradleException("Could not read version.properties!")
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 
     buildTypes {
