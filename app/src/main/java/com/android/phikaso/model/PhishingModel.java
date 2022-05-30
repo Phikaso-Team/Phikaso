@@ -1,8 +1,8 @@
-package com.android.phikaso.server;
+package com.android.phikaso.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PhishingData {
+public class PhishingModel {
 
     //피싱 여부
     @SerializedName("phishing")

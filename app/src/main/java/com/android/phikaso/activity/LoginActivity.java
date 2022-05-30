@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.phikaso.R;
 import com.android.phikaso.model.UserModel;
-import com.android.phikaso.service.ReportService;
 import com.android.phikaso.util.PreferenceManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -156,7 +155,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.d(TAG, "invoke: id " + user.getId());
                 Log.d(TAG, "invoke: email " + user.getKakaoAccount().getEmail());
                 Log.d(TAG, "invoke: nickname " + user.getKakaoAccount().getProfile().getNickname());
-                Log.d(TAG, "invoke: age " + user.getKakaoAccount().getAgeRange());
 
                 kakaoLogin.setVisibility(View.GONE);
                 kakaoUnlink.setVisibility(View.VISIBLE);

@@ -5,6 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
     private final static String BASE_URL = "http://15.164.229.237:5000/";
+    private final static String KAKAO_API_URL = "https://kapi.kakao.com";
     private static Retrofit retrofit = null;
 
     private RetrofitClient() { }
@@ -15,6 +16,16 @@ public class RetrofitClient {
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+        }
+        return retrofit;
+    }
+
+    public static Retrofit getKakaoApiClient() {
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(KAKAO_API_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
         }
         return retrofit;
     }

@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViewById(R.id.main_btn_search).setOnClickListener(this);
         findViewById(R.id.main_btn_add_case).setOnClickListener(this);
-
+        findViewById(R.id.main_btn_setting).setOnClickListener(this);
 
         textViewCount    = findViewById(R.id.main_text_cnt_case); // 전체 피해 사례
         switchProtection = findViewById(R.id.main_sw_protection); // 실시간 보호
@@ -79,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (id == R.id.phishingPrevent) { // 피싱 예방
             Intent intentPrevent = new Intent(MainActivity.this, PreventActivity.class);
             startActivity(intentPrevent);
+        } else if (id == R.id.main_btn_setting) { // 설정
+            Intent intentSetting = new Intent(MainActivity.this, SettingActivity.class);
+            startActivity(intentSetting);
         }
     }
 
