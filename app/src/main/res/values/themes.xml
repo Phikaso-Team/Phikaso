@@ -15,4 +15,13 @@
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="Theme.Phikaso.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Phikaso.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Phikaso.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

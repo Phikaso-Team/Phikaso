@@ -1,9 +1,11 @@
 package com.android.phikaso.activity;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -18,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth     mAuth;
     private FirebaseDatabase mDatabase;
+    ProgressDialog customProgressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,12 +32,34 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         mDatabase = FirebaseDatabase.getInstance();
 
         findViewById(R.id.buttonSignUp).setOnClickListener(this); // 회원가입 버튼
+        ((TextView) findViewById(R.id.service_text_terms)).setOnClickListener(this);// 이용약관 텍스트
+
+        ((TextView) findViewById(R.id.privacy_text_terms)).setOnClickListener(this);// 개인정보처리방침 텍스트
+
+
+        //로딩창 객체 생성
+        customProgressDialog = new ProgressDialog(this);
+        //로딩창을 투명하게
+        customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
     }
+
+
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.buttonSignUp) {
+        int id = v.getId();
+        if (id == R.id.buttonSignUp) {
             signUp();
+            customProgressDialog.show();
+        } else if(id == R.id.service_text_terms){
+            Intent intentSearch = new Intent(SignupActivity.this, ServiceTermsActivity.class);
+            startActivity(intentSearch);
+
+        }
+        else if(id == R.id.privacy_text_terms){
+            Intent intentSearch = new Intent(SignupActivity.this, PrivacyTermsActivity.class);
+            startActivity(intentSearch);
+
         }
     }
 
@@ -74,6 +99,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 }
             });
     }
+
 
     private void showToast(final String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();

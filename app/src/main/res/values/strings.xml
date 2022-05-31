@@ -4,4 +4,15 @@
 
     <string name="register">아직 회원이 아니신가요? 지금 &lt;font color=\'red\'&gt;&lt;b>가입&lt;/b>&lt;/font&gt;하세요.</string>
     <string name="user_agent">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36</string>
+    <string name="terms1"> <u>이용약관</u> </string>
+    <string name="terms2"> <u>개인정보처리방침</u> </string>
+    <string name="title_activity_terms">termsActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>
