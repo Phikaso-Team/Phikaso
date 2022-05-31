@@ -1,10 +1,12 @@
 package com.android.phikaso.activity;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +40,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private DatabaseReference mDBReference;
 
     private View kakaoLogin, kakaoUnlink;
+    ProgressDialog customProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +64,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         kakaoUnlink = findViewById(R.id.kakaoUnlink);
 
         kakaoLogin();
+
+        //로딩창 객체 생성
+        customProgressDialog = new ProgressDialog(this);
+        //로딩창을 투명하게
+        customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
     }
+
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.login_btn_login) {
             firebaseLogin();
+            customProgressDialog.show();
+
+
         } else if (id == R.id.login_text_register) {
             Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
             startActivity(intent);
@@ -90,31 +103,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         mAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this, task -> {
-                if (!task.isSuccessful()) {
-                    if (task.getException() != null) {
-                        showToast("이메일 또는 비밀번호가 일치하지 않습니다.");
-                        return;
+                .addOnCompleteListener(this, task -> {
+                    if (!task.isSuccessful()) {
+                        if (task.getException() != null) {
+                            showToast("이메일 또는 비밀번호가 일치하지 않습니다.");
+                            return;
+                        }
                     }
-                }
-                final FirebaseUser user = mAuth.getCurrentUser();
-                if (user != null) {
-                    final String uid = user.getUid();
-                    mDBReference = mDatabase.getReference().child("users");
-                    mDBReference.child(uid)
-                        .addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NotNull DataSnapshot snapshot) {
-                                String name = snapshot.child("name").getValue(String.class);
-                                PreferenceManager.setString(LoginActivity.this, "personal-name", name);
-                                PreferenceManager.setString(LoginActivity.this, "personal-id", uid);
-                            }
-                            @Override
-                            public void onCancelled(@NotNull DatabaseError error) { }
-                        });
-                }
-                showMainScreen(); // 메인 액티비티로 전환
-            });
+                    final FirebaseUser user = mAuth.getCurrentUser();
+                    if (user != null) {
+                        final String uid = user.getUid();
+                        mDBReference = mDatabase.getReference().child("users");
+                        mDBReference.child(uid)
+                                .addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NotNull DataSnapshot snapshot) {
+                                        String name = snapshot.child("name").getValue(String.class);
+                                        PreferenceManager.setString(LoginActivity.this, "personal-name", name);
+                                        PreferenceManager.setString(LoginActivity.this, "personal-id", uid);
+                                    }
+                                    @Override
+                                    public void onCancelled(@NotNull DatabaseError error) { }
+                                });
+                    }
+                    showMainScreen(); // 메인 액티비티로 전환
+                });
     }
 
     private void kakaoLogin() {

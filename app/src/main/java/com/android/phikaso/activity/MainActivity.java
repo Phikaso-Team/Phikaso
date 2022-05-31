@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView preventCountToday;
     private TextView preventCountAll;
+    ProgressDialog customProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.phishingPrevent).setOnClickListener(this); // 피싱 예방
         preventCountToday = (TextView) findViewById(R.id.main_count_today);
         preventCountAll   = (TextView) findViewById(R.id.main_count_all);
+
 
         if (PreferenceManager.getString(MainActivity.this, "checked").equals("true")) {
             switchProtection.setChecked(true);

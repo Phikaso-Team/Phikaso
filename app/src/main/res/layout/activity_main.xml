@@ -17,9 +17,9 @@
             android:id="@+id/main_text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_black"
             android:text="PHIKASO"
             android:textColor="@color/phikaso"
-            android:fontFamily="@font/pretendard_black"
             android:textSize="36sp"
             android:textStyle="bold" />
 
