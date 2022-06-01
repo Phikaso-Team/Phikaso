@@ -20,7 +20,7 @@ import android.widget.Toast;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.android.phikaso.R;
-import com.android.phikaso.server.PhishingData;
+import com.android.phikaso.model.PhishingModel;
 import com.android.phikaso.server.RetrofitAPI;
 import com.android.phikaso.server.RetrofitClient;
 import com.android.phikaso.util.PreferenceManager;
@@ -129,17 +129,17 @@ public class MyOverlayService extends Service {
     //딥러닝 서버
     public void deepLearningServer(String text) {
         RetrofitAPI retrofitAPI = RetrofitClient.getClient().create(RetrofitAPI.class);
-        Call<PhishingData> call = retrofitAPI.getPhishingData(text);//카카오톡에서 읽어오는 텍스트
+        Call<PhishingModel> call = retrofitAPI.getPhishingData(text);//카카오톡에서 읽어오는 텍스트
 
-        call.enqueue(new Callback<PhishingData>() {
+        call.enqueue(new Callback<PhishingModel>() {
             @Override
-            public void onResponse(Call<PhishingData> call, Response<PhishingData> response) {
+            public void onResponse(Call<PhishingModel> call, Response<PhishingModel> response) {
                 if (!response.isSuccessful()) {
                     Log.d(TAG, String.valueOf(response.code()));
                     return;
                 }
 
-                PhishingData data = response.body();
+                PhishingModel data = response.body();
 
                 String content = "";
                 content += "Phishing: " + data.getPhishing() + "\n";
@@ -157,7 +157,7 @@ public class MyOverlayService extends Service {
             }
 
             @Override
-            public void onFailure(Call<PhishingData> call, Throwable t) {
+            public void onFailure(Call<PhishingModel> call, Throwable t) {
                 Log.d(TAG, t.getMessage());
             }
         });

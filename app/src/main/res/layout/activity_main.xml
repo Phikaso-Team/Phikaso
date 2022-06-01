@@ -23,6 +23,17 @@
             android:textSize="36sp"
             android:textStyle="bold" />
 
+        <!-- 설정 -->
+        <ImageButton
+            android:id="@+id/main_btn_setting"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/setting"
+            android:backgroundTint="@color/phikaso"
+            android:scaleType="fitCenter" />
 
     </RelativeLayout>
 
