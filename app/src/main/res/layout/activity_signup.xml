@@ -80,6 +80,64 @@
         android:hint="비밀번호 확인"
         android:fontFamily="@font/pretendard_light"/>
 
+    <LinearLayout
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="피카소 서비스 필수 동의 항목"
+            android:textSize="17dp"
+            android:fontFamily="@font/pretendard_semibold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="terms1"
+                android:id="@+id/service_text_terms"
+                android:text="@string/terms1"
+                android:textSize="16dp"
+                android:textColor="@color/phikaso"
+                android:fontFamily="@font/pretendard_semibold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="terms2"
+                android:text="@string/terms2"
+                android:id="@+id/privacy_text_terms"
+                android:textSize="16dp"
+                android:textColor="@color/phikaso"
+                android:fontFamily="@font/pretendard_semibold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="에 동의하시면"
+                android:textSize="16dp"
+                android:fontFamily="@font/pretendard_light"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_light"
+            android:text="'회원가입'을 눌러주세요"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+
     <Button
         android:id="@+id/buttonSignUp"
         android:layout_width="300dp"
@@ -90,5 +148,6 @@
         android:text="회원가입"
         android:textSize="20sp"
         android:fontFamily="@font/pretendard_light"/>
+
 
 </LinearLayout>

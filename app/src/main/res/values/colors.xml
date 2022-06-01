@@ -9,4 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="phikaso">#4D96FF</color>
     <color name="phikaso_view">#D4E6FF</color>
+
+    <color name="perm_allow">#009B00</color>
+    <color name="perm_deny">#000000</color>
+    <color name="perm_desc">#888888</color>
 </resources>

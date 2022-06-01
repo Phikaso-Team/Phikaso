@@ -4,22 +4,16 @@ import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.phikaso.R;
-import com.android.phikaso.service.MyNotificationService;
 import com.android.phikaso.service.MyOverlayService;
-import com.android.phikaso.util.PermissionUtil;
 import com.android.phikaso.util.PreferenceManager;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,7 +26,6 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
 
-    private AlertDialog dialog = null;
     private FirebaseDatabase  mDatabase;
     private DatabaseReference mDBReference;
     private TextView textViewCount;
@@ -41,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView preventCountToday;
     private TextView preventCountAll;
+    ProgressDialog customProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.phishingPrevent).setOnClickListener(this); // 피싱 예방
         preventCountToday = (TextView) findViewById(R.id.main_count_today);
         preventCountAll   = (TextView) findViewById(R.id.main_count_all);
+
 
         if (PreferenceManager.getString(MainActivity.this, "checked").equals("true")) {
             switchProtection.setChecked(true);
@@ -109,59 +104,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-
         preventCountToday();
         preventCountAll();
-
-        if (this.dialog != null) {
-            this.dialog.dismiss();
-        }
-
-        if (!PermissionUtil.checkNotificationPermission(this)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("알림 접근 권한 필요");
-                builder.setMessage("알림 접근 권한이 필요합니다.");
-                builder.setPositiveButton("설정", (dialog, which) -> {
-                    startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
-                });
-                dialog = builder.create();
-                dialog.show();
-                return;
-            }
-        }
-
-        if (!isMyServiceRunning(MyNotificationService.class)) {
-            Intent intent = new Intent(getApplicationContext(), MyNotificationService.class);
-            startService(intent); // 서비스 시작
-            Toast.makeText(this.getApplicationContext(), "알림 읽기 서비스 - 시작됨", Toast.LENGTH_SHORT).show();
-        }
-
-        if (!PermissionUtil.checkAccessibilityPermission(this)) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("접근성 권한 필요");
-            builder.setMessage("접근성 권한이 필요합니다.\n\n설치된 앱 -> 허용");
-            builder.setPositiveButton("설정", (dialog, which) -> {
-                startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
-            });
-            dialog = builder.create();
-            dialog.show();
-            return;
-        }
-
-        if (!PermissionUtil.checkOverlayPermission(this)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("다른 앱 위에 표시 권한 필요");
-                builder.setMessage("다른 앱 위에 표시 권한이 필요합니다.");
-                builder.setPositiveButton("설정", (dialog, which) -> {
-                    startActivity(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION));
-                });
-                dialog = builder.create();
-                dialog.show();
-                return;
-            }
-        }
 
         //실시간 보호
         switchProtection.setOnCheckedChangeListener((compoundButton, isChecked) -> {
