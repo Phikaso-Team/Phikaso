@@ -66,6 +66,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
 
     implementation "com.kakao.sdk:v2-user:2.6.0"
+    implementation "com.kakao.sdk:v2-talk:2.6.0"
+    
     implementation "com.squareup.okhttp3:okhttp"
     implementation 'org.jsoup:jsoup:1.13.1'
 }

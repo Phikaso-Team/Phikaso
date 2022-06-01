@@ -26,6 +26,11 @@ import com.kakao.sdk.user.UserApiClient;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
@@ -60,6 +65,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         kakaoUnlink = findViewById(R.id.kakaoUnlink);
 
         kakaoLogin();
+        checkAgreeFriends();
+        getAgreeFriends();
     }
 
     @Override
@@ -172,6 +179,60 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             } else {//연결 끊기
                 kakaoLogin.setVisibility(View.VISIBLE);
                 kakaoUnlink.setVisibility(View.GONE);
+            }
+            return null;
+        });
+    }
+
+    // '카카오 서비스 내 친구목록' 동의 내역 조회
+    private void checkAgreeFriends() {
+        List<String> scopes = Collections.singletonList("friends");
+
+        UserApiClient.getInstance().scopes(scopes, (scopeInfo, error) -> {
+            if (error != null) {
+                Log.e(TAG, "동의 정보 확인 실패", error);
+            }else if (scopeInfo != null) {
+                Log.i(TAG, "동의 정보 확인 성공\n 현재 가지고 있는 동의 항목: " + scopeInfo);
+                PreferenceManager.setBoolean(this, "friends-agree", scopeInfo.getScopes().get(0).getAgreed());
+            }
+            return null;
+        });
+    }
+
+    // '카카오 서비스 내 친구목록' 항목 동의 받기
+    private void getAgreeFriends() {
+        UserApiClient.getInstance().me((user, meError) -> {
+            if (meError != null) {
+                Log.d(TAG, "사용자 정보 요청 실패" + meError);
+            } else if (user != null) {
+                List<String> scopes = new ArrayList<>(Arrays.asList("profile_nickname", "account_email"));
+
+                boolean friendsAgree = PreferenceManager.getBoolean(this, "friends-agree");
+                if (friendsAgree != true) {
+                    scopes.add("friends");
+                }
+
+                Log.d(TAG, "요청 개수 " + scopes.size());
+                if (scopes.size() > 0) {
+                    Log.d(TAG, "사용자에게 추가 동의를 받아야 합니다.");
+
+                    UserApiClient.getInstance().loginWithNewScopes(this, scopes, (oAuthToken, error) -> {
+                        if (error != null) {
+                            Log.d(TAG, "사용자 추가 동의 실패" + error);
+                        } else {
+                            // 사용자 정보 재요청
+                            UserApiClient.getInstance().me((newUser, newError) -> {
+                                if (newError != null) {
+                                    Log.d(TAG, "사용자 정보 요청 실패" + newError);
+                                } else if (newUser != null) {
+                                    Log.d(TAG, "사용자 정보 요청 성공");
+                                }
+                                return null;
+                            });
+                        }
+                        return null;
+                    });
+                }
             }
             return null;
         });

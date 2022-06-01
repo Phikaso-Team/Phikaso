@@ -10,18 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.phikaso.R;
 import com.android.phikaso.RecyclerViewAdapter;
 import com.android.phikaso.model.FriendModel;
-import com.android.phikaso.model.KakaoFriendsModel;
-import com.android.phikaso.server.RetrofitAPI;
-import com.android.phikaso.server.RetrofitClient;
+import com.kakao.sdk.talk.TalkApiClient;
+import com.kakao.sdk.talk.model.Friend;
 
 import java.util.ArrayList;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class SettingActivity extends AppCompatActivity {
     private static final String TAG = "SettingActivity";
+
     private RecyclerViewAdapter recycler_view_adapter;
     private RecyclerView recycler_view;
     private ArrayList<FriendModel> friendModels;
@@ -31,7 +27,7 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
-        kakaoFriendsList();
+        getFriendsList();
 
         recycler_view = findViewById(R.id.recycler_view);
         friendModels = new ArrayList<>();
@@ -42,41 +38,23 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     // 카카오톡 친구 목록 가져오기
-    public void kakaoFriendsList() {
-        RetrofitAPI retrofitAPI = RetrofitClient.getKakaoApiClient().create(RetrofitAPI.class);
-        Call<KakaoFriendsModel> call = retrofitAPI.getKakaoFriends(100, "asc");
-
-        call.enqueue(new Callback<KakaoFriendsModel>() {
-            @Override
-            public void onResponse(Call<KakaoFriendsModel> call, Response<KakaoFriendsModel> response) {
-                if (!response.isSuccessful()) {
-                    Log.d(TAG, String.valueOf(response.code()));
-                    return;
-                }
-
-                KakaoFriendsModel data = response.body();
-                FriendModel elements;
-
-                String content = "";
-                if (data != null && data.getElements().size() != 0) {
-                    content += "elements: " + data.getElements() + "\n";
+    private void getFriendsList() {
+        TalkApiClient.getInstance().friends((friends, error) -> {
+            if (error != null) {
+                Log.e(TAG, "카카오톡 친구 목록 가져오기 실패", error);
+            }
+            else if (friends != null) {
+                Log.i(TAG, "카카오톡 친구 목록 가져오기 성공 \n" + friends.getElements() + "\n");
+                if(friends.getElements().size() != 0) {
                     for (int i = 0; i < 100; i++) {
-                        elements = data.getElements().get(i);
-                        String profile_thumbnail_image = elements.get_profile_thumbnail_image();
-                        String profile_nickname = elements.get_profile_nickname();
+                        Friend friend = friends.getElements().get(i);
+                        String profile_thumbnail_image = friend.getProfileThumbnailImage();
+                        String profile_nickname = friend.getProfileNickname();
                         friendModels.add(new FriendModel(profile_thumbnail_image, profile_nickname));
                     }
-                } else {
-                    content += "No friends list";
                 }
-
-                Log.d(TAG, content);
             }
-
-            @Override
-            public void onFailure(Call<KakaoFriendsModel> call, Throwable t) {
-                Log.d(TAG, t.getMessage());
-            }
+            return null;
         });
     }
 }
