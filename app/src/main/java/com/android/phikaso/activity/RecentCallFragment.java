@@ -1,6 +1,5 @@
 package com.android.phikaso.activity;
 
-import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.CallLog;
@@ -20,7 +19,6 @@ import com.android.phikaso.R;
 import com.android.phikaso.model.CallItem;
 import com.android.phikaso.util.RecyclerViewDecoration;
 
-import java.sql.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,7 +61,6 @@ public class RecentCallFragment extends Fragment {
         setData();
     }
 
-
     private void setData() {
 
         callList.add(new CallItem("010-0000-0000", "최선오", "21:00", "received"));
@@ -90,11 +87,9 @@ public class RecentCallFragment extends Fragment {
     // 통화 기록 가져오기
     // Todo: String -> ArrayList<CallItem> 으로 바꾸기
     private String getCallHistory() {
-
         String[] call_history = new String[] { CallLog.Calls.NUMBER, CallLog.Calls.DATE, CallLog.Calls.TYPE };
-
         // 보안상 Content Provider를 통해 URI로 접근해야 한다.
-        Cursor cursor = getActivity().getContentResolver().query(CallLog.Calls.CONTENT_URI, call_history, null, null, null);
+        Cursor cursor = getContext().getContentResolver().query(CallLog.Calls.CONTENT_URI, call_history, null, null, null);
         if (cursor.getCount() == 0) {
             return "최근 통화 기록이 없습니다";
         }
@@ -102,17 +97,17 @@ public class RecentCallFragment extends Fragment {
 
         StringBuffer callBuff = new StringBuffer();
         do{
-            int callData = cursor.getInt(0);
-            SimpleDateFormat myDateFormat = new SimpleDateFormat("yyyy-mm-dd");
+            long callData = cursor.getLong(1);
+            SimpleDateFormat myDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String date = myDateFormat.format(new Date(callData));
             callBuff.append(date + ":");
 
             // INCOMING_TYPE : 수신 | OUTGOING_TYPE : 발신 | MISSED_TYPE : 부재중 | VOICEMAIL_TYPE : 음성사서함 | REJECTED_TYPE : 거절
-            if (cursor.getInt(1) == CallLog.Calls.INCOMING_TYPE)          callBuff.append("수신 :");
-            else if (cursor.getInt(1) == CallLog.Calls.OUTGOING_TYPE)     callBuff.append("발신 :");
-            else if (cursor.getInt(1) == CallLog.Calls.MISSED_TYPE)       callBuff.append("부재중 : ");
-            else if (cursor.getInt(1) == CallLog.Calls.VOICEMAIL_TYPE)    callBuff.append("음성사서함 : ");
-            else if (cursor.getInt(1) == CallLog.Calls.REJECTED_TYPE)     callBuff.append("수신거절 : ");
+            if (cursor.getInt(2) == CallLog.Calls.INCOMING_TYPE)          callBuff.append("수신 :");
+            else if (cursor.getInt(2) == CallLog.Calls.OUTGOING_TYPE)     callBuff.append("발신 :");
+            else if (cursor.getInt(2) == CallLog.Calls.MISSED_TYPE)       callBuff.append("부재중 : ");
+            else if (cursor.getInt(2) == CallLog.Calls.VOICEMAIL_TYPE)    callBuff.append("음성사서함 : ");
+            else if (cursor.getInt(2) == CallLog.Calls.REJECTED_TYPE)     callBuff.append("수신거절 : ");
             else                                                             callBuff.append("알수없음 : ");
             callBuff.append(cursor.getString(2) + " | ");
             callBuff.append("\n");

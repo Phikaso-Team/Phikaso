@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.phikaso.ProgressDialog;
 import com.android.phikaso.R;
 import com.android.phikaso.model.UserModel;
 import com.android.phikaso.util.PreferenceManager;

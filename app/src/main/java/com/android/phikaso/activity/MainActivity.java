@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView preventCountToday;
     private TextView preventCountAll;
-    ProgressDialog customProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.main_btn_search) { // 피싱 번호 조회
-            // Intent intentSearch = new Intent(MainActivity.this, SearchActivity.class);
-            Intent intentSearch = new Intent(MainActivity.this, SearchActivity2.class);
+            Intent intentSearch = new Intent(MainActivity.this, SearchActivity.class);
             startActivity(intentSearch);
         } else if (id == R.id.main_btn_add_case) { // 피해 사례 등록
             Intent intentRegister = new Intent(MainActivity.this, ReportActivity.class);

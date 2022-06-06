@@ -18,9 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Phikaso"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".ProgressDialog"
-            android:exported="false" />
+
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.PermissionActivity" />
         <activity android:name=".activity.LoginActivity" />
@@ -29,10 +27,9 @@
         <activity android:name=".activity.PrivacyTermsActivity" />
         <activity android:name=".activity.ReportActivity" />
         <activity android:name=".activity.PreventActivity" />
-        <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.SettingActivity" />
 
-        <activity android:name=".activity.SearchActivity2">
+        <activity android:name=".activity.SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
