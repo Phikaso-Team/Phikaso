@@ -2,6 +2,7 @@ package com.android.phikaso.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -36,7 +37,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        // setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_search2);
 
         findViewById(R.id.search_btn_query).setOnClickListener(this);
 

@@ -56,26 +56,26 @@
         android:orientation="vertical"
         android:layout_marginTop="20dp">
 
-            <TextView
-                android:id="@+id/search_text_result_moya"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|center"
-                android:layout_marginTop="50dp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/pretendard_semibold"
-                android:textSize="30sp"/>
+        <TextView
+            android:id="@+id/search_text_result_moya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:layout_marginTop="50dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/pretendard_semibold"
+            android:textSize="30sp"/>
 
 
-            <TextView
-                android:id="@+id/search_text_result_police"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/pretendard_light"
-                android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/search_text_result_police"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/pretendard_light"
+            android:textSize="18sp"/>
 
 
     </LinearLayout>
@@ -99,3 +99,4 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
+

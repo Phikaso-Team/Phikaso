@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     def versionPropsFile = file('version.properties')
@@ -28,6 +28,7 @@ android {
     }
 
     buildFeatures {
+        // buildFeature.viewBinding true
         viewBinding true
     }
 
@@ -79,6 +80,13 @@ dependencies {
     
     implementation "com.squareup.okhttp3:okhttp"
     implementation 'org.jsoup:jsoup:1.13.1'
+
+    // View Pager 2
+    implementation "androidx.viewpager2:viewpager2:1.1.0-beta01"
+    // material design for TabLayout
+    implementation 'com.google.android.material:material:1.6.1'
+    // Recycler View
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 }
 
 apply plugin: 'com.google.gms.google-services'
