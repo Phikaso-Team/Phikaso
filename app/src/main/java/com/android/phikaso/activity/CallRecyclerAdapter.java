@@ -1,5 +1,6 @@
 package com.android.phikaso.activity;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +19,6 @@ import java.util.ArrayList;
 public class CallRecyclerAdapter extends RecyclerView.Adapter<CallRecyclerAdapter.CallViewHolder> {
 
     private ArrayList<CallItem> callList;
-
-    static final int callTypeImg[] = new int[] {     // 수신, 발신, 부재중 아이콘
-            R.drawable.ic_baseline_call_received_24,
-            R.drawable.ic_baseline_call_made_24,
-            R.drawable.ic_baseline_call_missed_24 };
 
     public class CallViewHolder extends RecyclerView.ViewHolder {
         public TextView name;      // 이름
@@ -53,10 +49,30 @@ public class CallRecyclerAdapter extends RecyclerView.Adapter<CallRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull CallRecyclerAdapter.CallViewHolder holder, int pos) {
+
         holder.name.setText(callList.get(pos).getName());
         holder.number.setText(callList.get(pos).getNumber());
         holder.date.setText(callList.get(pos).getDate());
-        holder.type.setImageResource(callTypeImg[0]);
+
+        String callType = callList.get(pos).getType();
+        switch (callType) {
+            case "1":   // 수신
+                holder.type.setImageResource(R.drawable.ic_baseline_call_received_24);
+                break;
+            case "2":   // 발신
+                holder.type.setImageResource(R.drawable.ic_baseline_call_made_24);
+                break;
+            case "3":   // 부재중
+                holder.type.setImageResource(R.drawable.ic_baseline_call_missed_24);
+                break;
+            case "5":   // 거절
+                holder.type.setImageResource(R.drawable.ic_baseline_phone_disabled_24);
+                break;
+            default:    // 기타
+                holder.type.setImageResource(R.drawable.ic_baseline_error_outline_24);
+                break;
+        }
+
     }
 
     @Override

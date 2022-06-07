@@ -26,6 +26,7 @@ import java.io.StringReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.StringTokenizer;
 
 public class RecentCallFragment extends Fragment {
 
@@ -59,36 +60,30 @@ public class RecentCallFragment extends Fragment {
         return v;
     }
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
 
+    // count 만큼 최근 통화 기록 데이터를 callList<CallItem>에 추가
     private void setData(int count) {
-
-        callList.add(new CallItem("010-0000-0000", "최선오", "21:00", "received"));
 
         String callData = getCallHistory(count);
 
-        BufferedReader br = new BufferedReader(new StringReader(callData));
-        try {
-            for (int i=0; i<count; i++) {
-                String name = br.readLine();
-                String number = br.readLine();
-                String type = br.readLine();
-                String date = br.readLine();
-                callList.add(new CallItem(number, name, date, type));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        StringTokenizer st = new StringTokenizer(callData, "|");
+        for (int i=0; i<count; i++) {
+            String name = st.nextToken();
+            String number = st.nextToken();
+            String type = st.nextToken();
+            Log.d("tttcallType", type);
+            String date = st.nextToken();
+            callList.add(new CallItem(number, name, date, type));
         }
     }
 
 
-
-    // count 만큼 최근 통화 기록 가져오는 함수!
+    // count 만큼 최근 통화 기록을 "|"로 구분된 String으로 가져오는 함수!
     private String getCallHistory(int count) {
 
         String[] call_history = new String[] {
@@ -118,27 +113,28 @@ public class RecentCallFragment extends Fragment {
                 name = cursor.getString(nameIdx);
             }
             Log.d("tttName", name);
-            callBuff.append(name + " |");
+            callBuff.append(name + "|");
 
             String number = cursor.getString(numberIdx);
             Log.d("tttNUMBER", number);
-            callBuff.append(number + " |");
+            callBuff.append(number + "|");
 
             // INCOMING_TYPE : 수신 | OUTGOING_TYPE : 발신 | MISSED_TYPE : 부재중 | VOICEMAIL_TYPE : 음성사서함 | REJECTED_TYPE : 거절
             String type = cursor.getString(typeIdx);
-            if (typeIdx == CallLog.Calls.INCOMING_TYPE)          callBuff.append("수신 +  |");
-            else if (typeIdx == CallLog.Calls.OUTGOING_TYPE)     callBuff.append("발신 +  |");
-            else if (typeIdx == CallLog.Calls.MISSED_TYPE)       callBuff.append("부재중 +  |");
-            else if (typeIdx == CallLog.Calls.VOICEMAIL_TYPE)    callBuff.append("음성사서함 +  |");
-            else if (typeIdx == CallLog.Calls.REJECTED_TYPE)     callBuff.append("수신거절 +  |");
-            else                                                 callBuff.append("알수없음 +  |");
+//            if (typeIdx == CallLog.Calls.INCOMING_TYPE)          callBuff.append("수신" + "|");
+//            else if (typeIdx == CallLog.Calls.OUTGOING_TYPE)     callBuff.append("발신" +  "|");
+//            else if (typeIdx == CallLog.Calls.MISSED_TYPE)       callBuff.append("부재중" +  "|");
+//            else if (typeIdx == CallLog.Calls.VOICEMAIL_TYPE)    callBuff.append("음성사서함" +  "|");
+//            else if (typeIdx == CallLog.Calls.REJECTED_TYPE)     callBuff.append("수신거절" +  "|");
+//            else                                                 callBuff.append("알수없음" +  "|");
             Log.d("tttType", type);
+            callBuff.append(type + "|");
 
             String date = cursor.getString(dateIdx);
             SimpleDateFormat dateFormatter = new SimpleDateFormat("MM-dd HH:mm");
             date = dateFormatter.format(new Date(Long.parseLong(date)));
             Log.d("tttDate", date);
-            callBuff.append(date + " |");
+            callBuff.append(date + "|");
 
             cursor.moveToNext();
         }

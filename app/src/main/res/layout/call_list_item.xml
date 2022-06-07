@@ -7,9 +7,10 @@
     <TextView
         android:id="@+id/call_name"
         android:layout_width="90dp"
-        android:layout_height="30dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="10dp"
         android:text="홍길동"
-        android:textSize="22sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/call_number"
@@ -18,7 +19,7 @@
         android:gravity="center"
         android:textAlignment="center"
         android:text="010-0000-0000"
-        android:textSize="15sp" />
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/call_date"
@@ -27,11 +28,11 @@
         android:gravity="center"
         android:textAlignment="center"
         android:text="00:00"
-        android:textSize="15sp" />
+        android:textSize="12sp" />
 
     <ImageView
         android:id="@+id/call_type"
-        android:layout_width="60dp"
+        android:layout_width="65dp"
         android:layout_height="match_parent"
         android:gravity="center"
         android:textAlignment="center"
