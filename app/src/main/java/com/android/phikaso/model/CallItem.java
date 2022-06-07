@@ -2,24 +2,16 @@ package com.android.phikaso.model;
 
 public class CallItem {
 
-    String number;      // 전화번호
     String name;        // 이름
-    String time;        // 시간
-    String callType;    // 수신, 발신, 부재중
+    String number;      // 전화번호
+    String date;        // 날짜 및 시간
+    String type;        // 수신, 발신, 부재중
 
-    public CallItem(String number, String name, String time, String callType) {
-        this.number = number;
+    public CallItem(String number, String name, String date, String type) {
         this.name = name;
-        this.time = time;
-        this.callType = callType;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
         this.number = number;
+        this.date = date;
+        this.type = type;
     }
 
     public String getName() {
@@ -30,20 +22,28 @@ public class CallItem {
         this.name = name;
     }
 
-    public String getTime() {
-        return time;
+    public String getNumber() {
+        return number;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public String getCallType() {
-        return callType;
+    public String getDate() {
+        return date;
     }
 
-    public void setCallType(String callType) {
-        this.callType = callType;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
 }

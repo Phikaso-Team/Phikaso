@@ -9,7 +9,7 @@
         android:layout_width="90dp"
         android:layout_height="30dp"
         android:text="홍길동"
-        android:textSize="25sp" />
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/call_number"
@@ -21,7 +21,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/call_time"
+        android:id="@+id/call_date"
         android:layout_width="60dp"
         android:layout_height="match_parent"
         android:gravity="center"

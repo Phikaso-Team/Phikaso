@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/drawable/ic_baseline_call_24.xml" value="0.181" />
+        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/drawable/ic_baseline_call_received_24.xml" value="0.181" />
         <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/drawable/ic_baseline_person_search_24.xml" value="0.276" />
         <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/drawable/ic_baseline_person_search_36.xml" value="0.276" />
+        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/drawable/ic_baseline_sms_24.xml" value="0.181" />
         <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/layout/activity_search.xml" value="0.25226449275362317" />
         <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/layout/activity_search2.xml" value="0.25" />
         <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/layout/call_list_item.xml" value="0.28854166666666664" />
