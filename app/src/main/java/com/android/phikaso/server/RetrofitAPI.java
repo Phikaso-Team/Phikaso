@@ -10,10 +10,11 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface RetrofitAPI {
-    @GET("/")
-    Call<PhishingModel> getPhishingData(@Query("text") String text);
+    // 피싱 확률 확인
+    @GET("/check")
+    Call<PhishingModel> checkPhishingProbability(@Query("text") String text);
 
-    // 사용자가 피싱 신고 등록 -> insert into DB
-    @POST("/reports")
-    Call<ReportModel> postPhishingMsg(@Body ReportModel reportModel);
+    // 피싱 의심 신고
+    @POST("/report")
+    Call<ReportModel> reportPhishingMessage(@Body ReportModel reportModel);
 }
