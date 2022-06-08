@@ -1,12 +1,14 @@
 package com.android.phikaso.model;
 
-public class FriendModel {
+import java.io.Serializable;
+
+public class FriendModel implements Serializable {
 
     // 사용자 프로필 닉네임
-    public String profile_nickname;
+    String profile_nickname;
 
     // 사용자 프로필 썸네일 이미지
-    public String profile_thumbnail_image;
+    String profile_thumbnail_image;
 
     public FriendModel(String profile_thumbnail_image, String profile_nickname){
         this.profile_thumbnail_image = profile_thumbnail_image;

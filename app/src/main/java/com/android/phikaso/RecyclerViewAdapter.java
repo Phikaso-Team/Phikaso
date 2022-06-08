@@ -1,6 +1,5 @@
 package com.android.phikaso;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,39 +10,34 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.phikaso.model.FriendModel;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    ArrayList<FriendModel> friendModels;
-    Context context;
+    private ArrayList<FriendModel> mFriendList;
 
-    public RecyclerViewAdapter(Context context, ArrayList<FriendModel> friendModels){
-        this.friendModels = friendModels;
-        this.context = context;
+    @NonNull
+    @Override
+    public RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.kakao_friends_list, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerViewAdapter.ViewHolder holder, int position) {
+        FriendModel friend = mFriendList.get(position);
+
+        Glide.with(holder.itemView.getContext())
+                .load(friend.get_profile_thumbnail_image())
+                .into(holder.profile_thumbnail_image);
+        holder.profile_nickname.setText(friend.get_profile_nickname());
     }
 
     @Override
     public int getItemCount() {
-        return friendModels.size();
-    }
-
-    @NonNull
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.kakao_friends_list, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-
-        return viewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ViewHolder viewHolder = (ViewHolder)holder;
-
-        viewHolder.profile_thumbnail_image.setImageResource(Integer.parseInt(friendModels.get(position).get_profile_thumbnail_image()));
-        viewHolder.profile_nickname.setText(friendModels.get(position).get_profile_nickname());
+        return mFriendList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -55,5 +49,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
             profile_thumbnail_image = itemView.findViewById(R.id.profile_thumbnail_image);
             profile_nickname =  itemView.findViewById(R.id.profile_nickname);
         }
+    }
+
+    public void setFriendList(ArrayList<FriendModel> mFriendList) {
+        this.mFriendList = mFriendList;
+        notifyDataSetChanged();
     }
 }
