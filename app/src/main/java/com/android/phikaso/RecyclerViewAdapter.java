@@ -37,6 +37,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
+        if(mFriendList == null) {
+            return 0;
+        }
         return mFriendList.size();
     }
 

@@ -76,7 +76,6 @@ dependencies {
 
     implementation "com.kakao.sdk:v2-user:2.10.0"
     implementation "com.kakao.sdk:v2-talk:2.10.0"
-    implementation "com.kakao.sdk:v2-friend:2.10.0"
     
     implementation "com.squareup.okhttp3:okhttp"
     implementation 'org.jsoup:jsoup:1.13.1'

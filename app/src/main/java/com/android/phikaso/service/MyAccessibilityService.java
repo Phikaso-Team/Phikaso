@@ -9,6 +9,8 @@ import android.view.accessibility.AccessibilityNodeInfo;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.android.phikaso.util.PreferenceManager;
+
 import java.util.Objects;
 
 public class MyAccessibilityService extends AccessibilityService {
@@ -134,6 +136,8 @@ public class MyAccessibilityService extends AccessibilityService {
 
                 message.append(text).append(" "); // 대화 내용만
 //                message.append(name).append(": ").append(text).append("\n"); // 이름 + 대화 내용
+
+                PreferenceManager.setString(this, "kakao-name", String.valueOf(name));
             }
         }
 

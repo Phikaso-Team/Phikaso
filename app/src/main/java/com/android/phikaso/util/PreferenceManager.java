@@ -3,7 +3,12 @@ package com.android.phikaso.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.android.phikaso.model.FriendModel;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -51,6 +56,14 @@ public class PreferenceManager {
         SharedPreferences prefs = getPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putFloat(key, value);
+        editor.apply();
+    }
+
+    public static void setArrayList(final Context context, final String key, ArrayList<FriendModel> value) {
+        Gson gson = new GsonBuilder().create();
+        SharedPreferences prefs = getPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, gson.toJson(value));
         editor.apply();
     }
 

@@ -1,12 +1,8 @@
 package com.android.phikaso.activity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,43 +10,39 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.phikaso.R;
 import com.android.phikaso.RecyclerViewAdapter;
 import com.android.phikaso.model.FriendModel;
+import com.android.phikaso.util.PreferenceManager;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.kakao.sdk.talk.TalkApiClient;
+import com.kakao.sdk.talk.model.Friend;
 
 import java.util.ArrayList;
 
-public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
+public class SettingActivity extends AppCompatActivity {
 
-    private RecyclerViewAdapter mRecyclerAdapter;
+    private static final String TAG = "SettingActivity";
+
     private RecyclerView mRecyclerView;
-    private ArrayList<FriendModel> mFriendList;
+    private RecyclerViewAdapter mRecyclerAdapter;
+
+    private ArrayList<FriendModel> setFriendList = new ArrayList<>();
+    private ArrayList<FriendModel> getFriendList = new ArrayList<>();
+    private Gson gson = new GsonBuilder().create();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
-        findViewById(R.id.selectFriend).setOnClickListener(this);
+        setFriendList();
+
+        String value = PreferenceManager.getString(SettingActivity.this, "friend-list");
+        getFriendList = gson.fromJson(value, new TypeToken<ArrayList<FriendModel>>() {}.getType());
+        setRecyclerView(getFriendList);
     }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        if (id == R.id.selectFriend) {
-            Intent intent = new Intent(SettingActivity.this, FriendActivity.class);
-            launcher.launch(intent);
-        }
-    }
-
-    ActivityResultLauncher<Intent> launcher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == Activity.RESULT_OK) {
-                    Intent data = result.getData();
-                    if (data != null) {
-                        mFriendList = (ArrayList<FriendModel>) data.getSerializableExtra("friend_list");
-                    }
-                    setRecyclerView(mFriendList);
-                }
-            });
-
+    // 리사이클러뷰 (실시간 보호 제외 사용자 리스트)
     private void setRecyclerView(ArrayList<FriendModel> mFriendList) {
         mRecyclerView = (RecyclerView) findViewById(R.id.kakao_friends_list);
         mRecyclerAdapter = new RecyclerViewAdapter();
@@ -59,4 +51,26 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         mRecyclerAdapter.setFriendList(mFriendList);
     }
 
+    // 카카오톡 친구 목록 가져오기 (실시간 보호 제외 사용자 저장)
+    private void setFriendList() {
+        TalkApiClient.getInstance().friends((friends, error) -> {
+            if (error != null) {
+                Log.e(TAG, "카카오톡 친구 목록 가져오기 실패", error);
+            } else {
+                Log.d(TAG, "카카오톡 친구 목록 가져오기 성공\n" + friends.getElements());
+
+                if(friends.getElements().size() != 0) {
+                    for (int i = 0; i < friends.getElements().size(); i++) {
+                        Friend friend = friends.getElements().get(i);
+                        String profile_thumbnail_image = friend.getProfileThumbnailImage();
+                        String profile_nickname = friend.getProfileNickname();
+                        setFriendList.add(new FriendModel(profile_thumbnail_image, profile_nickname));
+
+                        PreferenceManager.setArrayList(SettingActivity.this, "friend-list", setFriendList);
+                    }
+                }
+            }
+            return null;
+        });
+    }
 }
