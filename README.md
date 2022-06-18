@@ -1,24 +1,30 @@
 # Phikaso
-<img src="https://image.posterlounge.com/images/m/1889598.jpg" width="150" height="200"/>
 
-## Project Description
-> 💻프로젝트에 대한 간단한 설명
->
-> test
->
-> test
+<p align="center">
+<div align="center">
+<!-- <img src="~~~~~" width="50%"/>  -->
+대충 가운데 근사한(?) 로고</div>
+</p>
+<p align="center">"대충 근사한 캐치프레이즈"<br>AI기반 메신저 피싱 예측에 따른 사전 예방 서비스입니다.</p>
+<br>
+<br>
 
-## Team Members
-- YuGyeong98
-- soyeon kim
-- Deun Lee
-- kafkaaaa
+![](./docs/img_goal.png)
 
-## Enviornment (Getting Started / Installation)
-(실행환경, 실행방법, dependency 등)  
-- OS
-- Compiler
-- etc
+## 프로젝트 목표
+
+## 주요 기능
+
+## 서비스 아키텍처
+
+## 사용한 기술 스택
+
+## 프로젝트 화면 구성도
+
+## 기술적 이슈와 해결 과정
+
+CI/CD
+
 
 ## Coding Convention
 + **Naming Rule**
@@ -35,5 +41,3 @@
 - [ ] 설정화면에서 실시간보호 제외할 유저추가 기능 (SharedPref에 저장)
 - [ ] 카카오톡 로그인 안되는 이슈
 
-
-## Reference
