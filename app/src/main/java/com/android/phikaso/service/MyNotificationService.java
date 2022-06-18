@@ -10,6 +10,8 @@ import android.util.Log;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.android.phikaso.util.PreferenceManager;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
@@ -55,5 +57,7 @@ public class MyNotificationService extends NotificationListenerService {
         intent.putExtra(EXTRA_TEXT, text.toString());
         intent.putExtra(EXTRA_ROOM, room.toString());
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+
+        PreferenceManager.setString(this, "kakao-name", name);
     }
 }

@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.android.phikaso.R;
@@ -57,7 +58,7 @@ public class MyOverlayService extends Service {
                     @Override
                     public void onReceive(Context context, Intent intent) {
                         String text = intent.getStringExtra(MyNotificationService.EXTRA_TEXT);
-                        deepLearningServer(text);
+                        checkProbability(text);
                     }
                 }, new IntentFilter(MyNotificationService.ACTION_NOTIFICATION_BROADCAST)
         );
@@ -66,7 +67,7 @@ public class MyOverlayService extends Service {
                     @Override
                     public void onReceive(Context context, Intent intent) {
                         String text = intent.getStringExtra(MyAccessibilityService.EXTRA_TEXT);
-                        deepLearningServer(text);
+                        checkProbability(text);
                     }
                 }, new IntentFilter(MyAccessibilityService.ACTION_NOTIFICATION_BROADCAST)
         );
@@ -80,9 +81,9 @@ public class MyOverlayService extends Service {
                 LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 this.popupView = layoutInflater.inflate(R.layout.overdraw_popup, null);
 
-                if (Build.VERSION.SDK_INT >= 26) {//안드로이드 8 이상
+                if (Build.VERSION.SDK_INT >= 26) { // 안드로이드 8 이상
                     flags = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
-                } else {//안드로이드 8 미만
+                } else { // 안드로이드 8 미만
                     flags = WindowManager.LayoutParams.TYPE_PHONE;
                 }
                 WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(
@@ -126,39 +127,24 @@ public class MyOverlayService extends Service {
         super.onDestroy();
     }
 
-    //딥러닝 서버
-    public void deepLearningServer(String text) {
-        RetrofitAPI retrofitAPI = RetrofitClient.getClient().create(RetrofitAPI.class);
-        Call<PhishingModel> call = retrofitAPI.getPhishingData(text);//카카오톡에서 읽어오는 텍스트
-
+    public void checkProbability(final String text) {
+        final RetrofitAPI retrofitAPI = RetrofitClient.getClient().create(RetrofitAPI.class);
+        final Call<PhishingModel> call = retrofitAPI.checkPhishingProbability(text);
         call.enqueue(new Callback<PhishingModel>() {
             @Override
-            public void onResponse(Call<PhishingModel> call, Response<PhishingModel> response) {
+            public void onResponse(@NonNull Call<PhishingModel> call, @NonNull Response<PhishingModel> response) {
                 if (!response.isSuccessful()) {
-                    Log.d(TAG, String.valueOf(response.code()));
+                    Log.e(TAG, String.valueOf(response.code()));
                     return;
                 }
-
-                PhishingModel data = response.body();
-
-                String content = "";
-                content += "Phishing: " + data.getPhishing() + "\n";
-                if (data.getProbability().contains("%")) {
-                    data.getProbability().replace("%", "");
-                }
-                content += "Probability: " + data.getProbability() + "\n";
-                content += "Text: " + data.getText() + "\n";
-
-                if (data.getPhishing()) {
+                final PhishingModel data = response.body();
+                if (data != null && data.getPhishing()) {
                     showPopup(data.getProbability());
                 }
-
-                Log.d(TAG, content);
             }
-
             @Override
-            public void onFailure(Call<PhishingModel> call, Throwable t) {
-                Log.d(TAG, t.getMessage());
+            public void onFailure(@NonNull Call<PhishingModel> call, @NonNull Throwable throwable) {
+                Log.e(TAG, throwable.getMessage());
             }
         });
     }

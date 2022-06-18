@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.phikaso.R;
+import com.android.phikaso.model.FriendModel;
 import com.android.phikaso.service.MyOverlayService;
 import com.android.phikaso.util.PreferenceManager;
 import com.google.firebase.database.DataSnapshot;
@@ -20,7 +21,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -34,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView preventCountToday;
     private TextView preventCountAll;
+
+    private ArrayList<FriendModel> friendList = new ArrayList<>();
+    private Gson gson = new GsonBuilder().create();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +120,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (!isMyServiceRunning(MyOverlayService.class)) {
                     PreferenceManager.setString(MainActivity.this, "checked", "true");
                     startService(new Intent(getApplicationContext(), MyOverlayService.class));
+
+                    // 실시간 보호 제외 사용자
+                    String user = PreferenceManager.getString(MainActivity.this, "kakao-name");
+                    String value = PreferenceManager.getString(MainActivity.this, "friend-list");
+                    friendList = gson.fromJson(value, new TypeToken<ArrayList<FriendModel>>() {}.getType());
+
+                    for(int i=0; i<friendList.size(); i++) {
+                        if (friendList.get(i).get_profile_nickname().equals(user)) {
+                            stopService(new Intent(getApplicationContext(), MyOverlayService.class));
+                        }
+                    }
                 }
             } else {
                 PreferenceManager.setString(MainActivity.this, "checked", "false");

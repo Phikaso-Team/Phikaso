@@ -37,8 +37,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ReportActivity extends AppCompatActivity implements View.OnClickListener {
-
     private static final String TAG = "RegisterActivity";
+
     public static final int PICK_FROM_ALBUM = 1;
     private Uri imageUri;
     private String pathUri;
@@ -61,19 +61,16 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
 
-        //초기화
         mDatabase = FirebaseDatabase.getInstance();
         mStorage  = FirebaseStorage.getInstance();
 
-        //아이디 설정
         editTextTitle = findViewById(R.id.report_edit_title);
         editTextPhone = findViewById(R.id.report_edit_phone);
         editTextContent = findViewById(R.id.report_edit_content);
         imageViewFile = findViewById(R.id.report_img_file);
         imageViewText = findViewById(R.id.report_text_file);
 
-        //전체 피해 사례 초기화
-        count();
+        count(); // 전체 피해 사례 초기화
 
         imageViewFile.setOnClickListener(this);
         findViewById(R.id.report_btn_submit).setOnClickListener(this);
@@ -91,9 +88,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                 postPhishingCaseToDB();
                 break;
         }
-        // 신고 등록 후 작성한 내용 지움.
-        Toast.makeText(ReportActivity.this, "피싱 신고 완료", Toast.LENGTH_LONG).show();
-        editTextContent.setText("");
     }
 
     @Override
@@ -170,13 +164,12 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
 
     // 피싱 신고 등록 -> DB에 저장 (피싱 내용 텍스트만 저장)
     private void postPhishingCaseToDB() {
-
         String phishingText = editTextContent.getText().toString();
-        // todo : sql injection 방지하기 @@
         ReportService reportService = new ReportService();
         reportService.reportPhishing(phishingText);
+        Toast.makeText(ReportActivity.this, "피싱 메시지를 신고해주셔서 감사합니다!", Toast.LENGTH_LONG).show();
+        finish();
     }
-
 
     private void count() {
         mDBReference = mDatabase.getReference().child("phishingCases");

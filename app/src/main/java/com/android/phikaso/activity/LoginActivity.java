@@ -228,7 +228,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (scopes.size() > 0) {
                     Log.d(TAG, "사용자에게 추가 동의를 받아야 합니다.");
 
-                    UserApiClient.getInstance().loginWithNewScopes(this, scopes, (oAuthToken, error) -> {
+                    UserApiClient.getInstance().loginWithNewScopes(this, scopes, "nonce", (oAuthToken, error) -> {
                         if (error != null) {
                             Log.d(TAG, "사용자 추가 동의 실패" + error);
                         } else {
