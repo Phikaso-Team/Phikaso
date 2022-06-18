@@ -27,15 +27,20 @@
         <activity android:name=".activity.PrivacyTermsActivity" />
         <activity android:name=".activity.ReportActivity" />
         <activity android:name=".activity.PreventActivity" />
-        <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.SettingActivity" />
 
-        <activity android:name=".activity.SplashActivity">
+        <activity android:name=".activity.SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.SplashActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
 
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">

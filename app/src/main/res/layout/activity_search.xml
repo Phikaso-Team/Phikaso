@@ -1,101 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.SearchActivity"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/search_text_title"
-        android:layout_width="match_parent"
+    <!-- TabLayout 배치 -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:text="피싱 번호 조회"
-        android:textColor="@color/phikaso"
-        android:layout_marginBottom="40dp"
-        android:fontFamily="@font/pretendard_semibold"
-        android:textSize="36sp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        <!-- TabItem -->
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/search_edit_phone"
-            android:layout_height="50dp"
-            android:layout_width="300dp"
-            android:layout_marginRight="15dp"
-            android:ems="15"
-            android:hint="모르는 번호를 입력하세요"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:fontFamily="@font/pretendard_light"
-            android:inputType="phone"
-            android:background="@drawable/custom_input"
-            android:elevation="10dp"/>
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/search_btn_query"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="@drawable/search"
-            android:layout_marginEnd="10dp"
-            android:text="조회"/>
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    </LinearLayout>
+    </com.google.android.material.tabs.TabLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="20dp">
+    <!-- ViewPager2 -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+        app:layout_constraintVertical_bias="0.0" />
 
-            <TextView
-                android:id="@+id/search_text_result_moya"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|center"
-                android:layout_marginTop="50dp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/pretendard_semibold"
-                android:textSize="30sp"/>
-
-
-            <TextView
-                android:id="@+id/search_text_result_police"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/pretendard_light"
-                android:textSize="18sp"/>
-
-
-    </LinearLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="-6dp"
-            android:layout_marginBottom="-14dp"
-            android:background="@drawable/prevent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
