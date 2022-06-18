@@ -28,6 +28,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="앱을 사용하기 위해서 권한 허용이 필요합니다."
+        android:fontFamily="@font/pretendard_semibold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_title" />
@@ -71,6 +72,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="알림 읽기"
+                        android:fontFamily="@font/pretendard_semibold"
                         android:textColor="@color/perm_deny"
                         android:textSize="18sp" />
 
@@ -79,6 +81,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="백그라운드에서 피싱 예방을 위해 필요합니다."
+                        android:fontFamily="@font/pretendard_light"
                         android:textColor="@color/perm_desc" />
                 </LinearLayout>
             </LinearLayout>
@@ -108,6 +111,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="접근성"
+                        android:fontFamily="@font/pretendard_semibold"
                         android:textColor="@color/perm_deny"
                         android:textSize="18sp" />
 
@@ -116,6 +120,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="피싱 예방을 위해 화면 접근이 필요합니다."
+                        android:fontFamily="@font/pretendard_light"
                         android:textColor="@color/perm_desc" />
                 </LinearLayout>
             </LinearLayout>
@@ -144,6 +149,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="다른 앱 위에 표시"
+                        android:fontFamily="@font/pretendard_semibold"
                         android:textColor="@color/perm_deny"
                         android:textSize="18sp" />
 
@@ -152,6 +158,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="피싱 팝업 알림을 위해 필요합니다."
+                        android:fontFamily="@font/pretendard_light"
                         android:textColor="@color/perm_desc" />
                 </LinearLayout>
             </LinearLayout>
@@ -179,6 +186,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="통화 기록 (선택)"
+                        android:fontFamily="@font/pretendard_semibold"
                         android:textColor="@color/perm_deny"
                         android:textSize="18sp" />
 
@@ -186,6 +194,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="피싱 번호 간편 조회를 위해 필요합니다."
+                        android:fontFamily="@font/pretendard_light"
                         android:textColor="@color/perm_desc" />
                 </LinearLayout>
             </LinearLayout>
@@ -213,6 +222,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="연락처 (선택)"
+                        android:fontFamily="@font/pretendard_semibold"
                         android:textColor="@color/perm_deny"
                         android:textSize="18sp" />
 
@@ -220,6 +230,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="피싱 번호 간편 조회를 위해 필요합니다."
+                        android:fontFamily="@font/pretendard_light"
                         android:textColor="@color/perm_desc" />
                 </LinearLayout>
             </LinearLayout>

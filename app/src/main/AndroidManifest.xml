@@ -18,9 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Phikaso"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".ProgressDialog"
-            android:exported="false" />
+
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.PermissionActivity" />
         <activity android:name=".activity.LoginActivity" />

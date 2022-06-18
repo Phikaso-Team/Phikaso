@@ -10,47 +10,63 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.phikaso.R;
 import com.android.phikaso.RecyclerViewAdapter;
 import com.android.phikaso.model.FriendModel;
+import com.android.phikaso.util.PreferenceManager;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.kakao.sdk.talk.TalkApiClient;
 import com.kakao.sdk.talk.model.Friend;
 
 import java.util.ArrayList;
 
 public class SettingActivity extends AppCompatActivity {
+
     private static final String TAG = "SettingActivity";
 
-    private RecyclerViewAdapter recycler_view_adapter;
-    private RecyclerView recycler_view;
-    private ArrayList<FriendModel> friendModels;
+    private RecyclerView mRecyclerView;
+    private RecyclerViewAdapter mRecyclerAdapter;
+
+    private ArrayList<FriendModel> setFriendList = new ArrayList<>();
+    private ArrayList<FriendModel> getFriendList = new ArrayList<>();
+    private Gson gson = new GsonBuilder().create();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
-        getFriendsList();
+        setFriendList();
 
-        recycler_view = findViewById(R.id.recycler_view);
-        friendModels = new ArrayList<>();
-
-        recycler_view_adapter = new RecyclerViewAdapter(SettingActivity.this, friendModels);
-        recycler_view.setAdapter(recycler_view_adapter);
-        recycler_view.setLayoutManager(new LinearLayoutManager(SettingActivity.this, RecyclerView.VERTICAL,false));
+        String value = PreferenceManager.getString(SettingActivity.this, "friend-list");
+        getFriendList = gson.fromJson(value, new TypeToken<ArrayList<FriendModel>>() {}.getType());
+        setRecyclerView(getFriendList);
     }
 
-    // 카카오톡 친구 목록 가져오기
-    private void getFriendsList() {
+    // 리사이클러뷰 (실시간 보호 제외 사용자 리스트)
+    private void setRecyclerView(ArrayList<FriendModel> mFriendList) {
+        mRecyclerView = (RecyclerView) findViewById(R.id.kakao_friends_list);
+        mRecyclerAdapter = new RecyclerViewAdapter();
+        mRecyclerView.setAdapter(mRecyclerAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerAdapter.setFriendList(mFriendList);
+    }
+
+    // 카카오톡 친구 목록 가져오기 (실시간 보호 제외 사용자 저장)
+    private void setFriendList() {
         TalkApiClient.getInstance().friends((friends, error) -> {
             if (error != null) {
                 Log.e(TAG, "카카오톡 친구 목록 가져오기 실패", error);
-            }
-            else if (friends != null) {
-                Log.i(TAG, "카카오톡 친구 목록 가져오기 성공 \n" + friends.getElements() + "\n");
+            } else {
+                Log.d(TAG, "카카오톡 친구 목록 가져오기 성공\n" + friends.getElements());
+
                 if(friends.getElements().size() != 0) {
-                    for (int i = 0; i < 100; i++) {
+                    for (int i = 0; i < friends.getElements().size(); i++) {
                         Friend friend = friends.getElements().get(i);
                         String profile_thumbnail_image = friend.getProfileThumbnailImage();
                         String profile_nickname = friend.getProfileNickname();
-                        friendModels.add(new FriendModel(profile_thumbnail_image, profile_nickname));
+                        setFriendList.add(new FriendModel(profile_thumbnail_image, profile_nickname));
+
+                        PreferenceManager.setArrayList(SettingActivity.this, "friend-list", setFriendList);
                     }
                 }
             }
