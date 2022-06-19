@@ -14,15 +14,17 @@
 <br>
 <br>
 
-![](./docs/img_goal.png)
+피카소는 인공지능 기반 메신저 피싱 사전 예방 서비스입니다.
 
+
+## 개발 배경
+<p align="center">
+<img src="./docs/img_background1.png" width="80%"/>
+<img src="./docs/img_background2.png" width="80%"/>
+</p>
 
 ## 프로젝트 목표
-목표
-
-
-## 주요 기능
-기능
+![](./docs/img_goal.png)
 
 
 ## 서비스 아키텍처
@@ -33,7 +35,9 @@
 <img src="./docs/img_tech.png" width="80%"/>
 
 
-## 기술적 이슈와 해결 과정
+## 프로젝트 화면 구성도
+<img src="./docs/img_app.png" width="80%"/>
+
 
 ## 딥러닝 프로세스
 ![](./docs/img_deep.png)
