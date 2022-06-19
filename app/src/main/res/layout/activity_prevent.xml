@@ -104,8 +104,9 @@
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginTop="35dp"
+        android:gravity="center"
+        android:visibility="invisible"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout3">
@@ -113,25 +114,27 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="지금까지 총 "
             android:fontFamily="@font/pretendard_semibold"
+            android:text="지금까지 총 "
             android:textColor="#535962"
             android:textSize="20sp"
             android:textStyle="bold" />
+
         <TextView
             android:id="@+id/preventCountAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
             android:fontFamily="@font/pretendard_black"
+            android:text="0"
             android:textColor="#535962"
             android:textSize="30sp"
             android:textStyle="bold" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" 번"
             android:fontFamily="@font/pretendard_semibold"
+            android:text=" 번"
             android:textColor="#535962"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -142,6 +145,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:visibility="invisible"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout4">
@@ -149,12 +153,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="피싱을 예방했어요"
+            android:layout_marginBottom="5dp"
             android:fontFamily="@font/pretendard_semibold"
+            android:text="피싱을 예방했어요"
             android:textColor="#535962"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="5dp"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 

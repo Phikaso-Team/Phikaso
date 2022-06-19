@@ -87,8 +87,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // 실시간 보호 제외 사용자
                 String user = PreferenceManager.getString(MainActivity.this, "kakao-name");
                 String value = PreferenceManager.getString(MainActivity.this, "friend-list");
-                friendList = gson.fromJson(value, new TypeToken<ArrayList<FriendModel>>() {
-                }.getType());
+                friendList = gson.fromJson(value, new TypeToken<ArrayList<FriendModel>>() { }.getType());
+                if (friendList == null) return;
 
                 for (int i = 0; i < friendList.size(); i++) {
                     if (friendList.get(i).get_profile_nickname().equals(user)) {
