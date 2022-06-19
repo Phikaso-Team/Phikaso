@@ -35,9 +35,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     private TextView textSearchPolice;
     private TextView textSearchMoya;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_number, container, false);
 
         view.findViewById(R.id.search_btn_query).setOnClickListener(this);

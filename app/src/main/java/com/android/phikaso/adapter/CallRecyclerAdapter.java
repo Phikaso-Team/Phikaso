@@ -1,6 +1,5 @@
-package com.android.phikaso.activity;
+package com.android.phikaso.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +14,15 @@ import com.android.phikaso.model.CallItem;
 
 import java.util.ArrayList;
 
-
 public class CallRecyclerAdapter extends RecyclerView.Adapter<CallRecyclerAdapter.CallViewHolder> {
-
-    private ArrayList<CallItem> callList;
+    private final ArrayList<CallItem> callList;
 
     public class CallViewHolder extends RecyclerView.ViewHolder {
-        public TextView name;      // 이름
-        public TextView number;    // 전화번호
-        public TextView date;      // 날짜 및 시간
-        public ImageView type;     // 수신, 발신, 부재중
+        public TextView  name;   // 이름
+        public TextView  number; // 전화번호
+        public TextView  date;   // 날짜 및 시간
+        public ImageView type;   // 타입 (수신, 발신, 부재중)
 
-        // View Holder
         public CallViewHolder(@NonNull View view) {
             super(view);
             name = (TextView) view.findViewById(R.id.call_name);

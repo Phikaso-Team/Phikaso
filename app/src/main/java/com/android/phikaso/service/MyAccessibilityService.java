@@ -15,30 +15,24 @@ import java.util.Objects;
 
 public class MyAccessibilityService extends AccessibilityService {
     private static final String TAG = "AccessibilityService";
-    public static final String ACTION_NOTIFICATION_BROADCAST = "MyAccessibilityService_LocalBroadcast";
-    public static final String EXTRA_TEXT = "extra_text";
+    public  static final String ACTION_NOTIFICATION_BROADCAST = "phikaso_accessibility_service";
+    public  static final String EXTRA_TEXT = "extra_text";
 
     public static final String TARGET_APP_PACKAGE = "com.kakao.talk"; // 화면을 읽어올 앱
 
     private String old = "";
 
-    // 이벤트가 발생할때마다 실행되는 부분
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
-        // 패키지 체크
         final String packageName = event.getPackageName().toString();
         if (!Objects.equals(packageName, TARGET_APP_PACKAGE)) return;
 
-        // 정보 가져오기
         if (event.getClassName() == null || event.getSource() == null) return;
         int    type      = event.getEventType();
         String className = event.getClassName().toString();
-        AccessibilityNodeInfo rootNode  = event.getSource();
-
-        // 카카오톡 현재 보고있는 대화창 텍스트 읽기
+        AccessibilityNodeInfo rootNode = event.getSource();
         StringBuilder message = new StringBuilder();
 
-        // CASE 1. 새로운 메시지가 온 경우
         if (type == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED && className.equals("android.widget.FrameLayout")) {
             if (rootNode.getChildCount() >= 1) {
                 rootNode  = rootNode.getChild(0);
@@ -48,7 +42,7 @@ public class MyAccessibilityService extends AccessibilityService {
                 return;
             }
         }
-        // CASE 2. 사용자가 스크롤한 경우
+
         if (type == AccessibilityEvent.TYPE_VIEW_SCROLLED && className.equals("androidx.recyclerview.widget.RecyclerView")) {
             AccessibilityNodeInfo node;
             CharSequence name = null;
@@ -135,8 +129,6 @@ public class MyAccessibilityService extends AccessibilityService {
                 }
 
                 message.append(text).append(" "); // 대화 내용만
-//                message.append(name).append(": ").append(text).append("\n"); // 이름 + 대화 내용
-
                 PreferenceManager.setString(this, "kakao-name", String.valueOf(name));
             }
         }
@@ -152,7 +144,6 @@ public class MyAccessibilityService extends AccessibilityService {
             }
         }
     }
-
 
     private boolean checkChildClass(final AccessibilityNodeInfo node, final int index, final String className) {
         final AccessibilityNodeInfo child = node.getChild(index);
@@ -183,9 +174,9 @@ public class MyAccessibilityService extends AccessibilityService {
         return checkChildClass(node, index, "android.widget.RelativeLayout");
     }
 
-    private boolean isSelfMessage(final AccessibilityNodeInfo node) { // 내가 보낸 메시지인지 체크
+    private boolean isSelfMessage(final AccessibilityNodeInfo node) {
         final Rect rect = new Rect();
-        node.getBoundsInScreen(rect); // 노드의 화면 위치를 기준으로 내가 보냈는지 상대가 보냈는지 알아냄
+        node.getBoundsInScreen(rect);
         return rect.left >= 200;
     }
 

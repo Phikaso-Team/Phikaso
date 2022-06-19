@@ -2,12 +2,9 @@ package com.android.phikaso.model;
 
 import com.google.gson.annotations.SerializedName;
 
-// DTO : 사용자가 피싱 신고 -> store in DB
 public class ReportModel {
-
     @SerializedName("phishingReportMsg")
     private String phishingReportMsg;
-
 
     @Override
     public String toString() {

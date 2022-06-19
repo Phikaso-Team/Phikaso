@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.phikaso.ProgressDialog;
+import com.android.phikaso.misc.ProgressDialog;
 import com.android.phikaso.R;
 import com.android.phikaso.model.UserModel;
 import com.android.phikaso.util.PreferenceManager;
@@ -84,8 +84,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (id == R.id.login_btn_login) {
             firebaseLogin();
             customProgressDialog.show();
-
-
         } else if (id == R.id.login_text_register) {
             Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
             startActivity(intent);
@@ -170,7 +168,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void updateKakaoLogin() {
         UserApiClient.getInstance().me((user, throwable) -> {
-            if (user != null) {//로그인
+            if (user != null) { //로그인
                 Log.d(TAG, "invoke: id " + user.getId());
                 Log.d(TAG, "invoke: email " + user.getKakaoAccount().getEmail());
                 Log.d(TAG, "invoke: nickname " + user.getKakaoAccount().getProfile().getNickname());
@@ -188,7 +186,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 PreferenceManager.setString(LoginActivity.this, "personal-id", String.valueOf(user.getId()));
 
                 showMainScreen(); // 메인 액티비티로 전환
-            } else {//연결 끊기
+            } else { //연결 끊기
                 kakaoLogin.setVisibility(View.VISIBLE);
                 kakaoUnlink.setVisibility(View.GONE);
             }
@@ -218,7 +216,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.d(TAG, "사용자 정보 요청 실패" + meError);
             } else if (user != null) {
                 List<String> scopes = new ArrayList<>(Arrays.asList("profile_nickname", "account_email"));
-
                 boolean friendsAgree = PreferenceManager.getBoolean(this, "friends-agree");
                 if (friendsAgree != true) {
                     scopes.add("friends");

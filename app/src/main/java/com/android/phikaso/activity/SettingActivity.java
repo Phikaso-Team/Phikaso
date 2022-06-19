@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.phikaso.R;
-import com.android.phikaso.RecyclerViewAdapter;
+import com.android.phikaso.adapter.RecyclerViewAdapter;
 import com.android.phikaso.model.FriendModel;
 import com.android.phikaso.util.PreferenceManager;
 import com.google.gson.Gson;

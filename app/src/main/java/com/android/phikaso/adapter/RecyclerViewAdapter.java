@@ -1,4 +1,4 @@
-package com.android.phikaso;
+package com.android.phikaso.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.phikaso.R;
 import com.android.phikaso.model.FriendModel;
 import com.bumptech.glide.Glide;
 

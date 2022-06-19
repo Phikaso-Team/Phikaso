@@ -1,4 +1,4 @@
-package com.android.phikaso.activity;
+package com.android.phikaso.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -10,15 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentAdapter extends FragmentStateAdapter {
-
-    private List<Fragment> fragmentList = new ArrayList<>();
+    private final List<Fragment> fragmentList = new ArrayList<>();
 
     public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }
 
-    @NonNull
-    @Override
+    @Override @NonNull
     public Fragment createFragment(int position) {
         return fragmentList.get(position);
     }
@@ -31,5 +29,4 @@ public class FragmentAdapter extends FragmentStateAdapter {
     public int getItemCount() {
         return fragmentList.size();
     }
-
 }

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -13,8 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.phikaso.R;
+import com.android.phikaso.databinding.ActivityMainBinding;
+import com.android.phikaso.databinding.ActivityPermissionBinding;
 import com.android.phikaso.model.FriendModel;
 import com.android.phikaso.service.MyOverlayService;
+import com.android.phikaso.util.PermissionUtil;
 import com.android.phikaso.util.PreferenceManager;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,49 +32,39 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     private static final String TAG = "MainActivity";
 
-    private FirebaseDatabase  mDatabase;
-    private DatabaseReference mDBReference;
-    private TextView textViewCount;
-    private Switch switchProtection;
+    private ActivityMainBinding views;
+    private FirebaseDatabase    mDatabase;
+    private DatabaseReference   mDBReference;
     private int count;
-
-    private TextView preventCountToday;
-    private TextView preventCountAll;
-
     private ArrayList<FriendModel> friendList = new ArrayList<>();
-    private Gson gson = new GsonBuilder().create();
+    private final Gson gson = new GsonBuilder().create();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        views = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(views.getRoot());
 
         mDatabase = FirebaseDatabase.getInstance();
 
-        findViewById(R.id.main_btn_search).setOnClickListener(this);
-        findViewById(R.id.main_btn_add_case).setOnClickListener(this);
-        findViewById(R.id.main_btn_setting).setOnClickListener(this);
+        views.mainBtnSearch.setOnClickListener(this);  // 검색
+        views.mainBtnAddCase.setOnClickListener(this);  // 신고
+        views.mainBtnSetting.setOnClickListener(this);  // 설정
+        views.phishingPrevent.setOnClickListener(this); // 피싱 예방
 
-        textViewCount    = findViewById(R.id.main_text_cnt_case); // 전체 피해 사례
-        switchProtection = findViewById(R.id.main_sw_protection); // 실시간 보호
-
-        findViewById(R.id.phishingPrevent).setOnClickListener(this); // 피싱 예방
-        preventCountToday = (TextView) findViewById(R.id.main_count_today);
-        preventCountAll   = (TextView) findViewById(R.id.main_count_all);
-
-
+        views.mainSwProtection.setOnCheckedChangeListener(this);
         if (PreferenceManager.getString(MainActivity.this, "checked").equals("true")) {
-            switchProtection.setChecked(true);
+            views.mainSwProtection.setChecked(true);
         } else {
-            switchProtection.setChecked(false);
+            views.mainSwProtection.setChecked(false);
         }
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v) { // 뷰 클릭 이벤트
         int id = v.getId();
         if (id == R.id.main_btn_search) { // 피싱 번호 조회
             Intent intentSearch = new Intent(MainActivity.this, SearchActivity.class);
@@ -88,9 +82,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) { // 실시간 보호 스위치
+        if (isChecked) { // 팝업 알림 띄우기
+            if (!PermissionUtil.isMyServiceRunning(this, MyOverlayService.class)) { // 서비스가 실행중인지 확인
+                PreferenceManager.setString(MainActivity.this, "checked", "true");
+                startService(new Intent(getApplicationContext(), MyOverlayService.class)); // 서비스 실행
+
+                // 실시간 보호 제외 사용자
+                String user = PreferenceManager.getString(MainActivity.this, "kakao-name");
+                String value = PreferenceManager.getString(MainActivity.this, "friend-list");
+                friendList = gson.fromJson(value, new TypeToken<ArrayList<FriendModel>>() {
+                }.getType());
+
+                for (int i = 0; i < friendList.size(); i++) {
+                    if (friendList.get(i).get_profile_nickname().equals(user)) {
+                        stopService(new Intent(getApplicationContext(), MyOverlayService.class));
+                    }
+                }
+            }
+        } else {
+            PreferenceManager.setString(MainActivity.this, "checked", "false");
+            stopService(new Intent(getApplicationContext(), MyOverlayService.class)); // 서비스 중지
+        }
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
-        mDatabase.getReference().child("phishingCases").child("count")
+        mDatabase.getReference()
+            .child("phishingCases")
+            .child("count")
             .addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -99,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } else {
                         count = 0;
                     }
-                    textViewCount.setText(String.valueOf(count));
+                    views.mainTextCntCase.setText(String.valueOf(count)); // 전체 피해 사례
                 }
 
                 @Override
@@ -107,47 +128,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             });
     }
 
-    @SuppressLint("SetTextI18n")
-    @Override
+    @Override @SuppressLint("SetTextI18n")
     protected void onResume() {
         super.onResume();
         preventCountToday();
         preventCountAll();
-
-        //실시간 보호
-        switchProtection.setOnCheckedChangeListener((compoundButton, isChecked) -> {
-            if (isChecked) { // 팝업 알림 띄우기
-                if (!isMyServiceRunning(MyOverlayService.class)) {
-                    PreferenceManager.setString(MainActivity.this, "checked", "true");
-                    startService(new Intent(getApplicationContext(), MyOverlayService.class));
-
-                    // 실시간 보호 제외 사용자
-                    String user = PreferenceManager.getString(MainActivity.this, "kakao-name");
-                    String value = PreferenceManager.getString(MainActivity.this, "friend-list");
-                    friendList = gson.fromJson(value, new TypeToken<ArrayList<FriendModel>>() {}.getType());
-
-                    for(int i=0; i<friendList.size(); i++) {
-                        if (friendList.get(i).get_profile_nickname().equals(user)) {
-                            stopService(new Intent(getApplicationContext(), MyOverlayService.class));
-                        }
-                    }
-                }
-            } else {
-                PreferenceManager.setString(MainActivity.this, "checked", "false");
-                stopService(new Intent(getApplicationContext(), MyOverlayService.class));
-            }
-        });
-    }
-
-    // 서비스가 실행 중인지 확인하는 함수
-    private boolean isMyServiceRunning(Class<?> serviceClass) {
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     // 오늘의 피싱 예방
@@ -161,18 +146,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDBReference.child("total").child(today)
             .addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot snapshot) {
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
                     Integer count = snapshot.child("count").getValue(Integer.class);
                     if (count != null) {
-                        preventCountToday.setText(String.valueOf(count));
+                        views.mainCountToday.setText(String.valueOf(count));
                     } else {
-                        preventCountToday.setText("0");
+                        views.mainCountToday.setText("0");
                     }
                 }
-
                 @Override
-                public void onCancelled(DatabaseError error) {
-                }
+                public void onCancelled(@NonNull DatabaseError error) { }
             });
     }
 
@@ -182,18 +165,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDBReference.child("total")
             .addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot snapshot) {
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
                     Integer count = snapshot.child("count").getValue(Integer.class);
                     if (count != null) {
-                        preventCountAll.setText(String.valueOf(count));
+                        views.mainCountAll.setText(String.valueOf(count));
                     } else {
-                        preventCountAll.setText("0");
+                        views.mainCountAll.setText("0");
                     }
                 }
-
                 @Override
-                public void onCancelled(DatabaseError error) {
-                }
+                public void onCancelled(@NonNull DatabaseError error) { }
             });
     }
 }

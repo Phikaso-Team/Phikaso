@@ -1,4 +1,4 @@
-package com.android.phikaso;
+package com.android.phikaso.misc;
 
 import android.app.Dialog;
 import android.view.Window;

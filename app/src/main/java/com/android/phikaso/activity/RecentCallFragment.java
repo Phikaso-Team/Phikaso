@@ -16,20 +16,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.phikaso.R;
+import com.android.phikaso.adapter.CallRecyclerAdapter;
 import com.android.phikaso.model.CallItem;
 import com.android.phikaso.util.RecyclerViewDecoration;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.StringTokenizer;
 
 public class RecentCallFragment extends Fragment {
-
     private ArrayList<CallItem> callList = new ArrayList<>();
     private RecyclerView recyclerView;
     private CallRecyclerAdapter callAdapter;

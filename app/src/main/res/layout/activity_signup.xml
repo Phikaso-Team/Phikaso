@@ -102,7 +102,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="terms1"
                 android:id="@+id/service_text_terms"
                 android:text="@string/terms1"
                 android:textSize="16dp"
@@ -112,7 +111,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="terms2"
                 android:text="@string/terms2"
                 android:id="@+id/privacy_text_terms"
                 android:textSize="16dp"
@@ -125,7 +123,6 @@
                 android:text="에 동의하시면"
                 android:textSize="16dp"
                 android:fontFamily="@font/pretendard_light"/>
-
         </LinearLayout>
 
         <TextView
@@ -134,9 +131,7 @@
             android:fontFamily="@font/pretendard_light"
             android:text="'회원가입'을 눌러주세요"
             android:textSize="16dp" />
-
     </LinearLayout>
-
 
     <Button
         android:id="@+id/buttonSignUp"
@@ -148,6 +143,4 @@
         android:text="회원가입"
         android:textSize="20sp"
         android:fontFamily="@font/pretendard_light"/>
-
-
 </LinearLayout>

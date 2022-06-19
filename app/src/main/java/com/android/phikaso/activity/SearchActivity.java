@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.phikaso.R;
+import com.android.phikaso.adapter.FragmentAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -26,7 +27,6 @@ public class SearchActivity extends AppCompatActivity {
 
     static final List<String> tabTitles = new ArrayList<>(Arrays.asList(
             "피싱 번호 검색", "최근 통화 기록", "최근 문자 기록"));
-
 
     @Override
     protected void onCreate(Bundle savedInstance) {
