@@ -1,5 +1,10 @@
 # Phikaso
 
+![](https://github.com/Phikaso-Team/Phikaso/actions/workflows/android.yml/badge.svg)
+![](https://img.shields.io/github/contributors/Phikaso-Team/Phikaso)
+![](https://img.shields.io/github/issues/Phikaso-Team/Phikaso)
+
+
 <p align="center">
 <div align="center">
 <!-- <img src="~~~~~" width="50%"/>  -->
@@ -16,6 +21,7 @@
 ## 주요 기능
 
 ## 서비스 아키텍처
+![](./docs/img_tech.png)
 
 ## 사용한 기술 스택
 
