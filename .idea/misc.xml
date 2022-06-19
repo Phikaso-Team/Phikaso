@@ -3,43 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/drawable/ic_baseline_call_24.xml" value="0.181" />
-        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/drawable/ic_baseline_call_made_24.xml" value="0.269" />
-        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/drawable/ic_baseline_call_missed_24.xml" value="0.269" />
-        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/drawable/ic_baseline_call_received_24.xml" value="0.181" />
-        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/drawable/ic_baseline_person_search_24.xml" value="0.276" />
-        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/drawable/ic_baseline_person_search_36.xml" value="0.276" />
-        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/drawable/ic_baseline_sms_24.xml" value="0.181" />
-        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/layout/activity_search.xml" value="0.25226449275362317" />
-        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/layout/activity_search2.xml" value="0.25" />
-        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/layout/call_list_item.xml" value="0.28854166666666664" />
-        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/layout/fragment_recent_call.xml" value="0.33" />
-        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/layout/fragment_recent_msg.xml" value="0.22" />
-        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/layout/fragment_search_number.xml" value="0.25" />
-        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/layout/kakao_friends_list.xml" value="0.20923913043478262" />
-        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/layout/overdraw_popup.xml" value="0.20923913043478262" />
-        <entry key="..\:/Users/Lucky/AndroidStudioProjects/Phikaso/app/src/main/res/layout/search_recentcall.xml" value="0.33" />
-        <entry key="app/src/main/res/drawable/ic_baseline_settings.xml" value="0.223" />
-        <entry key="app/src/main/res/drawable/progress.xml" value="0.222" />
-        <entry key="app/src/main/res/drawable/progress_bg.xml" value="0.222" />
-        <entry key="app/src/main/res/drawable/progress_image.xml" value="0.222" />
-        <entry key="app/src/main/res/layout/aaa.xml" value="0.3763586956521739" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_prevent.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_privacy_terms.xml" value="0.3763586956521739" />
-        <entry key="app/src/main/res/layout/activity_progress_dialog.xml" value="0.21614583333333334" />
-        <entry key="app/src/main/res/layout/activity_report.xml" value="0.10562310030395136" />
-        <entry key="app/src/main/res/layout/activity_search.xml" value="0.19756838905775076" />
-        <entry key="app/src/main/res/layout/activity_service_terms.xml" value="0.3763586956521739" />
-        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.19756838905775076" />
-        <entry key="app/src/main/res/layout/activity_terms.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_terms2.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/content_terms.xml" value="0.3763586956521739" />
-        <entry key="app/src/main/res/layout/dialog_progress.xml" value="0.21510416666666668" />
-        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.3763586956521739" />
-        <entry key="app/src/main/res/layout/overdraw_popup.xml" value="0.1" />
       </map>
     </option>
   </component>

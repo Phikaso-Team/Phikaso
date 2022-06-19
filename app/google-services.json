@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:931405164530:android:c84cf47430890d2621856b",
         "android_client_info": {
-          "package_name": "com.android.phikaso"
+          "package_name": "com.phikaso.app"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "931405164530-2mi11ofkpnpoukrihmpu59t37cvgm3nl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.android.phikaso",
+            "package_name": "com.phikaso.app",
             "certificate_hash": "0f8eb2dd7d0b45aef27f443520801670a5216f0d"
           }
         },

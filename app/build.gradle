@@ -16,7 +16,7 @@ android {
         def verName = "1.0.0." + verCode.toString()
 
         defaultConfig {
-            applicationId "com.android.phikaso"
+            applicationId "com.phikaso.app"
             minSdkVersion 23
             targetSdkVersion 30
             versionCode verCode
