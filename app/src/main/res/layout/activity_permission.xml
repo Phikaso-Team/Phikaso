@@ -233,6 +233,44 @@
                         android:fontFamily="@font/pretendard_light"
                         android:textColor="@color/perm_desc" />
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:srcCompat="@drawable/ic_baseline_sms_36" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/perm_sms_receive"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="문자메시지 (선택)"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:textColor="@color/perm_deny"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="문자메시지 피싱 탐지를 위해 필요합니다."
+                        android:fontFamily="@font/pretendard_light"
+                        android:textColor="@color/perm_desc" />
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

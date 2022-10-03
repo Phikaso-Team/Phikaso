@@ -40,9 +40,9 @@ public class PermissionActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.perm_btn_request) {
-            final List<String> denieds = PermissionUtil.getDeniedPermission(PermissionActivity.this);
-            if (!denieds.isEmpty()) {
-                ActivityCompat.requestPermissions(PermissionActivity.this, denieds.toArray(new String[0]), MULTIPLE_PERMISSIONS);
+            final List<String> deniedPermList = PermissionUtil.getDeniedPermission(PermissionActivity.this);
+            if (!deniedPermList.isEmpty()) {
+                ActivityCompat.requestPermissions(PermissionActivity.this, deniedPermList.toArray(new String[0]), MULTIPLE_PERMISSIONS);
             } else {
                 requestPermissions();
             }
