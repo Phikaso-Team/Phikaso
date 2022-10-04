@@ -1,5 +1,6 @@
 package com.phikaso.app.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -86,6 +87,34 @@ public class PermissionActivity extends AppCompatActivity implements View.OnClic
             views.imgOverlay.setColorFilter(colorDeny);
             views.txtOverlay.setTextColor(colorDeny);
             views.txtOverlayDesc.setTextColor(colorDesc);
+        }
+        final List<String> deniedPermList = PermissionUtil.getDeniedPermission(PermissionActivity.this);
+        if (!deniedPermList.contains(Manifest.permission.READ_CALL_LOG)) {
+            views.imgCall.setColorFilter(colorAllow);
+            views.txtCall.setTextColor(colorAllow);
+            views.txtCallDesc.setTextColor(colorAllow);
+        } else {
+            views.imgCall.setColorFilter(colorDeny);
+            views.txtCall.setTextColor(colorDeny);
+            views.txtCallDesc.setTextColor(colorDeny);
+        }
+        if (!deniedPermList.contains(Manifest.permission.READ_CONTACTS)) {
+            views.imgContact.setColorFilter(colorAllow);
+            views.txtContact.setTextColor(colorAllow);
+            views.txtContactDesc.setTextColor(colorAllow);
+        } else {
+            views.imgContact.setColorFilter(colorDeny);
+            views.txtContact.setTextColor(colorDeny);
+            views.txtContactDesc.setTextColor(colorDeny);
+        }
+        if (!deniedPermList.contains(Manifest.permission.RECEIVE_SMS)) {
+            views.imgSms.setColorFilter(colorAllow);
+            views.txtSms.setTextColor(colorAllow);
+            views.txtSmsDesc.setTextColor(colorAllow);
+        } else {
+            views.imgSms.setColorFilter(colorDeny);
+            views.txtSms.setTextColor(colorDeny);
+            views.txtSmsDesc.setTextColor(colorDeny);
         }
     }
 

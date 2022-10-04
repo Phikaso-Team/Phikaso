@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 public class PermissionUtil {
+    // 요청할 권한 리스트
     public static final String[] permissions = {
             Manifest.permission.READ_CONTACTS,
             Manifest.permission.READ_CALL_LOG,

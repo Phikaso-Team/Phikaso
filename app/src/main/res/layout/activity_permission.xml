@@ -170,6 +170,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/img_call"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
@@ -182,7 +183,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/perm_text_call"
+                        android:id="@+id/txt_call"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="통화 기록 (선택)"
@@ -191,10 +192,11 @@
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/txt_call_desc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="피싱 번호 간편 조회를 위해 필요합니다."
                         android:fontFamily="@font/pretendard_light"
+                        android:text="피싱 번호 간편 조회를 위해 필요합니다."
                         android:textColor="@color/perm_desc" />
                 </LinearLayout>
             </LinearLayout>
@@ -206,6 +208,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/img_contact"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
@@ -218,7 +221,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/perm_text_contact"
+                        android:id="@+id/txt_contact"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="연락처 (선택)"
@@ -227,10 +230,11 @@
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/txt_contact_desc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="피싱 번호 간편 조회를 위해 필요합니다."
                         android:fontFamily="@font/pretendard_light"
+                        android:text="피싱 번호 간편 조회를 위해 필요합니다."
                         android:textColor="@color/perm_desc" />
                 </LinearLayout>
 
@@ -243,6 +247,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/img_sms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
@@ -255,7 +260,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/perm_sms_receive"
+                        android:id="@+id/txt_sms"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="문자메시지 (선택)"
@@ -264,10 +269,11 @@
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/txt_sms_desc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="문자메시지 피싱 탐지를 위해 필요합니다."
                         android:fontFamily="@font/pretendard_light"
+                        android:text="문자메시지 피싱 탐지를 위해 필요합니다."
                         android:textColor="@color/perm_desc" />
                 </LinearLayout>
 
