@@ -39,6 +39,8 @@ import retrofit2.Response;
 
 public class MyOverlayService extends Service {
     private static final String TAG = "MyOverlayService";
+    public static final String EXTRA_TEXT = "extra_text";
+
     private View popupView;
     private DatabaseReference mDBReference;
     private Calendar calendar = Calendar.getInstance();
@@ -53,24 +55,23 @@ public class MyOverlayService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        LocalBroadcastManager.getInstance(this).registerReceiver( // 백그라운드
-                new BroadcastReceiver() {
-                    @Override
-                    public void onReceive(Context context, Intent intent) {
-                        String text = intent.getStringExtra(MyNotificationService.EXTRA_TEXT);
-                        checkProbability(text);
-                    }
-                }, new IntentFilter(MyNotificationService.ACTION_NOTIFICATION_BROADCAST)
-        );
-        LocalBroadcastManager.getInstance(this).registerReceiver( // 포그라운드
-                new BroadcastReceiver() {
-                    @Override
-                    public void onReceive(Context context, Intent intent) {
-                        String text = intent.getStringExtra(MyAccessibilityService.EXTRA_TEXT);
-                        checkProbability(text);
-                    }
-                }, new IntentFilter(MyAccessibilityService.ACTION_NOTIFICATION_BROADCAST)
-        );
+        final String[] filters = {
+            MyNotificationService.ACTION_NOTIFICATION_BROADCAST,  // 카카오톡(백그라운드)
+            MyAccessibilityService.ACTION_NOTIFICATION_BROADCAST, // 카카오톡(포그라운드)
+            SMSReceiver.ACTION_NOTIFICATION_BROADCAST, // SMS (백그라운드 & 포그라운드)
+        };
+        // 브로드케스트 리시버 등록
+        for (final String filter : filters) {
+            LocalBroadcastManager.getInstance(this).registerReceiver(
+                    new BroadcastReceiver() {
+                        @Override
+                        public void onReceive(Context context, Intent intent) {
+                            String text = intent.getStringExtra(EXTRA_TEXT);
+                            checkProbability(text);
+                        }
+                    }, new IntentFilter(filter)
+            );
+        }
         return START_NOT_STICKY;
     }
 

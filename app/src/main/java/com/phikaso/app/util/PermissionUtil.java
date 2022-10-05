@@ -16,9 +16,11 @@ import java.util.List;
 import java.util.Set;
 
 public class PermissionUtil {
+    // 요청할 권한 리스트
     public static final String[] permissions = {
-        Manifest.permission.READ_CONTACTS,
-        Manifest.permission.READ_CALL_LOG,
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.READ_CALL_LOG,
+            Manifest.permission.RECEIVE_SMS,
     };
 
     // 알림 접근 권한이 있는지 확인하는 메서드
