@@ -24,13 +24,15 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/pterm_txt_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_semibold"
             android:layout_marginTop="20dp"
-            android:text="  개인정보처리방침"
-            android:textSize="20sp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="@string/privacy_term_title"
             android:textColor="@color/black"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <ImageButton
@@ -38,7 +40,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginTop="40dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="10dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:background="@drawable/back"
@@ -48,19 +50,13 @@
 
 
     <TextView
+        android:id="@+id/pterm_txt_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:fontFamily="@font/pretendard_semibold"
-        android:text="[ 피카소 ]는 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.\n\n
-○ 이 개인정보처리방침은 2022년 6월 1부터 적용됩니다.\n\n
-제1조(개인정보의 처리 목적)\n
-[ 피카소 ]는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며 이용 목적이 변경되는 경우에는 「개인정보 보호법」 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.\n
-홈페이지 회원가입 및 관리
-회원 가입의사 확인 목적으로 개인정보를 처리합니다.\n\n
-제2조(개인정보의 처리 및 보유 기간)\n
-[ 피카소 ]는 법령에 따른 개인정보 보유·이용기간 또는 정보주체로부터 개인정보를 수집 시에 동의받은 개인정보 보유·이용기간 내에서 개인정보를 처리·보유합니다.\n"
 
+        android:text="@string/privacy_term"
         android:textSize="16sp"
         android:textStyle="bold" />
 

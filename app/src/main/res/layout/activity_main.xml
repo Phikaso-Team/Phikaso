@@ -285,8 +285,8 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="20dp"
                             android:background="@drawable/rounded_corner"
-                            android:text="피해 사례 등록"
                             android:fontFamily="@font/pretendard_semibold"
+                            android:text="사례 등록"
                             android:textAllCaps="false"
                             android:textColor="#fff"
                             android:textSize="17sp" />

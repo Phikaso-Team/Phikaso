@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -12,9 +11,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="26dp"
         android:layout_marginTop="140dp"
+        android:fontFamily="@font/pretendard_black"
         android:gravity="top"
         android:text="PHIKASO"
-        android:fontFamily="@font/pretendard_black"
         android:textColor="@color/phikaso"
         android:textSize="36sp"
         android:textStyle="bold" />
@@ -24,14 +23,14 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="20dp"
-        android:inputType="textPersonName"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/custom_person_icon"
-        android:fontFamily="@font/pretendard_light"
         android:drawablePadding="12dp"
+        android:fontFamily="@font/pretendard_light"
+        android:hint="이름(닉네임)"
+        android:inputType="textPersonName"
         android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:hint="이름" />
+        android:paddingEnd="12dp" />
 
     <EditText
         android:id="@+id/editTextEmail"
@@ -39,60 +38,60 @@
         android:layout_height="60dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:inputType="textEmailAddress"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/custom_email_icon"
-        android:fontFamily="@font/pretendard_light"
         android:drawablePadding="12dp"
+        android:fontFamily="@font/pretendard_light"
+        android:hint="이메일"
+        android:inputType="textEmailAddress"
         android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:hint="이메일" />
+        android:paddingEnd="12dp" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/custom_lock_icon"
         android:drawablePadding="12dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:inputType="textPassword"
+        android:fontFamily="@font/pretendard_light"
         android:hint="비밀번호"
-        android:fontFamily="@font/pretendard_light"/>
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp" />
 
     <EditText
         android:id="@+id/editTextPasswordCheck"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/custom_lock_icon"
         android:drawablePadding="12dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:inputType="textPassword"
+        android:fontFamily="@font/pretendard_light"
         android:hint="비밀번호 확인"
-        android:fontFamily="@font/pretendard_light"/>
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp" />
 
     <LinearLayout
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_semibold"
             android:text="피카소 서비스 필수 동의 항목"
-            android:textSize="17dp"
-            android:fontFamily="@font/pretendard_semibold"/>
+            android:textSize="17dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,29 +99,38 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/service_text_terms"
-                android:text="@string/terms1"
-                android:textSize="16dp"
-                android:textColor="@color/phikaso"
-                android:fontFamily="@font/pretendard_semibold" />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/terms2"
+                android:fontFamily="@font/pretendard_semibold"
+                android:text="@string/service_term_title"
+                android:textColor="@color/phikaso"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_light"
+                android:text=" 및 "
+                android:textSize="16dp" />
+
+            <TextView
                 android:id="@+id/privacy_text_terms"
-                android:textSize="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_semibold"
+                android:text="@string/privacy_term_title"
                 android:textColor="@color/phikaso"
-                android:fontFamily="@font/pretendard_semibold"/>
+                android:textSize="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_light"
                 android:text="에 동의하시면"
-                android:textSize="16dp"
-                android:fontFamily="@font/pretendard_light"/>
+                android:textSize="16dp" />
+
         </LinearLayout>
 
         <TextView
@@ -140,7 +148,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:background="@drawable/rounded_corner"
+        android:fontFamily="@font/pretendard_light"
         android:text="회원가입"
-        android:textSize="20sp"
-        android:fontFamily="@font/pretendard_light"/>
+        android:textSize="20sp" />
 </LinearLayout>
